@@ -3,7 +3,7 @@ import cors from 'cors'
 import morgan from 'morgan'
 import { router } from './routes/index.js'
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 5000
 const app = express()
 
 app.use(cors())
