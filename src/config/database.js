@@ -19,4 +19,4 @@ try {
   console.error('Unable to connect to the database:', error)
 }
 
-export { db }
+export default db
