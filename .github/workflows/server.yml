@@ -27,18 +27,13 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run: npm run build --if-present
-    - name: Make envfile
-      uses: varunkumar/create-env-action@v1
-      with:
-        env: |
-          PORT: ${{ vars.PORT }}
-          DB_NAME: ${{ vars.DB_PORT }}
-          DB_USER_NAME: ${{ vars.DB_USER_NAME }} 
-          DB_PASSWORD: ${{ vars.DB_PASSWORD }} 
-          DB_HOST: ${{ vars.DB_HOST }} 
-          DB_PORT: ${{ vars.DB_PORT }} 
-        path: /home/ubuntu/server/_work/ecommerceServer/ecommerceServer
-         
+    - run: |
+        export DB_NAME=${{ env.DB_NAME}}
+        export DB_USER_NAME=${{ env.DB_USER_NAME }}
+        export DB_PASSWORD=${{ env.DB_PASSWORD }} 
+        export DB_HOST=${{ env.DB_HOST }}
+        export DB_PORT=${{ env.DB_PORT }} 
+        export PORT=${{ env.PORT}} 
     - run: npm install pm2 -g
     - run: pm2 stop all
     - run: pm2 start all
