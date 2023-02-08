@@ -30,13 +30,13 @@ jobs:
       uses: varunkumar/create-env-action@v1
       with:
         env: |
-         PORT: ${{ env.PORT }}
-         DB_NAME: ${{ env.DB_PORT }}
-         DB_USER_NAME: ${{ env.DB_USER_NAME }} 
-         DB_PASSWORD: ${{ env.DB_PASSWORD }} 
-         DB_HOST: ${{ env.DB_HOST }} 
-         DB_PORT: ${{ env.DB_PORT }} 
-         path: /home/ubuntu/server/_work/ecommerceServer/ecommerceServer
+          PORT: ${{ env.PORT }}
+          DB_NAME: ${{ env.DB_PORT }}
+          DB_USER_NAME: ${{ env.DB_USER_NAME }} 
+          DB_PASSWORD: ${{ env.DB_PASSWORD }} 
+          DB_HOST: ${{ env.DB_HOST }} 
+          DB_PORT: ${{ env.DB_PORT }} 
+        path: /home/ubuntu/server/_work/ecommerceServer/ecommerceServer
          
     - run: npm install pm2 -g
     - run: pm2 stop all
