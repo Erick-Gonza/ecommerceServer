@@ -1,15 +1,18 @@
-import { DataTypes as Dt, Model } from "sequelize";
-import db from "../db/db.js";
+import { DataTypes as Dt, Model } from 'sequelize'
+import db from '../config/database.js'
 
-class WishProduct extends Model{}
+class WishProduct extends Model {}
 
-WishProduct.init({
+WishProduct.init(
+  {
     //id
     //product id
     // user id
-},{
+  },
+  {
     sequelize: db,
-    modelName:"WishProduct"
-});
+    modelName: 'WishProduct',
+  }
+)
 
-export default WishProduct;
+export default WishProduct

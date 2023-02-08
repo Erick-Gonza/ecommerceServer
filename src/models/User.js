@@ -1,27 +1,30 @@
-import { DataTypes as Dt, Model } from "sequelize";
-import db from "../db/db.js";
+import { DataTypes as Dt, Model } from 'sequelize'
+import db from '../config/database.js'
 
-class User extends Model{}
+class User extends Model {}
 
-User.init({
+User.init(
+  {
     email: {
-        type:Dt.STRING
+      type: Dt.STRING,
     },
     firstName: {
-        type: Dt.STRING
+      type: Dt.STRING,
     },
     lastName: {
-        type: Dt.STRING
+      type: Dt.STRING,
     },
     phoneNumber: {
-        type: Dt.STRING
+      type: Dt.STRING,
     },
     birthDate: {
-        type: Dt.DATE
-    } //id pk
-},{
+      type: Dt.DATE,
+    }, //id pk
+  },
+  {
     sequelize: db,
-    modelName:"User"
-});
+    modelName: 'User',
+  }
+)
 
-export default User;
+export default User

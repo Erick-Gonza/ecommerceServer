@@ -1,22 +1,25 @@
-import { DataTypes as Dt, Model } from "sequelize";
-import db from "../db/db.js";
+import { DataTypes as Dt, Model } from 'sequelize'
+import db from '../config/database.js'
 
-class Price extends Model{}
+class Price extends Model {}
 
-Price.init({
+Price.init(
+  {
     //id
     price: {
-        type: Dt.DECIMAL
+      type: Dt.DECIMAL,
     },
     referencePrice: {
-        type: Dt.DECIMAL
+      type: Dt.DECIMAL,
     },
     isAnOffert: {
-        type: Dt.BOOLEAN
-    }
-},{
+      type: Dt.BOOLEAN,
+    },
+  },
+  {
     sequelize: db,
-    modelName:"Price"
-});
+    modelName: 'Price',
+  }
+)
 
-export default Price;
+export default Price

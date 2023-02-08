@@ -1,29 +1,31 @@
-import { DataTypes as Dt, Model } from "sequelize";
-import db from "../db/db.js";
+import { DataTypes as Dt, Model } from 'sequelize'
+import db from '../config/database.js'
 
-class Product extends Model{}
+class Product extends Model {}
 // parametros tabla
 // parametros conexion db y table name
-Product.init({
+Product.init(
+  {
     name: {
-        type:Dt.STRING,
-        allowNull:false,
+      type: Dt.STRING,
+      allowNull: false,
     },
     description: {
-        type: Dt.STRING
+      type: Dt.STRING,
     },
     //price id
     //sub category id
     imageUrl: {
-        type: Dt.STRING
+      type: Dt.STRING,
     },
     quantity: {
-        type: Dt.INTEGER
-    }
-},{
+      type: Dt.INTEGER,
+    },
+  },
+  {
     sequelize: db,
-    modelName:"Product"
-});
+    modelName: 'Product',
+  }
+)
 
-
-export default Product;
+export default Product

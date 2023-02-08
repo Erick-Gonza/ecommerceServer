@@ -1,18 +1,21 @@
-import { DataTypes as Dt, Model } from "sequelize";
-import db from "../db/db.js";
+import { DataTypes as Dt, Model } from 'sequelize'
+import db from '../config/database.js'
 
-class Order extends Model{}
+class Order extends Model {}
 
-Order.init({
+Order.init(
+  {
     //id
     creationDate: {
-        type: Dt.DATE
+      type: Dt.DATE,
     },
     //user id
     //order item id
-},{
+  },
+  {
     sequelize: db,
-    modelName:"Order"
-});
+    modelName: 'Order',
+  }
+)
 
-export default Order;
+export default Order

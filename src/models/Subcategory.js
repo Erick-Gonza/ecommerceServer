@@ -1,23 +1,25 @@
-import { DataTypes as Dt, Model } from "sequelize";
-import db from "../db/db.js";
+import { DataTypes as Dt, Model } from 'sequelize'
+import db from '../config/database.js'
 
-class Subcategory extends Model{}
+class Subcategory extends Model {}
 // parametros tabla
 // parametros conexion db y table name
-Subcategory.init({
+Subcategory.init(
+  {
     name: {
-        type:Dt.STRING,
-        allowNull:false,
+      type: Dt.STRING,
+      allowNull: false,
     },
     description: {
-        type: Dt.STRING
-    }
+      type: Dt.STRING,
+    },
     //ID
     //category Id
-},{
+  },
+  {
     sequelize: db,
-    modelName:"Subcategory"
-});
+    modelName: 'Subcategory',
+  }
+)
 
-
-export default Subcategory;
+export default Subcategory

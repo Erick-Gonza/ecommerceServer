@@ -1,22 +1,24 @@
-import { DataTypes as Dt, Model } from "sequelize";
-import db from "../db/db.js";
+import { DataTypes as Dt, Model } from 'sequelize'
+import db from '../config/database.js'
 
-class Category extends Model{}
+class Category extends Model {}
 // parametros tabla
 // parametros conexion db y table name
-Category.init({
+Category.init(
+  {
     name: {
-        type:Dt.STRING,
-        allowNull:false,
+      type: Dt.STRING,
+      allowNull: false,
     },
     description: {
-        type: Dt.STRING
-    }
+      type: Dt.STRING,
+    },
     //ID
-},{
+  },
+  {
     sequelize: db,
-    modelName:"Category"
-});
+    modelName: 'Category',
+  }
+)
 
-
-export default Category;
+export default Category

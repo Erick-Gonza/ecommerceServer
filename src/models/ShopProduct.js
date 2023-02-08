@@ -1,18 +1,21 @@
-import { DataTypes as Dt, Model } from "sequelize";
-import db from "../db/db.js";
+import { DataTypes as Dt, Model } from 'sequelize'
+import db from '../config/database.js'
 
-class ShopProduct extends Model{}
+class ShopProduct extends Model {}
 
-ShopProduct.init({
+ShopProduct.init(
+  {
     //id
     //product id
     // user id
     quantity: {
-        type: Dt.INTEGER
-    }
-},{
+      type: Dt.INTEGER,
+    },
+  },
+  {
     sequelize: db,
-    modelName:"ShopProduct"
-});
+    modelName: 'ShopProduct',
+  }
+)
 
-export default ShopProduct;
+export default ShopProduct
