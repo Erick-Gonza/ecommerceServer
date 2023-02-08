@@ -25,7 +25,7 @@ app.use(express.json())
 app.use(morgan('tiny'))
 
 //Main route
-app.use('/v1', router)
+app.use('/api/v1', router)
 
 await db.sync({ alter: true }).then(() => {
   app.listen(port, () => {
