@@ -13,7 +13,9 @@ Category.init(
     description: {
       type: Dt.STRING,
     },
-    //ID
+    //idSubcategory fk
+    //CreationDate
+    //updateDate
   },
   {
     sequelize: db,

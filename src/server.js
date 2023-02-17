@@ -10,10 +10,12 @@ import {
   Category,
   Subcategory,
   Order,
-  OrderItem,
-  Price,
-  WishProduct,
-  ShopProduct,
+  OrderDetail,
+  WishList,
+  Cart,
+  Role,
+  State,
+  Address
 } from './models/index.js'
 
 const port = process.env.PORT
@@ -28,7 +30,9 @@ app.use(morgan('tiny'))
 app.use('/api/v1', router)
 
 await db.sync({ alter: true }).then(() => {
-  app.listen(port, () => {
-    console.log(`Server is running on port ${port}`)
-  })
-})
+   app.listen(port, () => {
+     console.log(`Server is running on port ${port}`)
+   })
+ })
+
+
