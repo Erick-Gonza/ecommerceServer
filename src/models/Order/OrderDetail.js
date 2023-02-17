@@ -1,5 +1,5 @@
 import { DataTypes as Dt, Model } from 'sequelize'
-import db from '../config/database.js'
+import db from '../../config/database.js'
 
 class OrderDetail extends Model {}
 
@@ -13,7 +13,7 @@ OrderDetail.init(
     //updateDate
     quantity: {
       type: Dt.INTEGER,
-    }
+    },
   },
   {
     sequelize: db,

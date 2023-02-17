@@ -1,5 +1,5 @@
 import { DataTypes as Dt, Model } from 'sequelize'
-import db from '../config/database.js'
+import db from '../../config/database.js'
 
 class Product extends Model {}
 // parametros tabla
@@ -22,7 +22,7 @@ Product.init(
     },
     imageUrl: {
       type: Dt.STRING,
-    }
+    },
     //idCategory fk
     //creationDate
     //updateDate
