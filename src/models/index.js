@@ -1,12 +1,16 @@
-import Product from "./Product.js";
-import User from "./User.js";
-import Category from "./Category.js";
-import Subcategory from "./Subcategory.js";
-import Order  from "./Order.js";
-import OrderItem from "./OrderItem.js";
-import Price from "./Price.js";
-import WishProduct from "./WishProduct.js";
-import ShopProduct from "./ShopProduct.js"
+import Cart from "./Cart/Cart.js";
+import Order from "./Order/Order.js";
+import OrderDetail from "./Order/OrderDetail.js";
+import Category from "./Product/Category.js";
+import Product from "./Product/Product.js";
+import Subcategory from "./Product/Subcategory.js";
+import Address from "./User/Address.js";
+import Role from "./User/Role.js";
+import State from "./User/State.js";
+import User from "./User/User.js";
+import WishList from "./WishList/WishList.js";
+
+
 
 Category.hasMany(Subcategory, {
     foreignKey: {
@@ -24,51 +28,44 @@ Subcategory.hasMany(Product, {
 });
 Product.belongsTo(Subcategory);
 
-Price.hasOne(Product, {
-    foreignKey: {
-        field: "priceId"
-    },
-});
-Product.belongsTo(Price);
-
-Product.belongsToMany(WishProduct, {
-    through: "ProductWishProduct"
+Product.belongsToMany(WishList, {
+    through: "ProductWishList"
 });
 
-User.hasOne(WishProduct, {
+User.hasOne(WishList, {
     foreignKey: {
         field: "userId"
     },
 });
-WishProduct.belongsTo(User);
+WishList.belongsTo(User);
 
-Product.hasMany(ShopProduct, {
+User.hasOne(Cart, {
+    foreignKey: {
+        field: "userId"
+    },
+});
+Cart.belongsTo(User);
+
+Product.hasMany(Cart, {
     foreignKey: {
         field: "productId"
     },
 });
-ShopProduct.belongsTo(Product);
+Cart.belongsTo(Product);
 
-User.hasOne(ShopProduct, {
-    foreignKey: {
-        field: "userId"
-    },
-});
-ShopProduct.belongsTo(User);
-
-Product.hasMany(OrderItem, {
+Product.hasMany(OrderDetail, {
     foreignKey: {
         field: "productId"
     }
 });
-OrderItem.belongsTo(Product);
+OrderDetail.belongsTo(Product);
 
-Order.hasMany(OrderItem, {
+Order.hasMany(OrderDetail, {
     foreignKey: {
         field: "orderId"
     }
 });
-OrderItem.belongsTo(Order);
+OrderDetail.belongsTo(Order);
 
 User.hasMany(Order, {
     foreignKey: {
@@ -77,6 +74,30 @@ User.hasMany(Order, {
 });
 Order.belongsTo(User);
 
+//role 
+Role.hasOne(User, {
+    foreignKey: {
+        field: "RoleId"
+    },
+});
+User.belongsTo(Role);
+
+//state
+State.hasOne(User, {
+    foreignKey: {
+        field: "StateId"
+    },
+});
+User.belongsTo(State);
+
+//address
+User.hasOne(Address, {
+    foreignKey: {
+        field: "userId"
+    }
+});
+Address.belongsTo(User);
 
 
-export {Product, User, Category, Subcategory, Order, OrderItem, Price, WishProduct, ShopProduct}
+
+export {Product, User, Category, Subcategory, Order, OrderDetail, Address, Role, Cart, WishList, State}

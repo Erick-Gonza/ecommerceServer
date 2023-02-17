@@ -1,10 +1,10 @@
 import { DataTypes as Dt, Model } from 'sequelize'
 import db from '../config/database.js'
 
-class Product extends Model {}
+class Subcategory extends Model {}
 // parametros tabla
 // parametros conexion db y table name
-Product.init(
+Subcategory.init(
   {
     name: {
       type: Dt.STRING,
@@ -13,19 +13,13 @@ Product.init(
     description: {
       type: Dt.STRING,
     },
-    //price id
-    //sub category id
-    imageUrl: {
-      type: Dt.STRING,
-    },
-    quantity: {
-      type: Dt.INTEGER,
-    },
+    //creationDate
+    //updateDate
   },
   {
     sequelize: db,
-    modelName: 'Product',
+    modelName: 'Subcategory',
   }
 )
 
-export default Product
+export default Subcategory

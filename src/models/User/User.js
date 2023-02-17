@@ -5,21 +5,23 @@ class User extends Model {}
 
 User.init(
   {
-    email: {
-      type: Dt.STRING,
-    },
     firstName: {
       type: Dt.STRING,
     },
     lastName: {
       type: Dt.STRING,
     },
-    phoneNumber: {
+    username: {
       type: Dt.STRING,
     },
-    birthDate: {
-      type: Dt.DATE,
-    }, //id pk
+    email: {
+      type: Dt.STRING,
+    },
+    //password
+    //role fk
+    //isActive fk
+    //creationDate
+    //updateDate
   },
   {
     sequelize: db,
