@@ -17,6 +17,9 @@ User.init(
     email: {
       type: Dt.STRING,
     },
+    password: {
+      type: Dt.STRING,
+    },
     //password
     //role fk
     //isActive fk
