@@ -18,6 +18,7 @@ State.init(
 
 State.afterSync(async () => {
   await State.create({ name: 'active' })
+  await State.create({ name: 'inactive' })
 })
 
 export default State

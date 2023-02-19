@@ -38,8 +38,26 @@ User.afterSync(async () => {
     lastName: 'Doe',
     userName: 'janeDoe',
     email: 'test@test.com',
-    password: 'testpassword',
+    password: 'testPassword',
     RoleId: 1,
+    StateId: 1,
+  })
+  await User.create({
+    firstName: 'Joe',
+    lastName: 'Smith',
+    userName: 'joeSmith',
+    email: 'test@test.com',
+    password: 'testPassword',
+    RoleId: 2,
+    StateId: 2,
+  })
+  await User.create({
+    firstName: 'Joan',
+    lastName: 'Samson',
+    userName: 'joanSamson',
+    email: 'test@test.com',
+    password: 'testPassword',
+    RoleId: 2,
     StateId: 1,
   })
 })

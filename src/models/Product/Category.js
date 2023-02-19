@@ -2,8 +2,7 @@ import { DataTypes as Dt, Model } from 'sequelize'
 import db from '../../config/database.js'
 
 class Category extends Model {}
-// parametros tabla
-// parametros conexion db y table name
+
 Category.init(
   {
     name: {

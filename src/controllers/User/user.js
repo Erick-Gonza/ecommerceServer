@@ -96,4 +96,32 @@ const deleteUser = async (req, res) => {
   }
 }
 
-export { getAllUser, getByIdUser, createUser, updateUser, deleteUser }
+const createUserAddress = async (req, res) => {
+  try {
+    const { id } = req.params
+    const { street, city, state, zipCode } = req.body
+    const address = await Address.create({
+      street,
+      city,
+      state,
+      zipCode,
+      UserId: id,
+    })
+    res.send({
+      message: `Address created`,
+      success: true,
+      address,
+    })
+  } catch (error) {
+    res.status(400).send({ message: error, success: false })
+  }
+}
+
+export {
+  getAllUser,
+  getByIdUser,
+  createUser,
+  updateUser,
+  deleteUser,
+  createUserAddress,
+}

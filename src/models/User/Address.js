@@ -16,7 +16,7 @@ Address.init(
     state: {
       type: Dt.STRING,
     },
-    postalCode: {
+    zipCode: {
       type: Dt.INTEGER,
     },
     //creationDate
