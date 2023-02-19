@@ -35,13 +35,16 @@ const getByIdUser = async (req, res) => {
 
 const createUser = async (req, res) => {
   try {
-    const { firstName, lastName, userName, email, password } = req.body
+    const { firstName, lastName, userName, email, password, RoleId, StateId } =
+      req.body
     const user = await User.create({
       firstName,
       lastName,
       userName,
       email,
       password,
+      RoleId,
+      StateId,
     })
     res.send({
       message: `User created`,
@@ -53,7 +56,6 @@ const createUser = async (req, res) => {
   }
 }
 
-//TODO: FIX CASCADE UPDATE WITH TABLE ADDRESS
 const updateUser = async (req, res) => {
   try {
     const { id } = req.params
@@ -70,6 +72,7 @@ const updateUser = async (req, res) => {
         where: { id },
       }
     )
+
     res.send({
       message: `User updated`,
       success: true,

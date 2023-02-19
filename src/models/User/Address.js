@@ -4,28 +4,27 @@ import db from '../../config/database.js'
 class Address extends Model {}
 
 Address.init(
-{
+  {
     //id
     //idUser fk
-    address:{
-        type: Dt.STRING,
+    street: {
+      type: Dt.STRING,
     },
     city: {
-        type: Dt.STRING,
+      type: Dt.STRING,
     },
-    state:{
-        type: Dt.STRING,
+    state: {
+      type: Dt.STRING,
     },
-    postalCode:{
-        type: Dt.INTEGER,
+    postalCode: {
+      type: Dt.INTEGER,
     },
     //creationDate
     //updateDate
-
-},
-{
+  },
+  {
     sequelize: db,
     modelName: 'Address',
-}
+  }
 )
 export default Address

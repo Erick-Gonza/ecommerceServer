@@ -15,4 +15,9 @@ State.init(
     modelName: 'State',
   }
 )
+
+State.afterSync(async () => {
+  await State.create({ name: 'active' })
+})
+
 export default State

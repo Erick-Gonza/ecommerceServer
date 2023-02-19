@@ -15,4 +15,9 @@ Role.init(
     modelName: 'Role',
   }
 )
+
+Role.afterSync(async () => {
+  await Role.create({ name: 'admin' })
+})
+
 export default Role

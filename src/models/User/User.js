@@ -11,7 +11,7 @@ User.init(
     lastName: {
       type: Dt.STRING,
     },
-    username: {
+    userName: {
       type: Dt.STRING,
     },
     email: {
@@ -31,5 +31,17 @@ User.init(
     modelName: 'User',
   }
 )
+
+User.afterSync(async () => {
+  await User.create({
+    firstName: 'Jane',
+    lastName: 'Doe',
+    userName: 'janeDoe',
+    email: 'test@test.com',
+    password: 'testpassword',
+    RoleId: 1,
+    StateId: 1,
+  })
+})
 
 export default User
