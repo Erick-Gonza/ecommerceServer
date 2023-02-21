@@ -5,7 +5,11 @@ class Cart extends Model {}
 
 Cart.init(
   {
-    //id
+    id: {
+      type: Dt.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     //product id fk
     // user id fk
     quantity: {

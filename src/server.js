@@ -16,6 +16,8 @@ import {
   Role,
   State,
   Address,
+  Country,
+  Status,
 } from './models/index.js'
 
 const port = process.env.PORT

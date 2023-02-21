@@ -5,7 +5,11 @@ class Order extends Model {}
 
 Order.init(
   {
-    //id
+    id: {
+      type: Dt.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     //idUser fk
     //CreationDate
     //updateDate

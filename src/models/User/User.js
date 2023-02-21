@@ -5,6 +5,11 @@ class User extends Model {}
 
 User.init(
   {
+    id: {
+      type: Dt.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     firstName: {
       type: Dt.STRING,
     },
@@ -20,11 +25,20 @@ User.init(
     password: {
       type: Dt.STRING,
     },
-    //password
-    //role fk
-    //isActive fk
-    //creationDate
-    //updateDate
+    roleId: {
+      type: Dt.INTEGER,
+      references: {
+        model: 'Users',
+        key: 'id',
+      },
+    },
+    statusId: {
+      type: Dt.INTEGER,
+      references: {
+        model: 'Users',
+        key: 'id',
+      },
+    },
   },
   {
     sequelize: db,
@@ -34,31 +48,22 @@ User.init(
 
 User.afterSync(async () => {
   await User.create({
-    firstName: 'Jane',
-    lastName: 'Doe',
-    userName: 'janeDoe',
-    email: 'test@test.com',
-    password: 'testPassword',
-    RoleId: 1,
-    StateId: 1,
+    firstName: 'Admin',
+    lastName: 'Admin',
+    userName: 'Admin',
+    email: 'Admin@test.com',
+    password: 'Admin',
+    roleId: 1,
+    statusId: 1,
   })
   await User.create({
-    firstName: 'Joe',
-    lastName: 'Smith',
-    userName: 'joeSmith',
-    email: 'test@test.com',
-    password: 'testPassword',
-    RoleId: 2,
-    StateId: 2,
-  })
-  await User.create({
-    firstName: 'Joan',
-    lastName: 'Samson',
-    userName: 'joanSamson',
-    email: 'test@test.com',
-    password: 'testPassword',
-    RoleId: 2,
-    StateId: 1,
+    firstName: 'Admin',
+    lastName: 'Admin',
+    userName: 'Admin',
+    email: 'Admin@test.com',
+    password: 'Admin',
+    roleId: 2,
+    statusId: 2,
   })
 })
 

@@ -1,11 +1,14 @@
 import User from '../../models/User/User.js'
-import Address from '../../models/User/Address.js'
+import Address from '../../models/User/Address/Address.js'
 import Role from '../../models/User/Role.js'
-import State from '../../models/User/State.js'
+import State from '../../models/User/Status.js'
+import { WishList } from '../../models/index.js'
 
 const getAllUser = async (req, res) => {
   try {
-    const data = await User.findAll({ include: [Address, Role, State] })
+    const data = await User.findAll({
+      include: [Address, Role, State, WishList],
+    })
     data.length === 0
       ? res.status(400).send({ message: 'No users found', success: false })
       : res.status(200).send({ message: 'Get all users', success: true, data })

@@ -4,97 +4,95 @@ import OrderDetail from './Order/OrderDetail.js'
 import Category from './Product/Category.js'
 import Product from './Product/Product.js'
 import Subcategory from './Product/Subcategory.js'
-import Address from './User/Address.js'
+import Address from './User/Address/Address.js'
 import Role from './User/Role.js'
-import State from './User/State.js'
+import Status from './User/Status.js'
 import User from './User/User.js'
 import WishList from './WishList/WishList.js'
+import State from './User/Address/State.js'
+import Country from './User/Address/Country.js'
 
-Category.hasMany(Subcategory, {
-  foreignKey: {
-    field: 'categoryId',
-  },
-  //onDelete:"CASCADE"
+// User - Role
+User.hasOne(Role, {
+  foreignKey: 'id',
+  sourceKey: 'roleId',
+  onDelete: 'NO ACTION',
+  onUpdate: 'NO ACTION',
 })
-Subcategory.belongsTo(Category)
-
-Subcategory.hasMany(Product, {
-  foreignKey: {
-    field: 'subcategoryId',
-  },
-  //onDelete:"CASCADE"
-})
-Product.belongsTo(Subcategory)
-
-Product.belongsToMany(WishList, {
-  through: 'ProductWishList',
+Role.belongsTo(User, {
+  foreignKey: 'id',
+  targetKey: 'roleId',
+  onDelete: 'NO ACTION',
+  onUpdate: 'NO ACTION',
 })
 
-User.hasOne(WishList, {
-  foreignKey: {
-    field: 'userId',
-  },
+// User - Status
+User.hasOne(Status, {
+  foreignKey: 'id',
+  sourceKey: 'statusId',
+  onDelete: 'NO ACTION',
+  onUpdate: 'NO ACTION',
 })
-WishList.belongsTo(User)
+Status.belongsTo(User, {
+  foreignKey: 'id',
+  targetKey: 'statusId',
+  onDelete: 'NO ACTION',
+  onUpdate: 'NO ACTION',
+})
 
-User.hasOne(Cart, {
-  foreignKey: {
-    field: 'userId',
-  },
+// User - Address
+User.hasMany(Address, {
+  foreignKey: 'userId',
+  sourceKey: 'id',
+  onDelete: 'NO ACTION',
+  onUpdate: 'NO ACTION',
 })
-Cart.belongsTo(User)
+Address.belongsTo(User, {
+  foreignKey: 'userId',
+  targetKey: 'id',
+  onDelete: 'NO ACTION',
+  onUpdate: 'NO ACTION',
+})
 
-Product.hasMany(Cart, {
-  foreignKey: {
-    field: 'productId',
-  },
+// User - WishList
+User.hasMany(WishList, {
+  foreignKey: 'productId',
+  sourceKey: 'id',
 })
-Cart.belongsTo(Product)
+WishList.belongsTo(User, {
+  foreignKey: 'productId',
+  targetKey: 'id',
+})
 
-Product.hasMany(OrderDetail, {
-  foreignKey: {
-    field: 'productId',
-  },
+// WishList - Product
+WishList.hasMany(Product, {
+  foreignKey: 'wishListProductId',
+  sourceKey: 'id',
 })
-OrderDetail.belongsTo(Product)
+Product.belongsTo(WishList, {
+  foreignKey: 'wishListProductId',
+  targetKey: 'id',
+})
 
-Order.hasMany(OrderDetail, {
-  foreignKey: {
-    field: 'orderId',
-  },
-})
-OrderDetail.belongsTo(Order)
+// User.belongsTo(Cart, {
+//   foreignKey: 'wishListId',
+//   target: 'id',
+// })
 
-User.hasMany(Order, {
-  foreignKey: {
-    field: 'userId',
-  },
-})
-Order.belongsTo(User)
+// Cart.hasOne(User, {
+//   foreignKey: 'cartId',
+//   sourceKey: 'id',
+// })
 
-//role
-Role.hasOne(User, {
-  foreignKey: {
-    field: 'roleId',
-  },
-})
-User.belongsTo(Role)
+// Category.hasMany(Subcategory, {
+//   foreignKey: 'categoryId',
+//   sourceKey: 'id',
+// })
 
-//state
-State.hasOne(User, {
-  foreignKey: {
-    field: 'stateId',
-  },
-})
-User.belongsTo(State)
-
-//address
-User.hasOne(Address, {
-  foreignKey: {
-    field: 'userId',
-  },
-})
-Address.belongsTo(User)
+// Subcategory.belongsTo(Category, {
+//   foreignKey: 'categoryId',
+//   target: 'id',
+// })
 
 export {
   Product,
@@ -107,5 +105,7 @@ export {
   Role,
   Cart,
   WishList,
+  Status,
+  Country,
   State,
 }

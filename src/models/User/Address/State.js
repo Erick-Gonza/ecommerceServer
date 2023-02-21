@@ -1,11 +1,15 @@
 import { DataTypes as Dt, Model } from 'sequelize'
-import db from '../../config/database.js'
+import db from '../../../config/database.js'
 
 class State extends Model {}
 
 State.init(
   {
-    //id
+    id: {
+      type: Dt.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     name: {
       type: Dt.STRING,
     },
@@ -13,12 +17,8 @@ State.init(
   {
     sequelize: db,
     modelName: 'State',
+    timestamps: false,
   }
 )
-
-State.afterSync(async () => {
-  await State.create({ name: 'active' })
-  await State.create({ name: 'inactive' })
-})
 
 export default State

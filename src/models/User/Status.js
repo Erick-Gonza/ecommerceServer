@@ -1,9 +1,9 @@
 import { DataTypes as Dt, Model } from 'sequelize'
 import db from '../../config/database.js'
 
-class Category extends Model {}
+class Status extends Model {}
 
-Category.init(
+Status.init(
   {
     id: {
       type: Dt.INTEGER,
@@ -12,17 +12,22 @@ Category.init(
     },
     name: {
       type: Dt.STRING,
-      allowNull: false,
-    },
-    description: {
-      type: Dt.STRING,
     },
   },
-
   {
     sequelize: db,
-    modelName: 'Category',
+    modelName: 'Status',
+    timestamps: false,
   }
 )
 
-export default Category
+Status.afterSync(async () => {
+  await Status.create({
+    name: 'active',
+  })
+  await Status.create({
+    name: 'inactive',
+  })
+})
+
+export default Status

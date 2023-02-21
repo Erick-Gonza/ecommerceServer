@@ -5,7 +5,11 @@ class OrderDetail extends Model {}
 
 OrderDetail.init(
   {
-    //id
+    id: {
+      type: Dt.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     //order fk
     //idProduct fk
     //price ??

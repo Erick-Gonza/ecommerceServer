@@ -5,9 +5,18 @@ class WishList extends Model {}
 
 WishList.init(
   {
-    //id
-    //idProduct fk
-    //idUser fk
+    id: {
+      type: Dt.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    productId: {
+      type: Dt.INTEGER,
+      references: {
+        model: 'Products',
+        key: 'id',
+      },
+    },
   },
   {
     sequelize: db,

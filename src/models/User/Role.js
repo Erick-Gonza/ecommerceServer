@@ -5,7 +5,11 @@ class Role extends Model {}
 
 Role.init(
   {
-    //id
+    id: {
+      type: Dt.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     name: {
       type: Dt.STRING,
     },
@@ -13,12 +17,17 @@ Role.init(
   {
     sequelize: db,
     modelName: 'Role',
+    timestamps: false,
   }
 )
 
 Role.afterSync(async () => {
-  await Role.create({ name: 'admin' })
-  await Role.create({ name: 'client' })
+  await Role.create({
+    name: 'admin',
+  })
+  await Role.create({
+    name: 'client',
+  })
 })
 
 export default Role

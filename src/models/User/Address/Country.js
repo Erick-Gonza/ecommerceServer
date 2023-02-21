@@ -1,9 +1,9 @@
 import { DataTypes as Dt, Model } from 'sequelize'
-import db from '../../config/database.js'
+import db from '../../../config/database.js'
 
-class Category extends Model {}
+class Country extends Model {}
 
-Category.init(
+Country.init(
   {
     id: {
       type: Dt.INTEGER,
@@ -12,17 +12,13 @@ Category.init(
     },
     name: {
       type: Dt.STRING,
-      allowNull: false,
-    },
-    description: {
-      type: Dt.STRING,
     },
   },
-
   {
     sequelize: db,
-    modelName: 'Category',
+    modelName: 'Country',
+    timestamps: false,
   }
 )
 
-export default Category
+export default Country
