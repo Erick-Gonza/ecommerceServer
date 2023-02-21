@@ -1,11 +1,11 @@
 import { Router } from 'express'
-import { 
-    createSubCategory,
-    deleteSubCategory,
-    getAllSubCategory,
-    getByIdSubCategory,
-    updateSubCategory
-    } from '../../controllers/SubCategory/subCategory.js'
+import {
+  createSubCategory,
+  deleteSubCategory,
+  getAllSubCategory,
+  getByIdSubCategory,
+  updateSubCategory,
+} from '../../controllers/SubCategory/subCategory.js'
 
 const subCategoryRouter = Router()
 
