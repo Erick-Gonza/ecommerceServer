@@ -15,7 +15,7 @@ const getByIdOrder = async (req, res) => {
   try {
     const { id } = req.params
     const data = await Order.findByPk(id)
-    data.length === 0
+    data === null
       ? res.status(400).send({
           message: 'Order with id ' + id + ' not found',
           success: false,

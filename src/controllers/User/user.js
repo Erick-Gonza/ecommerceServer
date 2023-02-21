@@ -21,7 +21,7 @@ const getByIdUser = async (req, res) => {
   try {
     const { id } = req.params
     const data = await User.findByPk(id, { include: [Address, Role, State] })
-    data.length === 0
+    data === null
       ? res.status(400).send({
           message: 'User with id ' + id + ' not found',
           success: false,

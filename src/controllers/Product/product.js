@@ -4,7 +4,6 @@ import Subcategory from '../../models/Product/SubCategory.js'
 
 const getAllProduct = async (req, res) => {
   try {
-    // const data = await Product.findAll({ include: [Category, Subcategory] })
     const data = await Product.findAll()
     data.length === 0
       ? res.status(400).send({
@@ -24,11 +23,8 @@ const getAllProduct = async (req, res) => {
 const getByIdProduct = async (req, res) => {
   try {
     const { id } = req.params
-    // const data = await Product.findByIdPk(id, {
-    //   include: [Category, Subcategory],
-    // })
     const data = await Product.findByPk(id)
-    data.length === 0
+    data === null
       ? res.status(400).send({
           message: `Product with id ${id} not found`,
           success: false,

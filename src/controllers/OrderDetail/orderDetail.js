@@ -19,7 +19,7 @@ const getByIdOrderDetail = async (req, res) => {
   try {
     const { id } = req.params
     const data = await OrderDetail.findByPk(id)
-    data.length === 0
+    data === null
       ? res.status(400).send({
           message: 'OrderDetail with id ' + id + ' not found',
           success: false,

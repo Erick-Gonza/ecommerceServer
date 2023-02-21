@@ -22,7 +22,7 @@ const getByIdSubCategory = async (req, res) => {
   try {
     const { id } = req.params
     const data = await SubCategory.findByPk(id)
-    data.length === 0
+    data === null
       ? res.status(400).send({
           message: `SubCategory with id ${id} not found`,
           success: false,

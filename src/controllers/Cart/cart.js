@@ -15,7 +15,7 @@ const getByIdCart = async (req, res) => {
   try {
     const { id } = req.params
     const data = await Cart.findByPk(id)
-    data.length === 0
+    data === null
       ? res.status(400).send({
           message: 'Cart with id ' + id + ' not found',
           success: false,
