@@ -1,9 +1,9 @@
 import { DataTypes as Dt, Model } from 'sequelize'
 import db from '../../config/database.js'
 
-class Subcategory extends Model {}
+class SubCategory extends Model {}
 
-Subcategory.init(
+SubCategory.init(
   {
     id: {
       type: Dt.INTEGER,
@@ -23,8 +23,8 @@ Subcategory.init(
   },
   {
     sequelize: db,
-    modelName: 'Subcategory',
+    modelName: 'SubCategory',
   }
 )
 
-export default Subcategory
+export default SubCategory

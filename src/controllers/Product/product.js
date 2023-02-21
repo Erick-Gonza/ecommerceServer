@@ -1,6 +1,6 @@
 import Product from '../../models/Product/Product.js'
 import Category from '../../models/Product/Category.js'
-import Subcategory from '../../models/Product/Subcategory.js'
+import Subcategory from '../../models/Product/SubCategory.js'
 
 const getAllProduct = async (req, res) => {
   try {

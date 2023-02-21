@@ -5,12 +5,16 @@ import { productRouter } from './product/product.js'
 import { cartRouter } from './cart/cart.js'
 import { orderRouter } from './Order/order.js'
 import { orderDetailRouter } from './Order/orderDetail.js'
+import { wishListRouter } from './wishList/wishList.js'
+import { subCategoryRouter } from './subcategory/subcategory.js'
 
 const router = Router()
 
 router.use('/user', userRouter)
 router.use('/product', productRouter)
 router.use('/category', categoryRouter)
+router.use('/wishlist', wishListRouter)
+router.use('/subcategory', subCategoryRouter)
 router.use('/cart', cartRouter)
 router.use('/order', orderRouter)
 router.use('/orderDetail', orderDetailRouter)
