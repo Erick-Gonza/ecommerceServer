@@ -12,69 +12,65 @@ import WishList from './WishList/WishList.js'
 import State from './User/Address/State.js'
 import Country from './User/Address/Country.js'
 
-
 // User - Role
-Role.hasMany(User, {as: "user", foreignKey: "roleId"})
-User.belongsTo(Role , {as: "role", foreignKey: "roleId"})
+Role.hasMany(User, { as: 'user', foreignKey: 'roleId' })
+User.belongsTo(Role, { as: 'role', foreignKey: 'roleId' })
 
 // // User - Status
-Status.hasMany(User, {foreignKey: "statusId" })
-User.belongsTo(Status, {foreignKey: "statusId" })
+Status.hasMany(User, { foreignKey: 'statusId' })
+User.belongsTo(Status, { foreignKey: 'statusId' })
 
 // // User - Address
 User.belongsToMany(Address, { through: 'UserAddress', foreignKey: 'userId' })
 Address.belongsToMany(User, { through: 'UserAddress', foreignKey: 'addressId' })
 
-// // User - WishListc
-User.hasMany(WishList, {foreignKey: "userId"})
-WishList.belongsTo(User,{foreignKey: "userId"})
-
+// // User - WishList
+User.hasMany(WishList, { foreignKey: 'userId' })
+WishList.belongsTo(User, { foreignKey: 'userId' })
 
 // // WishListITEM - Product
-Product.hasMany(WishList, {foreignKey: "productId"})
-WishList.belongsTo(Product, {foreignKey: "productId"})
+Product.hasMany(WishList, { foreignKey: 'productId' })
+WishList.belongsTo(Product, { foreignKey: 'productId' })
 
 // // User - Order
-User.hasMany(Order, {foreignKey: 'userId'})
-Order.belongsTo(User, {foreignKey: 'userId'})
+User.hasMany(Order, { foreignKey: 'userId' })
+Order.belongsTo(User, { foreignKey: 'userId' })
 
 // //Product - Category subcategory*
-Subcategory.hasMany(Product, {foreignKey: 'subcategoryId'})
-Product.belongsTo(Subcategory, {foreignKey: 'subcategoryId'} )
+Subcategory.hasMany(Product, { foreignKey: 'subcategoryId' })
+Product.belongsTo(Subcategory, { foreignKey: 'subcategoryId' })
 
 //Product-CartITEM
 Product.hasMany(Cart, { foreignKey: 'productId' })
-Cart.belongsTo(Product, {foreignKey: 'productId'})
+Cart.belongsTo(Product, { foreignKey: 'productId' })
 
 //Product - OrderDetail
-Product.hasMany(OrderDetail, {foreignKey: 'productId'})
-OrderDetail.belongsTo(Product, {foreignKey: 'productId'})
+Product.hasMany(OrderDetail, { foreignKey: 'productId' })
+OrderDetail.belongsTo(Product, { foreignKey: 'productId' })
 
 //Category - SubCategory **
-Category.hasMany(Subcategory, {foreignKey: 'categoryId'})
-Subcategory.belongsTo(Category, {foreignKey: 'categoryId'} )
+Category.hasMany(Subcategory, { foreignKey: 'categoryId' })
+Subcategory.belongsTo(Category, { foreignKey: 'categoryId' })
 
 //User - Cart
-User.hasMany(Cart, {foreignKey: "userId"})
-Cart.belongsTo(User,{foreignKey: "userId"})
+User.hasMany(Cart, { foreignKey: 'userId' })
+Cart.belongsTo(User, { foreignKey: 'userId' })
 
 //order - orderdetail
-Order.hasMany(OrderDetail, {foreignKey: "orderId"} )
-OrderDetail.belongsTo(Order, {foreignKey: "orderId"} )
+Order.hasMany(OrderDetail, { foreignKey: 'orderId' })
+OrderDetail.belongsTo(Order, { foreignKey: 'orderId' })
 
 //order-address     USERADDRESS??
-Address.hasMany(Order, {foreignKey: "addressId"} )
-Order.belongsTo(Address, {foreignKey: "addressId"})
+Address.hasMany(Order, { foreignKey: 'addressId' })
+Order.belongsTo(Address, { foreignKey: 'addressId' })
 
 //country- address
-Country.hasMany(Address, {foreignKey: "countryId"})
-Address.belongsTo(Country,{foreignKey: "countryId"})
+Country.hasMany(Address, { foreignKey: 'countryId' })
+Address.belongsTo(Country, { foreignKey: 'countryId' })
 
 //state-address
-State.hasMany(Address, {foreignKey: "stateId"})
-Address.belongsTo(State,{foreignKey: "stateId"})
-
-
+State.hasMany(Address, { foreignKey: 'stateId' })
+Address.belongsTo(State, { foreignKey: 'stateId' })
 
 // User.belongsTo(Cart, {
 //   foreignKey: 'wishListId',

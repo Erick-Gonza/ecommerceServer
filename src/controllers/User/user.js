@@ -1,14 +1,9 @@
 import User from '../../models/User/User.js'
 import Address from '../../models/User/Address/Address.js'
-import Role from '../../models/User/Role.js'
-import State from '../../models/User/Status.js'
-import { WishList } from '../../models/index.js'
 
 const getAllUser = async (req, res) => {
   try {
-    const data = await User.findAll({
-      include: [Address, Role, State, WishList],
-    })
+    const data = await User.findAll({ include: [{ all: true }] })
     data.length === 0
       ? res.status(400).send({ message: 'No users found', success: false })
       : res.status(200).send({ message: 'Get all users', success: true, data })
@@ -20,7 +15,8 @@ const getAllUser = async (req, res) => {
 const getByIdUser = async (req, res) => {
   try {
     const { id } = req.params
-    const data = await User.findByPk(id, { include: [Address, Role, State] })
+    const data = await User.findByPk(id, { include: [{ all: true }] })
+
     data === null
       ? res.status(400).send({
           message: 'User with id ' + id + ' not found',

@@ -24,7 +24,7 @@ User.init(
     },
     password: {
       type: Dt.STRING,
-    }
+    },
   },
   {
     sequelize: db,
