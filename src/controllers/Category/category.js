@@ -1,6 +1,6 @@
 import Category from '../../models/Product/Category.js'
 
-const getAllCategory = async(req, res) {
+const getAllCategory = async(req, res) => {
     try {
         const data = await Category.findAll()
         data.length === 0 ?

@@ -24,4 +24,4 @@ addressRouter.put('/:id', updateAddress)
 // Delete a user
 addressRouter.delete('/:id', deleteAddress)
 
-export { userRouter }
+export { addressRouter }
