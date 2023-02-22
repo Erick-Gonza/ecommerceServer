@@ -24,21 +24,7 @@ User.init(
     },
     password: {
       type: Dt.STRING,
-    },
-    roleId: {
-      type: Dt.INTEGER,
-      references: {
-        model: 'Users',
-        key: 'id',
-      },
-    },
-    statusId: {
-      type: Dt.INTEGER,
-      references: {
-        model: 'Users',
-        key: 'id',
-      },
-    },
+    }
   },
   {
     sequelize: db,

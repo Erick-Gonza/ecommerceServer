@@ -10,13 +10,7 @@ WishList.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    productId: {
-      type: Dt.INTEGER,
-      references: {
-        model: 'Products',
-        key: 'id',
-      },
-    },
+    
   },
   {
     sequelize: db,
