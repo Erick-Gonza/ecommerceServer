@@ -1,20 +1,27 @@
 import { Router } from 'express'
+import {
+    getAllCategory,
+    getByIdCategory,
+    createCategory,
+    updateCategory,
+    deleteCategory,
+} from '../../controllers/Category/category.js'
 
 const categoryRouter = Router()
 
 // Get all categories
-categoryRouter.get('/', (req, res) => res.send('Get all categories'))
+categoryRouter.get('/', getAllCategory)
 
 // Get a category
-categoryRouter.get('/:id', (req, res) => res.send('Get a category'))
+categoryRouter.get('/:id', getByIdCategory)
 
 // Create a category
-categoryRouter.post('/', (req, res) => res.send('Create a category'))
+categoryRouter.post('/', createCategory)
 
 // Update a category
-categoryRouter.put('/:id', (req, res) => res.send('Update a category'))
+categoryRouter.put('/:id', updateCategory)
 
 // Delete a category
-categoryRouter.delete('/:id', (req, res) => res.send('Delete a category'))
+categoryRouter.delete('/:id', deleteCategory)
 
 export { categoryRouter }
