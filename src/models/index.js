@@ -11,6 +11,7 @@ import User from './User/User.js'
 import WishList from './WishList/WishList.js'
 import State from './User/Address/State.js'
 import Country from './User/Address/Country.js'
+import UserAddress from './User/UserAddress.js'
 
 // User - Role
 Role.hasMany(User, { as: 'user', foreignKey: 'roleId' })
@@ -21,8 +22,8 @@ Status.hasMany(User, { foreignKey: 'statusId' })
 User.belongsTo(Status, { foreignKey: 'statusId' })
 
 // // User - Address
-User.belongsToMany(Address, { through: 'UserAddress', foreignKey: 'userId' })
-Address.belongsToMany(User, { through: 'UserAddress', foreignKey: 'addressId' })
+User.belongsToMany(Address, { through: UserAddress, foreignKey: 'userId' })
+Address.belongsToMany(User, { through: UserAddress, foreignKey: 'addressId' })
 
 // // User - WishList
 User.hasMany(WishList, { foreignKey: 'userId' })
