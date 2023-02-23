@@ -1,9 +1,9 @@
 import { Router } from 'express'
 import {
-    getByIdWishList,
-    createWishList,
-    updateWishList,
-    deleteWishList,
+  getByIdWishList,
+  createWishList,
+  updateWishList,
+  deleteWishList,
 } from '../../controllers/WishList/wishList.js'
 
 const wishListRouter = Router()

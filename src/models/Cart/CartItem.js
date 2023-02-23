@@ -9,14 +9,14 @@ CartItem.init(
       type: Dt.INTEGER,
       primaryKey: true,
       autoIncrement: true,
-      allowNull:false
+      allowNull: false,
     },
     //product id fk
     // user id fk
     quantity: {
-       type: Dt.INTEGER,
-       allowNull: false
-     },
+      type: Dt.INTEGER,
+      allowNull: false,
+    },
     // total: {
     //   type: Dt.DECIMAL,
     // },

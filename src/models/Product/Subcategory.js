@@ -36,7 +36,7 @@ SubCategory.afterSync(async () => {
   await SubCategory.create({
     name: 'subcat 2',
     description: 'description 2',
-    categoryId: 1
+    categoryId: 1,
     // subcategoryId: 2,
   })
 })

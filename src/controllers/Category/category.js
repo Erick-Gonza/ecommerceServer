@@ -24,8 +24,8 @@ const getByIdCategory = async (req, res) => {
     const data = await Category.findByPk(id)
     data === null
       ? res.status(400).send({
-        message: `Category with id ${id} not found`,
-        success: false,
+          message: `Category with id ${id} not found`,
+          success: false,
         })
       : res.status(200).send({
           message: `Category with id ${id} found`,
@@ -39,21 +39,20 @@ const getByIdCategory = async (req, res) => {
 
 const createCategory = async (req, res) => {
   try {
-    const { name, description} = req.body
+    const { name, description } = req.body
     const [category, created] = await Category.findOrCreate({
-     where:{name},
-     defaults: {description}
+      where: { name },
+      defaults: { description },
     })
-    created === true 
-    ? res.send({
-      message: 'Category created',
-      success: true
-    })
-    : res.send({
-        message: `Category with name ${name} already exist`,
-        success: false  
-    })
-    
+    created === true
+      ? res.send({
+          message: 'Category created',
+          success: true,
+        })
+      : res.send({
+          message: `Category with name ${name} already exist`,
+          success: false,
+        })
   } catch (error) {
     res.status(400).send({ message: error, success: false })
   }
@@ -64,16 +63,16 @@ const updateCategory = async (req, res) => {
     const { id } = req.params
     const { name, description } = req.body
     const data = await Category.findByPk(id)
-    if (data === null){
+    if (data === null) {
       res.status(400).send({
         message: `Category with id ${id} not found`,
         success: false,
       })
-    }else{
+    } else {
       await Category.update(
         {
           name,
-          description
+          description,
         },
         {
           where: { id },
@@ -81,7 +80,7 @@ const updateCategory = async (req, res) => {
       )
       res.send({
         message: 'Category updated',
-        success: true
+        success: true,
       })
     }
   } catch (error) {
@@ -93,12 +92,12 @@ const deleteCategory = async (req, res) => {
   try {
     const { id } = req.params
     const data = await Category.findByPk(id)
-    if(data === null){
+    if (data === null) {
       res.status(400).send({
         message: `Category with id ${id} not found`,
         success: false,
       })
-    }else{
+    } else {
       await Category.destroy({
         where: { id },
       })

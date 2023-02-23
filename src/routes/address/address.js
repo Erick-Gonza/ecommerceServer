@@ -1,10 +1,10 @@
 import { Router } from 'express'
 import {
-    getAllAddress,
-    getByIdAddress,
-    createAddress,
-    updateAddress,
-    deleteAddress,
+  getAllAddress,
+  getByIdAddress,
+  createAddress,
+  updateAddress,
+  deleteAddress,
 } from '../../controllers/Address/address.js'
 
 const addressRouter = Router()

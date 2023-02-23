@@ -58,7 +58,7 @@ SubCategory.belongsTo(Category, { foreignKey: 'categoryId' })
 User.hasOne(Cart, { foreignKey: 'userId' })
 Cart.belongsTo(User, { foreignKey: 'userId' })
 
-//order - orderdetail
+//order - orderDetail
 Order.hasMany(OrderDetail, { foreignKey: 'orderId' })
 OrderDetail.belongsTo(Order, { foreignKey: 'orderId' })
 

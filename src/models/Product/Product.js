@@ -42,7 +42,7 @@ Product.afterSync(async () => {
   await Product.create({
     name: 'product 2',
     description: 'description 2',
-    subcategoryId: 1
+    subcategoryId: 1,
     // subcategoryId: 2,
   })
 })

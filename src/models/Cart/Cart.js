@@ -9,7 +9,7 @@ Cart.init(
       type: Dt.INTEGER,
       primaryKey: true,
       autoIncrement: true,
-      allowNull:false
+      allowNull: false,
     },
     //product id fk
     // user id fk
