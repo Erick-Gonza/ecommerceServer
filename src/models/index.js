@@ -12,6 +12,7 @@ import WishList from './WishList/WishList.js'
 import State from './User/Address/State.js'
 import Country from './User/Address/Country.js'
 import UserAddress from './User/UserAddress.js'
+import CartItem from './Cart/CartItem.js'
 
 // User - Role
 Role.hasMany(User, { as: 'user', foreignKey: 'roleId' })
@@ -42,8 +43,8 @@ SubCategory.hasMany(Product, { foreignKey: 'subcategoryId' })
 Product.belongsTo(SubCategory, { foreignKey: 'subcategoryId' })
 
 //Product-CartITEM
-Product.hasMany(Cart, { foreignKey: 'productId' })
-Cart.belongsTo(Product, { foreignKey: 'productId' })
+Cart.belongsToMany(Product, { through: CartItem, foreignKey: 'cartId' })
+Product.belongsToMany(Cart, { through: CartItem, foreignKey: 'productId' })
 
 //Product - OrderDetail
 Product.hasMany(OrderDetail, { foreignKey: 'productId' })
@@ -54,7 +55,7 @@ Category.hasMany(SubCategory, { foreignKey: 'categoryId' })
 SubCategory.belongsTo(Category, { foreignKey: 'categoryId' })
 
 //User - Cart
-User.hasMany(Cart, { foreignKey: 'userId' })
+User.hasOne(Cart, { foreignKey: 'userId' })
 Cart.belongsTo(User, { foreignKey: 'userId' })
 
 //order - orderdetail

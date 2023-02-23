@@ -39,17 +39,21 @@ const getByIdSubCategory = async (req, res) => {
 
 const createSubCategory = async (req, res) => {
   try {
-    const { subcategoryId, name, description } = req.body
-    const subCategory = await SubCategory.create({
-      subcategoryId,
-      name,
-      description,
+    const { categoryId, name, description } = req.body
+    const [subCategory, created] = await SubCategory.findOrCreate({
+      where: { name },
+      defaults: { description, categoryId },
     })
-    res.send({
-      message: 'SubCategory created',
-      success: true,
-      subCategory,
-    })
+    created === true
+      ? res.send({
+          message: 'SubCategory created',
+          success: true,
+          subCategory,
+        })
+      : res.send({
+          message: `Subcategory with name ${name} already exist`,
+          success: false,
+        })
   } catch (error) {
     res.status(400).send({ message: error, success: false })
   }
@@ -58,21 +62,29 @@ const createSubCategory = async (req, res) => {
 const updateSubCategory = async (req, res) => {
   try {
     const { id } = req.params
-    const { subcategoryId, name, description } = req.body
-    const SubCategory = await SubCategory.update(
-      {
-        subcategoryId,
-        name,
-        description,
-      },
-      {
-        where: { id },
-      }
-    )
-    res.send({
-      message: 'SubCategory updated',
-      success: true,
-    })
+    const { name, description, categoryId } = req.body
+    const data = await SubCategory.findByPk(id)
+    if (data === null) {
+      res.status(400).send({
+        message: `Subcategory with id ${id} not found`,
+        success: false,
+      })
+    } else {
+      await Subcategory.update(
+        {
+          name,
+          description,
+          categoryId,
+        },
+        {
+          where: { id },
+        }
+      )
+      res.send({
+        message: 'SubCategory updated',
+        success: true,
+      })
+    }
   } catch (error) {
     res.status(400).send({ message: error, success: false })
   }
@@ -81,15 +93,23 @@ const updateSubCategory = async (req, res) => {
 const deleteSubCategory = async (req, res) => {
   try {
     const { id } = req.params
-    await SubCategory.destroy({
-      where: {
-        id,
-      },
-    })
-    res.send({
-      message: `SubCategory with ${id} deleted`,
-      success: true,
-    })
+    const data = await SubCategory.findByPk(id)
+    if (data === null) {
+      res.status(400).send({
+        message: `Subcategory with id ${id} not found`,
+        success: false,
+      })
+    } else {
+      await SubCategory.destroy({
+        where: {
+          id,
+        },
+      })
+      res.send({
+        message: `SubCategory with ${id} deleted`,
+        success: true,
+      })
+    }
   } catch (error) {
     res.status(400).send({ message: error, success: false })
   }

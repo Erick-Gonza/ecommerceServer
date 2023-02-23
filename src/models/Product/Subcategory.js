@@ -27,4 +27,18 @@ SubCategory.init(
   }
 )
 
+SubCategory.afterSync(async () => {
+  await SubCategory.create({
+    name: 'Subcat 1',
+    categoryId: 1,
+    // subcategoryId: 1,
+  })
+  await SubCategory.create({
+    name: 'subcat 2',
+    description: 'description 2',
+    categoryId: 1
+    // subcategoryId: 2,
+  })
+})
+
 export default SubCategory
