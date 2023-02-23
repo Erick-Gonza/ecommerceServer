@@ -4,27 +4,14 @@ import morgan from 'morgan'
 import 'dotenv/config'
 import { router } from './routes/index.js'
 import db from './config/database.js'
-import {
-  Product,
-  User,
-  Category,
-  Subcategory,
-  Order,
-  OrderDetail,
-  WishList,
-  Cart,
-  Role,
-  State,
-  Address,
-  Country,
-  Status,
-} from './models/index.js'
+import cookieParser from 'cookie-parser'
 
 const port = process.env.PORT
 const app = express()
 
 app.use(cors())
 app.use(express.json())
+app.use(cookieParser())
 
 app.use(morgan('tiny'))
 

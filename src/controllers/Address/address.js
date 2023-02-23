@@ -1,4 +1,4 @@
-import Address from '../../models/User/Address/Address.js'
+import { Address } from '../../models/index.js'
 
 const getAllAddress = async (req, res) => {
   try {

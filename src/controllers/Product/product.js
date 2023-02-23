@@ -1,7 +1,4 @@
-import Product from '../../models/Product/Product.js'
-import Category from '../../models/Product/Category.js'
-import Subcategory from '../../models/Product/SubCategory.js'
-
+import { Product, Category, SubCategory } from '../../models/index.js'
 const getAllProduct = async (req, res) => {
   try {
     const data = await Product.findAll()

@@ -1,5 +1,4 @@
-import User from '../../models/User/User.js'
-import Address from '../../models/User/Address/Address.js'
+import { User, Address } from '../../models/index.js'
 
 const getAllUser = async (req, res) => {
   try {
