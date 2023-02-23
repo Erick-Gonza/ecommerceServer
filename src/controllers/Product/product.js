@@ -50,19 +50,28 @@ const createProduct = async (req, res) => {
       categoryId,
       subcategoryId,
     } = req.body
-    const product = await Product.create({
-      name,
-      description,
-      price,
-      stock,
-      imageUrl,
-      categoryId,
-      subcategoryId,
+    const [product, created] = await Product.findOrCreate({
+      where:{
+        name
+      },
+      defaults:{
+        description,
+        price,
+        stock,
+        imageUrl,
+        categoryId,
+        subcategoryId
+      }
     })
-    res.send({
+    created === true
+    ? res.send({
       message: 'Product created',
       success: true,
       product,
+    })
+    : res.send({
+      message: 'Product already exists',
+      success: false
     })
   } catch (error) {
     res.status(400).send({ message: error, success: false })
@@ -81,25 +90,35 @@ const updateProduct = async (req, res) => {
       categoryId,
       subCategoryId,
     } = req.body
-    const product = await Product.update(
-      {
-        name,
-        description,
-        price,
-        // discount,
-        stock,
-        imageUrl,
-        categoryId,
-        subCategoryId,
-      },
-      {
-        where: { id },
-      }
-    )
-    res.send({
-      message: 'Product updated',
-      success: true,
-    })
+    
+    const data = await Product.findByPk(id)
+    if(data === null){
+      res.status(400).send({
+          message: `Product with id ${id} not found`,
+          success: false,
+        })
+    }else{
+      await Product.update(
+        {
+          name,
+          description,
+          price,
+          // discount,
+          stock,
+          imageUrl,
+          categoryId,
+          subCategoryId,
+        },
+        {
+          where: { id },
+        }
+      )
+      res.send({
+        message: 'Product updated',
+        success: true,
+      })
+    }
+    
   } catch (error) {
     res.status(400).send({ message: error, success: false })
   }
@@ -108,15 +127,24 @@ const updateProduct = async (req, res) => {
 const deleteProduct = async (req, res) => {
   try {
     const { id } = req.params
-    await Product.destroy({
-      where: {
+    const data = await Product.findByPk(id)
+    if(data === null){
+      res.status(400).send({
+          message: `Product with id ${id} not found`,
+          success: false,
+        })
+    } else {
+      await Product.destroy({
+        where: {
         id,
-      },
-    })
+        },
+      })
     res.send({
       message: `Product with ${id} deleted`,
       success: true,
     })
+    }
+      
   } catch (error) {
     res.status(400).send({ message: error, success: false })
   }

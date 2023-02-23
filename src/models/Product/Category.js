@@ -8,6 +8,7 @@ Category.init(
     name: {
       type: Dt.STRING,
       allowNull: false,
+      unique: true
     },
     description: {
       type: Dt.STRING,

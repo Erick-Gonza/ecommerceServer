@@ -33,5 +33,18 @@ Product.init(
     modelName: 'Product',
   }
 )
+Product.afterSync(async () => {
+  await Product.create({
+    name: 'product 1',
+    categoryId: 1,
+    // subcategoryId: 1,
+  })
+  await Product.create({
+    name: 'product 2',
+    description: 'description 2',
+    subcategoryId: 1
+    // subcategoryId: 2,
+  })
+})
 
 export default Product

@@ -30,6 +30,7 @@ const getByIdCart = async (req, res) => {
   }
 }
 
+//add product to cart
 const createCart = async (req, res) => {
   try {
     const { quantity, total, userId, productId } = req.body

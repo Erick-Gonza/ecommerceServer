@@ -1,9 +1,9 @@
 import { DataTypes as Dt, Model } from 'sequelize'
 import db from '../../config/database.js'
 
-class Cart extends Model {}
+class CartItem extends Model {}
 
-Cart.init(
+CartItem.init(
   {
     id: {
       type: Dt.INTEGER,
@@ -13,9 +13,10 @@ Cart.init(
     },
     //product id fk
     // user id fk
-    // quantity: {
-    //   type: Dt.INTEGER,
-    // },
+    quantity: {
+       type: Dt.INTEGER,
+       allowNull: false
+     },
     // total: {
     //   type: Dt.DECIMAL,
     // },
@@ -24,8 +25,8 @@ Cart.init(
   },
   {
     sequelize: db,
-    modelName: 'Cart',
+    modelName: 'CartItem',
   }
 )
 
-export default Cart
+export default CartItem
