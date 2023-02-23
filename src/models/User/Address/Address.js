@@ -16,9 +16,6 @@ Address.init(
     city: {
       type: Dt.STRING,
     },
-    state: {
-      type: Dt.STRING,
-    },
     zipCode: {
       type: Dt.INTEGER,
     },
@@ -43,14 +40,12 @@ Address.afterSync(async () => {
   await Address.create({
     street: 'street 1',
     city: 'Bogota',
-    state: 'Bogota',
     zipCode: 111111,
     userId: 1,
   })
   await Address.create({
     street: 'street 2',
     city: 'Cartagena',
-    state: 'Cartagena',
     zipCode: 222222,
     userId: 1,
   })

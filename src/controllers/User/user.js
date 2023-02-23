@@ -56,7 +56,8 @@ const createUser = async (req, res) => {
 const updateUser = async (req, res) => {
   try {
     const { id } = req.params
-    const { firstName, lastName, userName, password, email } = req.body
+    const { firstName, lastName, userName, password, email, roleId, statusId } =
+      req.body
     const user = await User.update(
       {
         firstName,
@@ -64,6 +65,8 @@ const updateUser = async (req, res) => {
         userName,
         email,
         password,
+        roleId,
+        statusId,
       },
       {
         where: { id },

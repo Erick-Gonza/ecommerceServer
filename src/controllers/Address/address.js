@@ -39,13 +39,14 @@ const getByIdAddress = async (req, res) => {
 
 const createAddress = async (req, res) => {
   try {
-    const { street, city, state, zipCode, country } = req.body
+    const { street, city, zipCode, countryId, stateId, userId } = req.body
     const address = await Address.create({
       street,
       city,
-      state,
       zipCode,
-      country,
+      countryId,
+      stateId,
+      userId,
     })
     res.send({
       message: 'Address created',
