@@ -44,7 +44,6 @@ const createProduct = async (req, res) => {
       price,
       stock,
       imageUrl,
-      categoryId,
       subcategoryId,
     } = req.body
     const [product, created] = await Product.findOrCreate({
@@ -56,7 +55,6 @@ const createProduct = async (req, res) => {
         price,
         stock,
         imageUrl,
-        categoryId,
         subcategoryId,
       },
     })
@@ -84,7 +82,6 @@ const updateProduct = async (req, res) => {
       price,
       stock,
       imageUrl,
-      categoryId,
       subCategoryId,
     } = req.body
 
@@ -103,7 +100,6 @@ const updateProduct = async (req, res) => {
           // discount,
           stock,
           imageUrl,
-          categoryId,
           subCategoryId,
         },
         {

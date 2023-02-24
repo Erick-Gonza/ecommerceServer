@@ -36,11 +36,10 @@ const getByIdOrderDetail = async (req, res) => {
 
 const createOrderDetail = async (req, res) => {
   try {
-    const { quantity, total, userId, productId } = req.body
+    const { quantity, orderId, productId } = req.body
     const data = await OrderDetail.create({
       quantity,
-      total,
-      userId,
+      orderId,
       productId,
     })
     res.send({
@@ -56,12 +55,11 @@ const createOrderDetail = async (req, res) => {
 const updateOrderDetail = async (req, res) => {
   try {
     const { id } = req.params
-    const { quantity, total, userId, productId } = req.body
+    const { quantity, orderId, productId } = req.body
     const data = await OrderDetail.update(
       {
         quantity,
-        total,
-        userId,
+        orderId,
         productId,
       },
       {
