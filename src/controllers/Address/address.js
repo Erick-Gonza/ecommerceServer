@@ -1,8 +1,8 @@
-import { Address } from '../../models/index.js'
+import { Address, Country, State } from '../../models/index.js'
 
 const getAllAddress = async (req, res) => {
   try {
-    const data = await Address.findAll()
+    const data = await Address.findAll({ include: [Country, State] })
     data.length === 0
       ? res.status(400).send({
           message: 'No addresses found',

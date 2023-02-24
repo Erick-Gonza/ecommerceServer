@@ -42,15 +42,6 @@ User.afterSync(async () => {
     roleId: 1,
     statusId: 1,
   })
-  await User.create({
-    firstName: 'Admin',
-    lastName: 'Admin',
-    userName: 'Admin',
-    email: 'Admin@test.com',
-    password: 'Admin',
-    roleId: 2,
-    statusId: 2,
-  })
 })
 
 export default User

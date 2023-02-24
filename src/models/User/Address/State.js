@@ -21,4 +21,16 @@ State.init(
   }
 )
 
+State.afterSync(async () => {
+  await State.create({
+    name: 'Nuevo Leon',
+  })
+  await State.create({
+    name: 'CDMX',
+  })
+  await State.create({
+    name: 'Tamaulipas',
+  })
+})
+
 export default State

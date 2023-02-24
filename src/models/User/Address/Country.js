@@ -21,4 +21,19 @@ Country.init(
   }
 )
 
+Country.afterSync(async () => {
+  await Country.create({
+    name: 'Monterrey',
+  })
+  await Country.create({
+    name: 'Guadalupe',
+  })
+  await Country.create({
+    name: 'Reynosa',
+  })
+  await Country.create({
+    name: 'Mier',
+  })
+})
+
 export default Country

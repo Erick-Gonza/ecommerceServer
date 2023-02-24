@@ -40,10 +40,6 @@ UserAddress.afterSync(async () => {
     userId: 1,
     addressId: 2,
   })
-  await UserAddress.create({
-    userId: 2,
-    addressId: 1,
-  })
 })
 
 export default UserAddress
