@@ -13,6 +13,8 @@ import State from './User/Address/State.js'
 import Country from './User/Address/Country.js'
 import UserAddress from './User/UserAddress.js'
 import CartItem from './Cart/CartItem.js'
+import WishListItem from './WishList/WishListItem.js'
+
 
 // User - Role
 Role.hasMany(User, { as: 'user', foreignKey: 'roleId' })
@@ -27,12 +29,12 @@ User.belongsToMany(Address, { through: UserAddress, foreignKey: 'userId' })
 Address.belongsToMany(User, { through: UserAddress, foreignKey: 'addressId' })
 
 // // User - WishList
-User.hasMany(WishList, { foreignKey: 'userId' })
+User.hasOne(WishList, { foreignKey: 'userId' })
 WishList.belongsTo(User, { foreignKey: 'userId' })
 
 // // WishListITEM - Product
-Product.hasMany(WishList, { foreignKey: 'productId' })
-WishList.belongsTo(Product, { foreignKey: 'productId' })
+WishList.belongsToMany(Product, { through: WishListItem, foreignKey: 'wishlistId' })
+Product.belongsToMany(WishList, { through: WishListItem, foreignKey: 'productId' })
 
 // // User - Order
 User.hasMany(Order, { foreignKey: 'userId' })

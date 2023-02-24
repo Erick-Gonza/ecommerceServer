@@ -1,16 +1,18 @@
-import { WishList } from '../../models/index.js'
+import { WishList, Product, User } from '../../models/index.js'
+import WishListItem from '../../models/WishList/WishListItem.js';
 
-const getByIdWishList = async (req, res) => {
+const getWishList = async (req, res) =>{
   try {
     const { id } = req.params
-    const data = await WishList.findByPk(id)
+    const data = await WishList.findByPk(id, { include: [{ all: true }] })
+
     data === null
       ? res.status(400).send({
-          message: 'wishlist with id ' + id + ' not found',
+          message: 'wishlist not found',
           success: false,
         })
       : res.status(200).send({
-          message: 'wishlist with id ' + id + ' found',
+          message: 'wishlist',
           success: true,
           data,
         })
@@ -19,62 +21,66 @@ const getByIdWishList = async (req, res) => {
   }
 }
 
-const createWishList = async (req, res) => {
+const addToWishList = async (req, res ) =>{
   try {
-    const { wishlistId, productId, userId } = req.body
-    const wishList = await WishList.create({
-      wishlistId,
-      productId,
-      userId,
-    })
-    res.send({
-      message: 'WishList created',
-      success: true,
-      wishList,
-    })
-  } catch (error) {
-    res.status(400).send({ message: error, success: false })
-  }
-}
-
-const updateWishList = async (req, res) => {
-  try {
-    const { id } = req.params
-    const { wishlistId, productId, userId } = req.body
-    const WishList = await WishList.update(
-      {
-        wishlistId,
-        productId,
-        userId,
-      },
-      {
-        where: { id },
+    const { productId, userId } = req.body
+    // que producto exista
+    const product = await Product.findByPk(productId);
+    if(product === null){
+      res.status(400).send({
+        message: 'product with id ' + productId + ' not found',
+        success: false,
+      })
+      return 
+    } 
+    //que usuario exista
+    const user = await User.findByPk(userId);
+    if(user === null){
+      res.status(400).send({
+        message: ' with id ' + userId + ' not found',
+        success: false,
+      })
+      return 
+    } 
+    //que usuario tenga wl
+    let wishlist = await WishList.findOne({where: {userId}});
+    if(wishlist === null){
+      wishlist = await WishList.create({ 
+        userId
+      })
+    } 
+    
+    const wishlistItem = await WishListItem.findOne({
+      where:{
+        wishListId: wishlist.id, 
+        productId 
       }
-    )
-    res.send({
-      message: 'WishList updated',
-      success: true,
     })
+    if(wishlistItem === null){
+      await CartItem.create({
+      cartId: cart.id,
+      productId,
+      quantity: 1
+    })
+    res.status(201).send({
+      message: 'product added to wishlist',
+      success: true
+    })
+  }else{
+    res.send({
+      message:'product already in wl',
+      success:true
+    })
+  }
+    
   } catch (error) {
     res.status(400).send({ message: error, success: false })
   }
 }
 
-const deleteWishList = async (req, res) => {
-  try {
-    const { id } = req.params
-    await WishList.destroy({
-      where: {
-        id,
-      },
-    })
-    res.send({
-      message: `WishList with ${id} deleted`,
-      success: true,
-    })
-  } catch (error) {
-    res.status(400).send({ message: error, success: false })
-  }
-}
+// const deleteFromWishlist = async (req, res) =>{
 
-export { getByIdWishList, createWishList, updateWishList, deleteWishList }
+// }
+
+
+export {  getWishList, addToWishList }
