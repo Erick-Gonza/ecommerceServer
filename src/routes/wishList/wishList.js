@@ -1,23 +1,28 @@
 import { Router } from 'express'
 import {
-  getByIdWishList,
-  createWishList,
-  updateWishList,
-  deleteWishList,
+  getWishList, 
+  addToWishList,
+  //deleteFromWishList
 } from '../../controllers/WishList/wishList.js'
 
 const wishListRouter = Router()
 
 // Get a WishList
-wishListRouter.get('/:id', getByIdWishList)
+wishListRouter.get('/:id', getWishList)
 
-// Create a WishList
-wishListRouter.post('/', createWishList)
+//add to wishlist
+wishListRouter.post('/', addToWishList)
 
-// Update a WishList
-wishListRouter.put('/:id', updateWishList)
+//delete from wishlist
+// wishListRouter.delete('/', deleteFromWishList)
 
-// Delete a WishList
-wishListRouter.delete('/:id', deleteWishList)
+// // Create a WishList
+// wishListRouter.post('/', createWishList)
+
+// // Update a WishList
+// wishListRouter.put('/:id', updateWishList)
+
+// // Delete a WishList
+// wishListRouter.delete('/:id', deleteWishList)
 
 export { wishListRouter }

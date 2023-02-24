@@ -1,27 +1,31 @@
 import { Router } from 'express'
 import {
-  createCart,
-  deleteCart,
-  getByIdCart,
-  getCart,
-  updateCart,
+ getCart,
+ addToCart,
+deleteFromCart
 } from '../../controllers/Cart/cart.js'
 
 const cartRouter = Router()
 
-// Get all categories
-cartRouter.get('/', getCart)
+// Get cart
+// cartRouter.get('/', getCart)
 
-// Get a category
-cartRouter.get('/:id', getByIdCart)
+// Get cart
+cartRouter.get('/:id', getCart)
+
+//add to cart
+cartRouter.post('/', addToCart)
+
+//delete from cart
+cartRouter.put('/', deleteFromCart)
 
 // Create a category
-cartRouter.post('/', createCart)
+//cartRouter.post('/', createCart)
 
 // Update a category
-cartRouter.put('/:id', updateCart)
+//cartRouter.put('/:id', updateCart)
 
 // Delete a category
-cartRouter.delete('/:id', deleteCart)
+//cartRouter.delete('/:id', deleteCart)
 
 export { cartRouter }

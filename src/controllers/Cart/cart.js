@@ -1,27 +1,18 @@
-import { Cart } from '../../models/index.js'
+import CartItem from '../../models/Cart/CartItem.js';
+import { Cart, Product, User } from '../../models/index.js'
 
-const getCart = async (req, res) => {
-  try {
-    const data = await Cart.findAll()
-    data.length === 0
-      ? res.status(400).send({ message: 'No cart found', success: false })
-      : res.status(200).send({ message: 'Get all cart', success: true, data })
-  } catch (error) {
-    res.status(400).send({ message: error, success: false })
-  }
-}
-
-const getByIdCart = async (req, res) => {
+const getCart = async (req, res) =>{
   try {
     const { id } = req.params
-    const data = await Cart.findByPk(id)
+    const data = await Cart.findByPk(id, { include: [{ all: true }] })
+
     data === null
       ? res.status(400).send({
-          message: 'Cart with id ' + id + ' not found',
+          message: 'cart not found',
           success: false,
         })
       : res.status(200).send({
-          message: 'Cart with id ' + id + ' found',
+          message: 'cart',
           success: true,
           data,
         })
@@ -30,63 +21,107 @@ const getByIdCart = async (req, res) => {
   }
 }
 
-//add product to cart
-const createCart = async (req, res) => {
+const addToCart = async (req, res ) =>{
   try {
-    const { quantity, total, userId, productId } = req.body
-    const data = await Cart.create({
-      quantity,
-      total,
-      userId,
-      productId,
-    })
-    res.send({
-      message: `Cart created`,
-      success: true,
-      data,
-    })
-  } catch (error) {
-    res.status(400).send({ message: error, success: false })
-  }
-}
-
-const updateCart = async (req, res) => {
-  try {
-    const { id } = req.params
-    const { quantity, total, userId, productId } = req.body
-    const data = await Cart.update(
-      {
-        quantity,
-        total,
-        userId,
-        productId,
-      },
-      {
-        where: { id },
+    const { productId, userId } = req.body
+    // que producto exista
+    const product = await Product.findByPk(productId);
+    if(product === null){
+      res.status(400).send({
+        message: 'Cart with id ' + productId + ' not found',
+        success: false,
+      })
+      return 
+    } 
+    //que usuario exista
+    const user = await User.findByPk(userId);
+    if(user === null){
+      res.status(400).send({
+        message: ' with id ' + userId + ' not found',
+        success: false,
+      })
+      return 
+    } 
+    //que usuario tenga un carrito 
+    let cart = await Cart.findOne({where: {userId}});
+    if(cart === null){
+      cart = await Cart.create({ 
+        userId
+      })
+    } 
+    
+    const cartItem = await CartItem.findOne({
+      where:{
+        cartId: cart.id,
+        productId 
       }
-    )
-
-    res.send({
-      message: `Cart updated`,
-      success: true,
     })
+    if(cartItem === null){
+      await CartItem.create({
+        cartId: cart.id,
+        productId,
+        quantity: 1
+      })
+    }else{
+      await cartItem.update({
+        quantity: cartItem.quantity + 1
+      })
+    }
+    res.status(201).send({
+      message: 'product added to cart',
+      success: true
+    })
+
+    // crear cart item
   } catch (error) {
     res.status(400).send({ message: error, success: false })
   }
 }
 
-const deleteCart = async (req, res) => {
+const deleteFromCart = async (req, res ) =>{
   try {
-    const { id } = req.params
-    await Cart.destroy({
-      where: {
-        id,
-      },
+    const { productId, userId } = req.body
+    // que producto exista
+    const product = await Product.findByPk(productId);
+    if(product === null){
+      res.status(400).send({
+        message: 'Cart with id ' + productId + ' not found',
+        success: false,
+      })
+      return 
+    } 
+    //que usuario exista
+    const user = await User.findByPk(userId);
+    if(user === null){
+      res.status(400).send({
+        message: ' with id ' + userId + ' not found',
+        success: false,
+      })
+      return 
+    } 
+    //que usuario tenga un carrito 
+    let cart = await Cart.findOne({where: {userId}});
+    
+    const cartItem = await CartItem.findOne({
+      where:{
+        cartId: cart.id,
+        productId 
+      }
     })
-    res.send({ message: `Cart with ${id} deleted`, success: true })
+
+      await cartItem.update({
+        quantity: cartItem.quantity - 1 
+      })
+    
+    res.status(201).send({
+      message: 'one item removed from cart',
+      success: true
+    })
+
   } catch (error) {
     res.status(400).send({ message: error, success: false })
   }
 }
 
-export { getCart, getByIdCart, createCart, updateCart, deleteCart }
+
+export {  addToCart, getCart, deleteFromCart }
