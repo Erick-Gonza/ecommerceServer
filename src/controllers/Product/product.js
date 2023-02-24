@@ -38,14 +38,8 @@ const getByIdProduct = async (req, res) => {
 
 const createProduct = async (req, res) => {
   try {
-    const {
-      name,
-      description,
-      price,
-      stock,
-      imageUrl,
-      subcategoryId,
-    } = req.body
+    const { name, description, price, stock, imageUrl, subcategoryId } =
+      req.body
     const [product, created] = await Product.findOrCreate({
       where: {
         name,
@@ -76,14 +70,8 @@ const createProduct = async (req, res) => {
 const updateProduct = async (req, res) => {
   try {
     const { id } = req.params
-    const {
-      name,
-      description,
-      price,
-      stock,
-      imageUrl,
-      subCategoryId,
-    } = req.body
+    const { name, description, price, stock, imageUrl, subCategoryId } =
+      req.body
 
     const data = await Product.findByPk(id)
     if (data === null) {
