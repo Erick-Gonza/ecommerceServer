@@ -3,7 +3,7 @@ import Order from './Order/Order.js'
 import OrderDetail from './Order/OrderDetail.js'
 import Category from './Product/Category.js'
 import Product from './Product/Product.js'
-import SubCategory from './Product/SubCategory.js'
+import Subcategory from './Product/Subcategory.js'
 import Address from './User/Address/Address.js'
 import Role from './User/Role.js'
 import Status from './User/Status.js'
@@ -46,8 +46,8 @@ User.hasMany(Order, { foreignKey: 'userId' })
 Order.belongsTo(User, { foreignKey: 'userId' })
 
 // //Product - Category subcategory*
-SubCategory.hasMany(Product, { foreignKey: 'subcategoryId' })
-Product.belongsTo(SubCategory, { foreignKey: 'subcategoryId' })
+Subcategory.hasMany(Product, { foreignKey: 'subcategoryId' })
+Product.belongsTo(Subcategory, { foreignKey: 'subcategoryId' })
 
 //Product-CartITEM
 Cart.belongsToMany(Product, { through: CartItem, foreignKey: 'cartId' })
@@ -58,8 +58,8 @@ Product.hasMany(OrderDetail, { foreignKey: 'productId' })
 OrderDetail.belongsTo(Product, { foreignKey: 'productId' })
 
 //Category - SubCategory **
-Category.hasMany(SubCategory, { foreignKey: 'categoryId' })
-SubCategory.belongsTo(Category, { foreignKey: 'categoryId' })
+Category.hasMany(Subcategory, { foreignKey: 'categoryId' })
+Subcategory.belongsTo(Category, { foreignKey: 'categoryId' })
 
 //User - Cart
 User.hasOne(Cart, { foreignKey: 'userId' })
@@ -105,7 +105,7 @@ export {
   Product,
   User,
   Category,
-  SubCategory,
+  Subcategory,
   Order,
   OrderDetail,
   Address,
