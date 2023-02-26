@@ -70,7 +70,7 @@ const createProduct = async (req, res) => {
 const updateProduct = async (req, res) => {
   try {
     const { id } = req.params
-    const { name, description, price, stock, imageUrl, subCategoryId } =
+    const { name, description, price, stock, imageUrl, SubcategoryId } =
       req.body
 
     const data = await Product.findByPk(id)
@@ -88,7 +88,7 @@ const updateProduct = async (req, res) => {
           // discount,
           stock,
           imageUrl,
-          subCategoryId,
+          SubcategoryId,
         },
         {
           where: { id },

@@ -1,27 +1,27 @@
 import { Router } from 'express'
 import {
-  createSubCategory,
-  deleteSubCategory,
-  getAllSubCategory,
-  getByIdSubCategory,
-  updateSubCategory,
-} from '../../controllers/SubCategory/subCategory.js'
+  createSubcategory,
+  deleteSubcategory,
+  getAllSubcategory,
+  getByIdSubcategory,
+  updateSubcategory,
+} from '../../controllers/Subcategory/subcategory.js'
 
-const subCategoryRouter = Router()
+const subcategoryRouter = Router()
 
-// Get all SubCategory
-subCategoryRouter.get('/', getAllSubCategory)
+// Get all Subcategory
+subcategoryRouter.get('/', getAllSubcategory)
 
-// Get a SubCategory
-subCategoryRouter.get('/:id', getByIdSubCategory)
+// Get a Subcategory
+subcategoryRouter.get('/:id', getByIdSubcategory)
 
-// Create a SubCategory
-subCategoryRouter.post('/', createSubCategory)
+// Create a Subcategory
+subcategoryRouter.post('/', createSubcategory)
 
-// Update a SubCategory
-subCategoryRouter.put('/:id', updateSubCategory)
+// Update a Subcategory
+subcategoryRouter.put('/:id', updateSubcategory)
 
-// Delete a SubCategory
-subCategoryRouter.delete('/:id', deleteSubCategory)
+// Delete a Subcategory
+subcategoryRouter.delete('/:id', deleteSubcategory)
 
-export { subCategoryRouter }
+export { subcategoryRouter }
