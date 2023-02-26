@@ -29,7 +29,7 @@ jobs:
     - run: npm run build --if-present
 
     - name: Run script file
-        run: |
+      run: |
           chmod +x /home/gonza/ecommerceClient/_work/ecommerceClient/ecommerceClient/scripts/before_install.sh
           /home/gonza/ecommerceClient/_work/ecommerceClient/ecommerceClient/scripts/before_install.sh
-        shell: bash
+      shell: bash
