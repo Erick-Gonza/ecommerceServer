@@ -2,24 +2,26 @@ import jwt from 'jsonwebtoken'
 
 const secret = process.env.SECRET
 
-export const generateToken = (payload) => {
-  return jwt.sign(payload, secret, { expiresIn: '1d' })
+const generateToken = (payload) => {
+  return jwt.sign({ payload }, secret, { expiresIn: '3m' })
 }
 
-export const verifyToken = (token) => {
+const validateToken = (token) => {
   return jwt.verify(token, secret)
 }
 
-export const cookieJwtAuth = (req, res, next) => {
+const auth = (req, res, next) => {
   const token = req.cookies.token
   if (!token) {
-    return res.status(401).json({ error: 'Unauthorized' })
+    return res.status(401).send({ message: 'Unauthorized: No token provided' })
   }
   try {
-    const payload = verifyToken(token)
-    req.user = payload
+    const verified = jwt.verify(token, secret)
+    req.user = verified
     next()
   } catch (error) {
-    res.status(401).json({ error: 'Unauthorized' }).clearCookie('token')
+    res.status(400).send({ message: 'Invalid token' })
   }
 }
+
+export { generateToken, validateToken, auth }

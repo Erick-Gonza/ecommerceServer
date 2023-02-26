@@ -6,6 +6,7 @@ import {
   updateUser,
   deleteUser,
   createUserAddress,
+  loginUser,
 } from '../../controllers/User/user.js'
 
 const userRouter = Router()
@@ -18,6 +19,9 @@ userRouter.get('/:id', getByIdUser)
 
 // Create a user
 userRouter.post('/', createUser)
+
+// Login with user
+userRouter.post('/signin', loginUser)
 
 // Update a user
 userRouter.put('/:id', updateUser)

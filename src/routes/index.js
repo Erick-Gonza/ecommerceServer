@@ -6,7 +6,7 @@ import { cartRouter } from './cart/cart.js'
 import { orderRouter } from './Order/order.js'
 import { orderDetailRouter } from './Order/orderDetail.js'
 import { wishListRouter } from './wishList/wishList.js'
-import { subCategoryRouter } from './subcategory/subcategory.js'
+import { subCategoryRouter } from './subCategory/subCategory.js'
 import { addressRouter } from './address/address.js'
 
 const router = Router()
