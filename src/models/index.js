@@ -15,7 +15,6 @@ import UserAddress from './User/UserAddress.js'
 import CartItem from './Cart/CartItem.js'
 import WishListItem from './WishList/WishListItem.js'
 
-
 // User - Role
 Role.hasMany(User, { as: 'user', foreignKey: 'roleId' })
 User.belongsTo(Role, { as: 'role', foreignKey: 'roleId' })
@@ -33,8 +32,14 @@ User.hasOne(WishList, { foreignKey: 'userId' })
 WishList.belongsTo(User, { foreignKey: 'userId' })
 
 // // WishListITEM - Product
-WishList.belongsToMany(Product, { through: WishListItem, foreignKey: 'wishlistId' })
-Product.belongsToMany(WishList, { through: WishListItem, foreignKey: 'productId' })
+WishList.belongsToMany(Product, {
+  through: WishListItem,
+  foreignKey: 'wishlistId',
+})
+Product.belongsToMany(WishList, {
+  through: WishListItem,
+  foreignKey: 'productId',
+})
 
 // // User - Order
 User.hasMany(Order, { foreignKey: 'userId' })
