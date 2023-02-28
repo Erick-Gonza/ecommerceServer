@@ -1,8 +1,7 @@
 import { verifyToken } from '../config/authToken.js'
 
 const isAuth = (req, res, next) => {
-  const { token } = req.headers
-  next()
+  const { token } = req.cookies
   if (!token) {
     return res.status(401).json({ message: 'Unauthorized' })
   }
