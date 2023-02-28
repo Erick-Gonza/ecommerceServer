@@ -1,6 +1,6 @@
 import { SubCategory } from '../../models/index.js'
 
-const getAllSubCategory = async (req, res) => {
+const getAllSubcategory = async (req, res) => {
   try {
     const data = await SubCategory.findAll()
     data.length === 0
@@ -18,7 +18,7 @@ const getAllSubCategory = async (req, res) => {
   }
 }
 
-const getByIdSubCategory = async (req, res) => {
+const getByIdSubcategory = async (req, res) => {
   try {
     const { id } = req.params
     const data = await SubCategory.findByPk(id)
@@ -37,7 +37,7 @@ const getByIdSubCategory = async (req, res) => {
   }
 }
 
-const createSubCategory = async (req, res) => {
+const createSubcategory = async (req, res) => {
   try {
     const { categoryId, name, description } = req.body
     const [subCategory, created] = await SubCategory.findOrCreate({
@@ -59,7 +59,7 @@ const createSubCategory = async (req, res) => {
   }
 }
 
-const updateSubCategory = async (req, res) => {
+const updateSubcategory = async (req, res) => {
   try {
     const { id } = req.params
     const { name, description, categoryId } = req.body
@@ -90,7 +90,7 @@ const updateSubCategory = async (req, res) => {
   }
 }
 
-const deleteSubCategory = async (req, res) => {
+const deleteSubcategory = async (req, res) => {
   try {
     const { id } = req.params
     const data = await SubCategory.findByPk(id)
@@ -116,9 +116,9 @@ const deleteSubCategory = async (req, res) => {
 }
 
 export {
-  getAllSubCategory,
-  getByIdSubCategory,
-  createSubCategory,
-  updateSubCategory,
-  deleteSubCategory,
+  getAllSubcategory,
+  getByIdSubcategory,
+  createSubcategory,
+  updateSubcategory,
+  deleteSubcategory,
 }

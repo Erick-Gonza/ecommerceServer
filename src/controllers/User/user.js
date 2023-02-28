@@ -1,4 +1,5 @@
 import { User, Address } from '../../models/index.js'
+import bcrypt from 'bcryptjs'
 
 const getAllUser = async (req, res) => {
   try {
@@ -27,7 +28,7 @@ const getByIdUser = async (req, res) => {
           data,
         })
   } catch (error) {
-    res.status(400).send({ message: error, success: false })
+    res.status(400).send({ message: 'error', success: false })
   }
 }
 
@@ -35,12 +36,14 @@ const createUser = async (req, res) => {
   try {
     const { firstName, lastName, userName, email, password, RoleId, StateId } =
       req.body
+
+    const passwordHash = await bcrypt.hash(password, 10)
     const user = await User.create({
       firstName,
       lastName,
       userName,
       email,
-      password,
+      password: passwordHash,
       RoleId,
       StateId,
     })
