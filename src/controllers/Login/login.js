@@ -26,6 +26,8 @@ const loginUser = async (req, res) => {
 
     const token = signToken(userForToken, process.env.SECRET)
 
+    res.cookie('token', token)
+
     res.status(200).send({ token, user: user.userName })
   } catch (error) {
     res.status(400).send({ message: 'error', success: false })

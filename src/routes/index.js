@@ -15,9 +15,13 @@ const router = Router()
 
 router.use('/user', userRouter)
 router.use('/login', loginRouter)
+
+// How to use isAuth middleware to protect routes
+// router.use('/product', isAuth, productRouter)
+
 router.use('/product', productRouter)
 router.use('/category', categoryRouter)
-router.use('/wishlist', isAuth, wishListRouter)
+router.use('/wishlist', wishListRouter)
 router.use('/Subcategory', subcategoryRouter)
 router.use('/cart', cartRouter)
 router.use('/order', orderRouter)
