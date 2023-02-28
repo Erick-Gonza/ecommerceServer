@@ -1,25 +1,18 @@
 import jwt from 'jsonwebtoken'
+import bcrypt from 'bcryptjs'
 
 const secret = process.env.SECRET
 
-export const generateToken = (payload) => {
-  return jwt.sign(payload, secret, { expiresIn: '1d' })
+const signToken = (user) => {
+  return jwt.sign(user, secret)
 }
 
-export const verifyToken = (token) => {
+const verifyToken = (token) => {
   return jwt.verify(token, secret)
 }
 
-export const cookieJwtAuth = (req, res, next) => {
-  const token = req.cookies.token
-  if (!token) {
-    return res.status(401).json({ error: 'Unauthorized' })
-  }
-  try {
-    const payload = verifyToken(token)
-    req.user = payload
-    next()
-  } catch (error) {
-    res.status(401).json({ error: 'Unauthorized' }).clearCookie('token')
-  }
+const compareBcrypt = async (password, hash) => {
+  return await bcrypt.compare(password, hash)
 }
+
+export { compareBcrypt, signToken, verifyToken }
