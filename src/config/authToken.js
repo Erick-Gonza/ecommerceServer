@@ -1,18 +1,27 @@
 import jwt from 'jsonwebtoken'
-import bcrypt from 'bcryptjs'
 
 const secret = process.env.SECRET
 
-const signToken = (user) => {
-  return jwt.sign(user, secret)
+const generateToken = (payload) => {
+  return jwt.sign({ payload }, secret, { expiresIn: '3m' })
 }
 
-const verifyToken = (token) => {
+const validateToken = (token) => {
   return jwt.verify(token, secret)
 }
 
-const compareBcrypt = async (password, hash) => {
-  return await bcrypt.compare(password, hash)
+const auth = (req, res, next) => {
+  const token = req.cookies.token
+  if (!token) {
+    return res.status(401).send({ message: 'Unauthorized: No token provided' })
+  }
+  try {
+    const verified = jwt.verify(token, secret)
+    req.user = verified
+    next()
+  } catch (error) {
+    res.status(400).send({ message: 'Invalid token' })
+  }
 }
 
-export { compareBcrypt, signToken, verifyToken }
+export { generateToken, validateToken, auth }

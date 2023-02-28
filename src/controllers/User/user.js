@@ -1,5 +1,6 @@
 import { User, Address } from '../../models/index.js'
-import bcrypt from 'bcryptjs'
+import { comparePassword } from '../../services/passwordEncrypt.js'
+import jwt from 'jsonwebtoken'
 
 const getAllUser = async (req, res) => {
   try {
@@ -28,7 +29,7 @@ const getByIdUser = async (req, res) => {
           data,
         })
   } catch (error) {
-    res.status(400).send({ message: 'error', success: false })
+    res.status(400).send({ message: error, success: false })
   }
 }
 
@@ -36,14 +37,12 @@ const createUser = async (req, res) => {
   try {
     const { firstName, lastName, userName, email, password, RoleId, StateId } =
       req.body
-
-    const passwordHash = await bcrypt.hash(password, 10)
     const user = await User.create({
       firstName,
       lastName,
       userName,
       email,
-      password: passwordHash,
+      password,
       RoleId,
       StateId,
     })
@@ -120,6 +119,28 @@ const createUserAddress = async (req, res) => {
   }
 }
 
+const loginUser = async (req, res) => {
+  const verifyUserOrEmail = (userName) => {
+    return userName.includes('@') ? { email: userName } : { userName: userName }
+  }
+
+  try {
+    const { userName, password } = req.body
+    const login = verifyUserOrEmail(userName)
+    const data = await User.findOne({ where: login })
+    if (data === null) {
+      res.status(400).send({
+        message: `User with username ${userName} not found`,
+        success: false,
+      })
+    } else {
+      //TODO: Implement JWT, validate salt and hash password, token expiration
+    }
+  } catch (error) {
+    res.status(400).send({ message: error, success: false })
+  }
+}
+
 export {
   getAllUser,
   getByIdUser,
@@ -127,4 +148,5 @@ export {
   updateUser,
   deleteUser,
   createUserAddress,
+  loginUser,
 }

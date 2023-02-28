@@ -1,6 +1,5 @@
 import { DataTypes as Dt, Model } from 'sequelize'
 import db from '../../config/database.js'
-import Category from './Category.js'
 
 class Product extends Model {}
 
