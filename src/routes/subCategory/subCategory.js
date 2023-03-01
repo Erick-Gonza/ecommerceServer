@@ -5,7 +5,7 @@ import {
   getAllSubcategory,
   getByIdSubcategory,
   updateSubcategory,
-} from '../../controllers/Subcategory/subCategory.js'
+} from '../../controllers/SubCategory/subCategory.js'
 
 const subcategoryRouter = Router()
 
