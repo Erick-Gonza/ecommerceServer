@@ -106,4 +106,4 @@ dist
 #ENV
 .env
 
-uploads/**
+# uploads/**
