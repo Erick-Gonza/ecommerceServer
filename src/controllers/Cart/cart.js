@@ -6,6 +6,16 @@ const getCart = async (req, res) => {
     const { id } = req.params
     const data = await Cart.findByPk(id, { include: [{ all: true }] })
 
+    // !data && res.status(400).send({
+    //   message: 'cart not found',
+    //   success: false,
+    // })
+
+    // res.status(200).send({
+    //   message: 'cart',
+    //   success: true,
+    //   data,
+    // })
     data === null
       ? res.status(400).send({
           message: 'cart not found',
@@ -28,6 +38,11 @@ const addToCart = async (req, res) => {
     // TODO, refactorizar validaciones
     // !product && new Error("Product doesn't exist")
     const product = await Product.findByPk(productId)
+    // !product && !user && res.status(400).send({
+    //   message: 'Cart with id ' + productId + ' not found',
+    //   success: false,
+    // })
+
     if (product === null) {
       res.status(400).send({
         message: 'Cart with id ' + productId + ' not found',

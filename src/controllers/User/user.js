@@ -1,6 +1,4 @@
 import { User, Address } from '../../models/index.js'
-import { comparePassword } from '../../services/passwordEncrypt.js'
-import jwt from 'jsonwebtoken'
 
 const getAllUser = async (req, res) => {
   try {
@@ -46,7 +44,7 @@ const createUser = async (req, res) => {
       RoleId,
       StateId,
     })
-    //TODO ASOCIAR CARRITO Y WISH LIST AL CREAR USER
+    //TODO asignar el cartId y el wishlistId al usuario
     res.send({
       message: `User created`,
       success: true,
