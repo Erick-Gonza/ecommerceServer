@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import {
-  getWishList, 
+  getWishList,
   addToWishList,
   //deleteFromWishList
 } from '../../controllers/WishList/wishList.js'
