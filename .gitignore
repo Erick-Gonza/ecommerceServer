@@ -105,3 +105,5 @@ dist
 
 #ENV
 .env
+
+uploads/**

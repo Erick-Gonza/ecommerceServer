@@ -46,6 +46,7 @@ const createUser = async (req, res) => {
       RoleId,
       StateId,
     })
+    //TODO ASOCIAR CARRITO Y WISH LIST AL CREAR USER
     res.send({
       message: `User created`,
       success: true,

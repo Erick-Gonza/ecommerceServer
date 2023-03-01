@@ -1,4 +1,5 @@
-import { Router } from 'express'
+import express, { Router } from 'express'
+import { filePath, multerUpload } from '../../middleware/multerUpload.js'
 import {
   getAllProduct,
   getByIdProduct,
@@ -9,6 +10,9 @@ import {
 
 const productRouter = Router()
 
+//Image service
+productRouter.use('/public', express.static(`${filePath}../../../uploads`))
+
 // Get all products
 productRouter.get('/', getAllProduct)
 
@@ -16,7 +20,7 @@ productRouter.get('/', getAllProduct)
 productRouter.get('/:id', getByIdProduct)
 
 // Create a product
-productRouter.post('/', createProduct)
+productRouter.post('/', multerUpload.single('file'), createProduct)
 
 // Update a product
 productRouter.put('/:id', updateProduct)

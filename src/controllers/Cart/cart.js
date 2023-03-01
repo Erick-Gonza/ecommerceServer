@@ -25,6 +25,8 @@ const addToCart = async (req, res) => {
   try {
     const { productId, userId } = req.body
     // que producto exista
+    // TODO, refactorizar validaciones
+    // !product && new Error("Product doesn't exist")
     const product = await Product.findByPk(productId)
     if (product === null) {
       res.status(400).send({
