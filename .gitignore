@@ -106,4 +106,5 @@ dist
 #ENV
 .env
 
-# uploads/**
+#Ignore all content on uploads folder
+uploads/**
