@@ -36,13 +36,31 @@ Product.afterSync(async () => {
   await Product.create({
     name: 'product 1',
     categoryId: 1,
-    // subcategoryId: 1,
+    price: 100,
   })
   await Product.create({
     name: 'product 2',
     description: 'description 2',
-    subcategoryId: 1,
-    // subcategoryId: 2,
+    categoryId: 2,
+    price: 200,
+  })
+  await Product.create({
+    name: 'product 3',
+    description: 'description 3',
+    categoryId: 3,
+    price: 100,
+  })
+  await Product.create({
+    name: 'product 4',
+    description: 'description 4',
+    categoryId: 3,
+    price: 100,
+  })
+  await Product.create({
+    name: 'product 5',
+    description: 'description 5',
+    categoryId: 3,
+    price: 100,
   })
 })
 

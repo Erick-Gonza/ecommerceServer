@@ -20,7 +20,12 @@ const getAllProduct = async (req, res) => {
 const getByIdProduct = async (req, res) => {
   try {
     const { id } = req.params
-    const data = await Product.findByPk(id)
+    const data = await Product.findByPk(id, {
+      include: [
+        { model: Category, attributes: ['name'] },
+        { model: Subcategory, attributes: ['name'] },
+      ],
+    })
     data === null
       ? res.status(400).send({
           message: `Product with id ${id} not found`,
@@ -30,6 +35,29 @@ const getByIdProduct = async (req, res) => {
           message: `Product with id ${id} found`,
           success: true,
           data,
+        })
+  } catch (error) {
+    res.status(400).send({ message: error, success: false })
+  }
+}
+
+const getAllProductByCategoryId = async (req, res) => {
+  try {
+    const { id } = req.params
+    const data = await Category.findByPk(id)
+    const products = await data.getProducts()
+
+    data === null
+      ? res.status(400).send({
+          message: 'Products with the category Id not found',
+          success: false,
+        })
+      : res.send({
+          data: {
+            products: products,
+            category: data,
+          },
+          success: true,
         })
   } catch (error) {
     res.status(400).send({ message: error, success: false })
@@ -146,4 +174,5 @@ export {
   createProduct,
   updateProduct,
   deleteProduct,
+  getAllProductByCategoryId,
 }

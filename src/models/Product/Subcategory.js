@@ -29,15 +29,18 @@ Subcategory.init(
 
 Subcategory.afterSync(async () => {
   await Subcategory.create({
-    name: 'Subcat 1',
+    name: 'Sub category 1',
     categoryId: 1,
-    // SubcategoryId: 1,
   })
   await Subcategory.create({
-    name: 'subcat 2',
+    name: 'Sub category 2',
     description: 'description 2',
-    categoryId: 1,
-    // SubcategoryId: 2,
+    categoryId: 2,
+  })
+  await Subcategory.create({
+    name: 'Sub category 3',
+    description: 'description 3',
+    categoryId: 3,
   })
 })
 

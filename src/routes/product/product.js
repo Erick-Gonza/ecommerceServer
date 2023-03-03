@@ -6,6 +6,7 @@ import {
   createProduct,
   updateProduct,
   deleteProduct,
+  getAllProductByCategoryId,
 } from '../../controllers/Product/product.js'
 
 const productRouter = Router()
@@ -18,6 +19,9 @@ productRouter.get('/', getAllProduct)
 
 // Get a product
 productRouter.get('/:id', getByIdProduct)
+
+// Get all products from categoryId
+productRouter.get('/category/:id', getAllProductByCategoryId)
 
 // Create a product
 productRouter.post('/', multerUpload.single('file'), createProduct)

@@ -45,9 +45,13 @@ Product.belongsToMany(WishList, {
 User.hasMany(Order, { foreignKey: 'userId' })
 Order.belongsTo(User, { foreignKey: 'userId' })
 
-// //Product - Category subcategory*
+// //Product - subcategory
 Subcategory.hasMany(Product, { foreignKey: 'subcategoryId' })
 Product.belongsTo(Subcategory, { foreignKey: 'subcategoryId' })
+
+// //Product - Category
+Category.hasMany(Product, { foreignKey: 'categoryId' })
+Product.belongsTo(Category, { foreignKey: 'categoryId' })
 
 //Product-CartITEM
 Cart.belongsToMany(Product, { through: CartItem, foreignKey: 'cartId' })
