@@ -20,7 +20,12 @@ const getAllProduct = async (req, res) => {
 const getByIdProduct = async (req, res) => {
   try {
     const { id } = req.params
-    const data = await Product.findByPk(id)
+    const data = await Product.findByPk(id, {
+      include: [
+        { model: Category, attributes: ['name'] },
+        { model: Subcategory, attributes: ['name'] },
+      ],
+    })
     data === null
       ? res.status(400).send({
           message: `Product with id ${id} not found`,
@@ -36,32 +41,66 @@ const getByIdProduct = async (req, res) => {
   }
 }
 
-const createProduct = async (req, res) => {
+const getAllProductByCategoryId = async (req, res) => {
   try {
-    const { name, description, price, stock, imageUrl, subcategoryId } =
-      req.body
-    const [product, created] = await Product.findOrCreate({
-      where: {
-        name,
-      },
-      defaults: {
-        description,
-        price,
-        stock,
-        imageUrl,
-        subcategoryId,
-      },
-    })
-    created === true
-      ? res.send({
-          message: 'Product created',
-          success: true,
-          product,
-        })
-      : res.send({
-          message: 'Product already exists',
+    const { id } = req.params
+    const data = await Category.findByPk(id)
+    const products = await data.getProducts()
+
+    data === null
+      ? res.status(400).send({
+          message: 'Products with the category Id not found',
           success: false,
         })
+      : res.send({
+          data: {
+            products: products,
+            category: data,
+          },
+          success: true,
+        })
+  } catch (error) {
+    res.status(400).send({ message: error, success: false })
+  }
+}
+
+const createProduct = async (req, res) => {
+  try {
+    const { name, description, price, stock, subcategoryId } = req.body
+    const { file } = req
+    const product = {
+      name,
+      description,
+      price,
+      stock,
+      imageUrl: file.path,
+      subcategoryId,
+      file,
+    }
+    res.send({ product })
+    // const [product, created] = await Product.findOrCreate({
+    //   where: {
+    //     name,
+    //   },
+    //   defaults: {
+    //     description,
+    //     price,
+    //     stock,
+    //     imageUrl,
+    //     subcategoryId,
+    //   },
+    // })
+    // created === true
+    //   ? res.send({
+    //       message: 'Product created',
+    //       success: true,
+    //       product,
+    //       file,
+    //     })
+    //   : res.send({
+    //       message: 'Product already exists',
+    //       success: false,
+    //     })
   } catch (error) {
     res.status(400).send({ message: error, success: false })
   }
@@ -135,4 +174,5 @@ export {
   createProduct,
   updateProduct,
   deleteProduct,
+  getAllProductByCategoryId,
 }
