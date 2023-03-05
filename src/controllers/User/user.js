@@ -1,4 +1,4 @@
-import { User, Address } from '../../models/index.js'
+import { User, Address, Cart, WishList } from '../../models/index.js'
 
 const getAllUser = async (req, res) => {
   try {
@@ -33,7 +33,7 @@ const getByIdUser = async (req, res) => {
 
 const createUser = async (req, res) => {
   try {
-    const { firstName, lastName, userName, email, password, RoleId, StateId } =
+    const { firstName, lastName, userName, email, password, roleId, statusId } =
       req.body
     const user = await User.create({
       firstName,
@@ -41,8 +41,14 @@ const createUser = async (req, res) => {
       userName,
       email,
       password,
-      RoleId,
-      StateId,
+      roleId,
+      statusId,
+    })
+    const cart = await Cart.create({
+      userId: user.id
+    })
+    const wishlist = await WishList.create({
+      userId: user.id,
     })
     //TODO asignar el cartId y el wishlistId al usuario
     res.send({
