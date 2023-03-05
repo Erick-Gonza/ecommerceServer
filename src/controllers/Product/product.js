@@ -66,18 +66,20 @@ const getAllProductByCategoryId = async (req, res) => {
 
 const createProduct = async (req, res) => {
   try {
-    const { name, description, price, stock, subcategoryId } = req.body
-    const { file } = req
-    const product = {
-      name,
-      description,
-      price,
-      stock,
-      imageUrl: file.path,
-      subcategoryId,
-      file,
-    }
-    res.send({ product })
+    const { name, description, price, stock, subcategoryId, categoryId } =
+      req.body
+    res.send({ msg: req.file })
+
+    // const newProduct = {
+    //   name,
+    //   description,
+    //   price,
+    //   stock,
+    //   imageUrl: file,
+    //   subcategoryId,
+    //   categoryId,
+    //   file,
+    // }
     // const [product, created] = await Product.findOrCreate({
     //   where: {
     //     name,
@@ -86,8 +88,10 @@ const createProduct = async (req, res) => {
     //     description,
     //     price,
     //     stock,
-    //     imageUrl,
+    //     imageUrl: file,
     //     subcategoryId,
+    //     categoryId,
+    //     file,
     //   },
     // })
     // created === true
