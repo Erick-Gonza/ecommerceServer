@@ -13,12 +13,13 @@ Product.init(
     name: {
       type: Dt.STRING,
       allowNull: false,
+      unique: true
     },
     description: {
       type: Dt.STRING,
     },
     price: {
-      type: Dt.DECIMAL,
+      type: Dt.DOUBLE,
     },
     stock: {
       type: Dt.INTEGER,
@@ -60,6 +61,24 @@ Product.afterSync(async () => {
     name: 'product 5',
     description: 'description 5',
     categoryId: 3,
+    price: 100,
+  })
+  await Product.create({
+    name: 'product 6',
+    description: 'description 6',
+    categoryId: 1,
+    price: 100,
+  })
+  await Product.create({
+    name: 'product 7',
+    description: 'description 7',
+    categoryId: 1,
+    price: 100,
+  })
+  await Product.create({
+    name: 'product 8',
+    description: 'description 8',
+    categoryId: 1,
     price: 100,
   })
 })
