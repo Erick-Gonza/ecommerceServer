@@ -9,7 +9,7 @@ const multerUpload = multer({
     destination: `${filePath}../../../uploads`,
     filename: (req, file, cb) => {
       const fileExtension = file.originalname.split('.').pop()
-      const fileName = file.originalname
+      const fileName = file.originalname.split('.').shift()
 
       cb(null, `${fileName}-${Date.now()}.${fileExtension}`)
     },

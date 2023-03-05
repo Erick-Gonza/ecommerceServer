@@ -66,32 +66,23 @@ const getAllProductByCategoryId = async (req, res) => {
 
 const createProduct = async (req, res) => {
   try {
-    const { name, description, price, stock, subcategoryId, categoryId } =
+    const { name, description, price, stock, categoryId, subcategoryId, file } =
       req.body
-    res.send({ msg: req.file })
-
-    // const newProduct = {
-    //   name,
-    //   description,
-    //   price,
-    //   stock,
-    //   imageUrl: file,
-    //   subcategoryId,
-    //   categoryId,
-    //   file,
-    // }
+    const { files } = req
+    console.log(files[0])
+    console.log(files[0].originalname)
     // const [product, created] = await Product.findOrCreate({
     //   where: {
     //     name,
     //   },
     //   defaults: {
+    //     name,
     //     description,
     //     price,
     //     stock,
-    //     imageUrl: file,
-    //     subcategoryId,
     //     categoryId,
-    //     file,
+    //     subcategoryId,
+    //     imageUrl: file,
     //   },
     // })
     // created === true
@@ -99,7 +90,6 @@ const createProduct = async (req, res) => {
     //       message: 'Product created',
     //       success: true,
     //       product,
-    //       file,
     //     })
     //   : res.send({
     //       message: 'Product already exists',

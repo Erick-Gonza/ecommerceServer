@@ -24,7 +24,7 @@ productRouter.get('/:id', getByIdProduct)
 productRouter.get('/category/:id', getAllProductByCategoryId)
 
 // Create a product
-productRouter.post('/', multerUpload.single('file'), createProduct)
+productRouter.post('/', multerUpload.array('file'), createProduct)
 
 // Update a product
 productRouter.put('/:id', updateProduct)
