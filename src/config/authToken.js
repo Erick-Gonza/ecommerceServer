@@ -15,4 +15,8 @@ const compareBcrypt = async (password, hash) => {
   return await bcrypt.compare(password, hash)
 }
 
-export { compareBcrypt, signToken, verifyToken }
+const hashBcrypt = async (password) => {
+  return await bcrypt.hash(password, 10)
+}
+
+export { compareBcrypt, signToken, verifyToken, hashBcrypt }
