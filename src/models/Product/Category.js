@@ -29,14 +29,19 @@ Category.init(
 
 Category.afterSync(async () => {
   await Category.create({
-    name: 'Product 1',
+    name: 'Category 1',
     description: 'description 1',
-    // subcategoryId: 1,
+    subcategoryId: 1,
   })
   await Category.create({
-    name: 'Product 2',
+    name: 'Category 2',
     description: 'description 2',
-    // subcategoryId: 2,
+    subcategoryId: 2,
+  })
+  await Category.create({
+    name: 'Category 3',
+    description: 'description 3',
+    subcategoryId: 3,
   })
 })
 

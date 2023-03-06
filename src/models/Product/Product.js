@@ -1,6 +1,5 @@
 import { DataTypes as Dt, Model } from 'sequelize'
 import db from '../../config/database.js'
-import Category from './Category.js'
 
 class Product extends Model {}
 
@@ -14,12 +13,13 @@ Product.init(
     name: {
       type: Dt.STRING,
       allowNull: false,
+      unique: true
     },
     description: {
       type: Dt.STRING,
     },
     price: {
-      type: Dt.DECIMAL,
+      type: Dt.DOUBLE,
     },
     stock: {
       type: Dt.INTEGER,
@@ -37,13 +37,49 @@ Product.afterSync(async () => {
   await Product.create({
     name: 'product 1',
     categoryId: 1,
-    // subcategoryId: 1,
+    price: 100,
   })
   await Product.create({
     name: 'product 2',
     description: 'description 2',
-    subcategoryId: 1,
-    // subcategoryId: 2,
+    categoryId: 2,
+    price: 200,
+  })
+  await Product.create({
+    name: 'product 3',
+    description: 'description 3',
+    categoryId: 3,
+    price: 100,
+  })
+  await Product.create({
+    name: 'product 4',
+    description: 'description 4',
+    categoryId: 3,
+    price: 100,
+  })
+  await Product.create({
+    name: 'product 5',
+    description: 'description 5',
+    categoryId: 3,
+    price: 100,
+  })
+  await Product.create({
+    name: 'product 6',
+    description: 'description 6',
+    categoryId: 1,
+    price: 100,
+  })
+  await Product.create({
+    name: 'product 7',
+    description: 'description 7',
+    categoryId: 1,
+    price: 100,
+  })
+  await Product.create({
+    name: 'product 8',
+    description: 'description 8',
+    categoryId: 1,
+    price: 100,
   })
 })
 

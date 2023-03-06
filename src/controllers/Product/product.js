@@ -1,4 +1,4 @@
-import { Product, Category, SubCategory } from '../../models/index.js'
+import { Product, Category, Subcategory } from '../../models/index.js'
 const getAllProduct = async (req, res) => {
   try {
     const data = await Product.findAll()
@@ -20,7 +20,12 @@ const getAllProduct = async (req, res) => {
 const getByIdProduct = async (req, res) => {
   try {
     const { id } = req.params
-    const data = await Product.findByPk(id)
+    const data = await Product.findByPk(id, {
+      include: [
+        { model: Category, attributes: ['name'] },
+        { model: Subcategory, attributes: ['name'] },
+      ],
+    })
     data === null
       ? res.status(400).send({
           message: `Product with id ${id} not found`,
@@ -36,32 +41,60 @@ const getByIdProduct = async (req, res) => {
   }
 }
 
-const createProduct = async (req, res) => {
+const getAllProductByCategoryId = async (req, res) => {
   try {
-    const { name, description, price, stock, imageUrl, subcategoryId } =
-      req.body
-    const [product, created] = await Product.findOrCreate({
-      where: {
-        name,
-      },
-      defaults: {
-        description,
-        price,
-        stock,
-        imageUrl,
-        subcategoryId,
-      },
-    })
-    created === true
-      ? res.send({
-          message: 'Product created',
-          success: true,
-          product,
-        })
-      : res.send({
-          message: 'Product already exists',
+    const { id } = req.params
+    const data = await Category.findByPk(id)
+    const products = await data.getProducts()
+
+    data === null
+      ? res.status(400).send({
+          message: 'Products with the category Id not found',
           success: false,
         })
+      : res.send({
+          data: {
+            products: products,
+            category: data,
+          },
+          success: true,
+        })
+  } catch (error) {
+    res.status(400).send({ message: error, success: false })
+  }
+}
+
+const createProduct = async (req, res) => {
+  try {
+    const { name, description, price, stock, categoryId, subcategoryId, file } =
+      req.body
+    const { files } = req
+    console.log(files[0])
+    console.log(files[0].originalname)
+    // const [product, created] = await Product.findOrCreate({
+    //   where: {
+    //     name,
+    //   },
+    //   defaults: {
+    //     name,
+    //     description,
+    //     price,
+    //     stock,
+    //     categoryId,
+    //     subcategoryId,
+    //     imageUrl: file,
+    //   },
+    // })
+    // created === true
+    //   ? res.send({
+    //       message: 'Product created',
+    //       success: true,
+    //       product,
+    //     })
+    //   : res.send({
+    //       message: 'Product already exists',
+    //       success: false,
+    //     })
   } catch (error) {
     res.status(400).send({ message: error, success: false })
   }
@@ -70,7 +103,7 @@ const createProduct = async (req, res) => {
 const updateProduct = async (req, res) => {
   try {
     const { id } = req.params
-    const { name, description, price, stock, imageUrl, subCategoryId } =
+    const { name, description, price, stock, imageUrl, SubcategoryId } =
       req.body
 
     const data = await Product.findByPk(id)
@@ -88,7 +121,7 @@ const updateProduct = async (req, res) => {
           // discount,
           stock,
           imageUrl,
-          subCategoryId,
+          SubcategoryId,
         },
         {
           where: { id },
@@ -135,4 +168,5 @@ export {
   createProduct,
   updateProduct,
   deleteProduct,
+  getAllProductByCategoryId,
 }

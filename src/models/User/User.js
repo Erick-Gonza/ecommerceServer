@@ -18,6 +18,7 @@ User.init(
     },
     userName: {
       type: Dt.STRING,
+      unique: true,
     },
     email: {
       type: Dt.STRING,
@@ -31,6 +32,16 @@ User.init(
     modelName: 'User',
   }
 )
+// TODO: Add password encryption, and add a beforeCreate and beforeUpdate hook
+// User.beforeCreate(async (user) => {
+//   const salt = await bcrypt.genSalt(10)
+//   user.password = await bcrypt.hash(user.password, salt)
+// })
+
+// User.beforeUpdate(async (user) => {
+//   const salt = await bcrypt.genSalt(10)
+//   user.password = await bcrypt.hash(user.password, salt)
+// })
 
 User.afterSync(async () => {
   await User.create({
