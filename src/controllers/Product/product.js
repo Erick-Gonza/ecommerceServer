@@ -69,32 +69,33 @@ const createProduct = async (req, res) => {
     const { name, description, price, stock, categoryId, subcategoryId, file } =
       req.body
     const { files } = req
-    console.log(files[0])
-    console.log(files[0].originalname)
-    // const [product, created] = await Product.findOrCreate({
-    //   where: {
-    //     name,
-    //   },
-    //   defaults: {
-    //     name,
-    //     description,
-    //     price,
-    //     stock,
-    //     categoryId,
-    //     subcategoryId,
-    //     imageUrl: file,
-    //   },
-    // })
-    // created === true
-    //   ? res.send({
-    //       message: 'Product created',
-    //       success: true,
-    //       product,
-    //     })
-    //   : res.send({
-    //       message: 'Product already exists',
-    //       success: false,
-    //     })
+    // console.log(files[0])
+    // console.log(files[0].originalname)
+    const imageUrl = files[0].originalname
+    const [product, created] = await Product.findOrCreate({
+      where: {
+        name,
+      },
+      defaults: {
+        name,
+        description,
+        price,
+        stock,
+        categoryId,
+        subcategoryId,
+        imageUrl,
+      },
+    })
+    created === true
+      ? res.send({
+          message: 'Product created',
+          success: true,
+          product,
+        })
+      : res.send({
+          message: 'Product already exists',
+          success: false,
+        })
   } catch (error) {
     res.status(400).send({ message: error, success: false })
   }

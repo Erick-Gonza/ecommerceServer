@@ -10,6 +10,8 @@ const loginUser = async (req, res) => {
 
     const user = await User.findOne({ where: login })
 
+    !user && res.status(404).send({ message: 'User not found', success: false })
+
     const passwordCorrect =
       user === null ? false : compareBcrypt(password, user.password)
 
@@ -26,9 +28,7 @@ const loginUser = async (req, res) => {
 
     const token = signToken(userForToken, process.env.SECRET)
 
-    res.cookie('token', token)
-
-    res.status(200).send({ token, user: user.userName })
+    res.cookie('token', token).status(200).send({ token, user: user.userName })
   } catch (error) {
     res.status(400).send({ message: 'error', success: false })
   }

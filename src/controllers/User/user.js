@@ -1,3 +1,4 @@
+import { hashBcrypt } from '../../config/authToken.js'
 import { User, Address, Cart, WishList } from '../../models/index.js'
 
 const getAllUser = async (req, res) => {
@@ -35,6 +36,7 @@ const createUser = async (req, res) => {
   try {
     const { firstName, lastName, userName, email, password, roleId, statusId } =
       req.body
+
     const user = await User.create({
       firstName,
       lastName,
@@ -45,7 +47,7 @@ const createUser = async (req, res) => {
       statusId,
     })
     const cart = await Cart.create({
-      userId: user.id
+      userId: user.id,
     })
     const wishlist = await WishList.create({
       userId: user.id,
@@ -124,28 +126,6 @@ const createUserAddress = async (req, res) => {
   }
 }
 
-const loginUser = async (req, res) => {
-  const verifyUserOrEmail = (userName) => {
-    return userName.includes('@') ? { email: userName } : { userName: userName }
-  }
-
-  try {
-    const { userName, password } = req.body
-    const login = verifyUserOrEmail(userName)
-    const data = await User.findOne({ where: login })
-    if (data === null) {
-      res.status(400).send({
-        message: `User with username ${userName} not found`,
-        success: false,
-      })
-    } else {
-      //TODO: Implement JWT, validate salt and hash password, token expiration
-    }
-  } catch (error) {
-    res.status(400).send({ message: error, success: false })
-  }
-}
-
 export {
   getAllUser,
   getByIdUser,
@@ -153,5 +133,4 @@ export {
   updateUser,
   deleteUser,
   createUserAddress,
-  loginUser,
 }
