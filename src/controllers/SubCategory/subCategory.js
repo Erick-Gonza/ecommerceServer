@@ -5,14 +5,14 @@ const getAllSubcategory = async (req, res) => {
     const data = await Subcategory.findAll()
     data.length === 0
       ? res.status(400).send({
-          message: 'No SubCategories found',
-          success: false,
-        })
+        message: 'No SubCategories found',
+        success: false
+      })
       : res.status(200).send({
-          message: 'Get all SubCategories',
-          success: true,
-          data,
-        })
+        message: 'Get all SubCategories',
+        success: true,
+        data
+      })
   } catch (error) {
     res.status(400).send({ message: error, success: false })
   }
@@ -24,14 +24,14 @@ const getByIdSubcategory = async (req, res) => {
     const data = await Subcategory.findByPk(id)
     data === null
       ? res.status(400).send({
-          message: `Subcategory with id ${id} not found`,
-          success: false,
-        })
+        message: `Subcategory with id ${id} not found`,
+        success: false
+      })
       : res.status(200).send({
-          message: `Subcategory with id ${id} found`,
-          success: true,
-          data,
-        })
+        message: `Subcategory with id ${id} found`,
+        success: true,
+        data
+      })
   } catch (error) {
     res.status(400).send({ message: error, success: false })
   }
@@ -42,18 +42,18 @@ const createSubcategory = async (req, res) => {
     const { categoryId, name, description } = req.body
     const [Subcategory, created] = await Subcategory.findOrCreate({
       where: { name },
-      defaults: { description, categoryId },
+      defaults: { description, categoryId }
     })
     created === true
       ? res.send({
-          message: 'Subcategory created',
-          success: true,
-          Subcategory,
-        })
+        message: 'Subcategory created',
+        success: true,
+        Subcategory
+      })
       : res.send({
-          message: `Subcategory with name ${name} already exist`,
-          success: false,
-        })
+        message: `Subcategory with name ${name} already exist`,
+        success: false
+      })
   } catch (error) {
     res.status(400).send({ message: error, success: false })
   }
@@ -67,22 +67,22 @@ const updateSubcategory = async (req, res) => {
     if (data === null) {
       res.status(400).send({
         message: `Subcategory with id ${id} not found`,
-        success: false,
+        success: false
       })
     } else {
       await Subcategory.update(
         {
           name,
           description,
-          categoryId,
+          categoryId
         },
         {
-          where: { id },
+          where: { id }
         }
       )
       res.send({
         message: 'Subcategory updated',
-        success: true,
+        success: true
       })
     }
   } catch (error) {
@@ -97,17 +97,17 @@ const deleteSubcategory = async (req, res) => {
     if (data === null) {
       res.status(400).send({
         message: `Subcategory with id ${id} not found`,
-        success: false,
+        success: false
       })
     } else {
       await Subcategory.destroy({
         where: {
-          id,
-        },
+          id
+        }
       })
       res.send({
         message: `Subcategory with ${id} deleted`,
-        success: true,
+        success: true
       })
     }
   } catch (error) {
@@ -120,5 +120,5 @@ export {
   getByIdSubcategory,
   createSubcategory,
   updateSubcategory,
-  deleteSubcategory,
+  deleteSubcategory
 }

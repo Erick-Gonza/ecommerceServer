@@ -8,25 +8,25 @@ Role.init(
     id: {
       type: Dt.INTEGER,
       primaryKey: true,
-      autoIncrement: true,
+      autoIncrement: true
     },
     name: {
-      type: Dt.STRING,
-    },
+      type: Dt.STRING
+    }
   },
   {
     sequelize: db,
     modelName: 'Role',
-    timestamps: false,
+    timestamps: false
   }
 )
 
 Role.afterSync(async () => {
   await Role.create({
-    name: 'admin',
+    name: 'admin'
   })
   await Role.create({
-    name: 'client',
+    name: 'client'
   })
 })
 

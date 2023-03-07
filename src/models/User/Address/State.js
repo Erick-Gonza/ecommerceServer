@@ -8,28 +8,28 @@ State.init(
     id: {
       type: Dt.INTEGER,
       primaryKey: true,
-      autoIncrement: true,
+      autoIncrement: true
     },
     name: {
-      type: Dt.STRING,
-    },
+      type: Dt.STRING
+    }
   },
   {
     sequelize: db,
     modelName: 'State',
-    timestamps: false,
+    timestamps: false
   }
 )
 
 State.afterSync(async () => {
   await State.create({
-    name: 'Nuevo Leon',
+    name: 'Nuevo Leon'
   })
   await State.create({
-    name: 'CDMX',
+    name: 'CDMX'
   })
   await State.create({
-    name: 'Tamaulipas',
+    name: 'Tamaulipas'
   })
 })
 
