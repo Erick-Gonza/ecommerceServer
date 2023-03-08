@@ -8,39 +8,39 @@ Subcategory.init(
     id: {
       type: Dt.INTEGER,
       primaryKey: true,
-      autoIncrement: true,
+      autoIncrement: true
     },
     name: {
       type: Dt.STRING,
-      allowNull: false,
+      allowNull: false
     },
     description: {
-      type: Dt.STRING,
-    },
+      type: Dt.STRING
+    }
     // categoryId: {
     //   type: Dt.INTEGER,
     // },
   },
   {
     sequelize: db,
-    modelName: 'Subcategory',
+    modelName: 'Subcategory'
   }
 )
 
 Subcategory.afterSync(async () => {
   await Subcategory.create({
     name: 'Sub category 1',
-    categoryId: 1,
+    categoryId: 1
   })
   await Subcategory.create({
     name: 'Sub category 2',
     description: 'description 2',
-    categoryId: 2,
+    categoryId: 2
   })
   await Subcategory.create({
     name: 'Sub category 3',
     description: 'description 3',
-    categoryId: 3,
+    categoryId: 3
   })
 })
 

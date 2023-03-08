@@ -5,7 +5,7 @@ import {
   createUser,
   updateUser,
   deleteUser,
-  createUserAddress,
+  createUserAddress
 } from '../../controllers/User/user.js'
 
 const userRouter = Router()
@@ -25,7 +25,7 @@ userRouter.put('/:id', updateUser)
 // Delete a user
 userRouter.delete('/:id', deleteUser)
 
-//Add a new address to a user
+// Add a new address to a user
 userRouter.post('/:id/address', createUserAddress)
 
 export { userRouter }

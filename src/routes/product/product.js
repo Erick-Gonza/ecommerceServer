@@ -6,12 +6,12 @@ import {
   createProduct,
   updateProduct,
   deleteProduct,
-  getAllProductByCategoryId,
+  getAllProductByCategoryId
 } from '../../controllers/Product/product.js'
 
 const productRouter = Router()
 
-//Image service
+// Image service
 productRouter.use('/public', express.static(`${filePath}../../../uploads`))
 
 // Get all products

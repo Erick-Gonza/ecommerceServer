@@ -9,12 +9,12 @@ WishListItem.init(
       type: Dt.INTEGER,
       primaryKey: true,
       autoIncrement: true,
-      allowNull: false,
+      allowNull: false
     }
   },
   {
     sequelize: db,
-    modelName: 'WishListItem',
+    modelName: 'WishListItem'
   }
 )
 

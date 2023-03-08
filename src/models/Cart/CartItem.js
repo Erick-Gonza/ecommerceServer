@@ -9,23 +9,23 @@ CartItem.init(
       type: Dt.INTEGER,
       primaryKey: true,
       autoIncrement: true,
-      allowNull: false,
+      allowNull: false
     },
-    //product id fk
+    // product id fk
     // user id fk
     quantity: {
       type: Dt.INTEGER,
-      allowNull: false,
-    },
+      allowNull: false
+    }
     // total: {
     //   type: Dt.DECIMAL,
     // },
-    //creationDate
-    //updateDate
+    // creationDate
+    // updateDate
   },
   {
     sequelize: db,
-    modelName: 'CartItem',
+    modelName: 'CartItem'
   }
 )
 

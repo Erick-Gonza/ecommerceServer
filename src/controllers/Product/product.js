@@ -4,14 +4,14 @@ const getAllProduct = async (req, res) => {
     const data = await Product.findAll()
     data.length === 0
       ? res.status(400).send({
-          message: 'No products found',
-          success: false,
-        })
+        message: 'No products found',
+        success: false
+      })
       : res.status(200).send({
-          message: 'Get all products',
-          success: true,
-          data,
-        })
+        message: 'Get all products',
+        success: true,
+        data
+      })
   } catch (error) {
     res.status(400).send({ message: error, success: false })
   }
@@ -23,19 +23,19 @@ const getByIdProduct = async (req, res) => {
     const data = await Product.findByPk(id, {
       include: [
         { model: Category, attributes: ['name'] },
-        { model: Subcategory, attributes: ['name'] },
-      ],
+        { model: Subcategory, attributes: ['name'] }
+      ]
     })
     data === null
       ? res.status(400).send({
-          message: `Product with id ${id} not found`,
-          success: false,
-        })
+        message: `Product with id ${id} not found`,
+        success: false
+      })
       : res.status(200).send({
-          message: `Product with id ${id} found`,
-          success: true,
-          data,
-        })
+        message: `Product with id ${id} found`,
+        success: true,
+        data
+      })
   } catch (error) {
     res.status(400).send({ message: error, success: false })
   }
@@ -49,16 +49,16 @@ const getAllProductByCategoryId = async (req, res) => {
 
     data === null
       ? res.status(400).send({
-          message: 'Products with the category Id not found',
-          success: false,
-        })
+        message: 'Products with the category Id not found',
+        success: false
+      })
       : res.send({
-          data: {
-            products: products,
-            category: data,
-          },
-          success: true,
-        })
+        data: {
+          products,
+          category: data
+        },
+        success: true
+      })
   } catch (error) {
     res.status(400).send({ message: error, success: false })
   }
@@ -66,7 +66,7 @@ const getAllProductByCategoryId = async (req, res) => {
 
 const createProduct = async (req, res) => {
   try {
-    const { name, description, price, stock, categoryId, subcategoryId, file } =
+    const { name, description, price, stock, categoryId, subcategoryId } =
       req.body
     const { files } = req
     // console.log(files[0])
@@ -74,7 +74,7 @@ const createProduct = async (req, res) => {
     const imageUrl = files[0].originalname
     const [product, created] = await Product.findOrCreate({
       where: {
-        name,
+        name
       },
       defaults: {
         name,
@@ -83,19 +83,19 @@ const createProduct = async (req, res) => {
         stock,
         categoryId,
         subcategoryId,
-        imageUrl,
-      },
+        imageUrl
+      }
     })
     created === true
       ? res.send({
-          message: 'Product created',
-          success: true,
-          product,
-        })
+        message: 'Product created',
+        success: true,
+        product
+      })
       : res.send({
-          message: 'Product already exists',
-          success: false,
-        })
+        message: 'Product already exists',
+        success: false
+      })
   } catch (error) {
     res.status(400).send({ message: error, success: false })
   }
@@ -111,7 +111,7 @@ const updateProduct = async (req, res) => {
     if (data === null) {
       res.status(400).send({
         message: `Product with id ${id} not found`,
-        success: false,
+        success: false
       })
     } else {
       await Product.update(
@@ -122,15 +122,15 @@ const updateProduct = async (req, res) => {
           // discount,
           stock,
           imageUrl,
-          SubcategoryId,
+          SubcategoryId
         },
         {
-          where: { id },
+          where: { id }
         }
       )
       res.send({
         message: 'Product updated',
-        success: true,
+        success: true
       })
     }
   } catch (error) {
@@ -145,17 +145,17 @@ const deleteProduct = async (req, res) => {
     if (data === null) {
       res.status(400).send({
         message: `Product with id ${id} not found`,
-        success: false,
+        success: false
       })
     } else {
       await Product.destroy({
         where: {
-          id,
-        },
+          id
+        }
       })
       res.send({
         message: `Product with ${id} deleted`,
-        success: true,
+        success: true
       })
     }
   } catch (error) {
@@ -169,5 +169,5 @@ export {
   createProduct,
   updateProduct,
   deleteProduct,
-  getAllProductByCategoryId,
+  getAllProductByCategoryId
 }

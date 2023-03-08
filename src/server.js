@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use(morgan('tiny'))
 
-//Main route
+// Main route
 app.use('/api/v1', router)
 
 await db.sync({ force: true }).then(() => {

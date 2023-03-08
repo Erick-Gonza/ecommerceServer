@@ -4,7 +4,7 @@ import {
   getByIdOrderDetail,
   createOrderDetail,
   updateOrderDetail,
-  deleteOrderDetail,
+  deleteOrderDetail
 } from '../../controllers/OrderDetail/orderDetail.js'
 
 const orderDetailRouter = Router()

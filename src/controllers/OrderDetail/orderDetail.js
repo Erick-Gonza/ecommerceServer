@@ -5,11 +5,11 @@ const getOrderDetail = async (req, res) => {
     const data = await OrderDetail.findAll()
     data.length === 0
       ? res
-          .status(400)
-          .send({ message: 'No OrderDetail found', success: false })
+        .status(400)
+        .send({ message: 'No OrderDetail found', success: false })
       : res
-          .status(200)
-          .send({ message: 'Get all OrderDetail', success: true, data })
+        .status(200)
+        .send({ message: 'Get all OrderDetail', success: true, data })
   } catch (error) {
     res.status(400).send({ message: error, success: false })
   }
@@ -21,14 +21,14 @@ const getByIdOrderDetail = async (req, res) => {
     const data = await OrderDetail.findByPk(id)
     data === null
       ? res.status(400).send({
-          message: 'OrderDetail with id ' + id + ' not found',
-          success: false,
-        })
+        message: 'OrderDetail with id ' + id + ' not found',
+        success: false
+      })
       : res.status(200).send({
-          message: 'OrderDetail with id ' + id + ' found',
-          success: true,
-          data,
-        })
+        message: 'OrderDetail with id ' + id + ' found',
+        success: true,
+        data
+      })
   } catch (error) {
     res.status(400).send({ message: error, success: false })
   }
@@ -40,12 +40,12 @@ const createOrderDetail = async (req, res) => {
     const data = await OrderDetail.create({
       quantity,
       orderId,
-      productId,
+      productId
     })
     res.send({
-      message: `OrderDetail created`,
+      message: 'OrderDetail created',
       success: true,
-      data,
+      data
     })
   } catch (error) {
     res.status(400).send({ message: error, success: false })
@@ -60,16 +60,17 @@ const updateOrderDetail = async (req, res) => {
       {
         quantity,
         orderId,
-        productId,
+        productId
       },
       {
-        where: { id },
+        where: { id }
       }
     )
 
     res.send({
-      message: `OrderDetail updated`,
+      message: 'OrderDetail updated',
       success: true,
+      data
     })
   } catch (error) {
     res.status(400).send({ message: error, success: false })
@@ -81,8 +82,8 @@ const deleteOrderDetail = async (req, res) => {
     const { id } = req.params
     await OrderDetail.destroy({
       where: {
-        id,
-      },
+        id
+      }
     })
     res.send({ message: `OrderDetail with ${id} deleted`, success: true })
   } catch (error) {
@@ -95,5 +96,5 @@ export {
   getByIdOrderDetail,
   createOrderDetail,
   updateOrderDetail,
-  deleteOrderDetail,
+  deleteOrderDetail
 }

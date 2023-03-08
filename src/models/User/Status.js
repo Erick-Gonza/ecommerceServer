@@ -8,25 +8,25 @@ Status.init(
     id: {
       type: Dt.INTEGER,
       primaryKey: true,
-      autoIncrement: true,
+      autoIncrement: true
     },
     name: {
-      type: Dt.STRING,
-    },
+      type: Dt.STRING
+    }
   },
   {
     sequelize: db,
     modelName: 'Status',
-    timestamps: false,
+    timestamps: false
   }
 )
 
 Status.afterSync(async () => {
   await Status.create({
-    name: 'active',
+    name: 'active'
   })
   await Status.create({
-    name: 'inactive',
+    name: 'inactive'
   })
 })
 

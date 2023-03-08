@@ -17,13 +17,13 @@ const loginUser = async (req, res) => {
 
     if (!(user && passwordCorrect)) {
       return res.status(401).json({
-        error: 'invalid user or password',
+        error: 'invalid user or password'
       })
     }
 
     const userForToken = {
       id: user.id,
-      password: user.password,
+      password: user.password
     }
 
     const token = signToken(userForToken, process.env.SECRET)

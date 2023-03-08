@@ -34,11 +34,11 @@ WishList.belongsTo(User, { foreignKey: 'userId' })
 // // WishListITEM - Product
 WishList.belongsToMany(Product, {
   through: WishListItem,
-  foreignKey: 'wishlistId',
+  foreignKey: 'wishlistId'
 })
 Product.belongsToMany(WishList, {
   through: WishListItem,
-  foreignKey: 'productId',
+  foreignKey: 'productId'
 })
 
 // // User - Order
@@ -53,35 +53,35 @@ Product.belongsTo(Subcategory, { foreignKey: 'subcategoryId' })
 Category.hasMany(Product, { foreignKey: 'categoryId' })
 Product.belongsTo(Category, { foreignKey: 'categoryId' })
 
-//Product-CartITEM
+// Product-CartITEM
 Cart.belongsToMany(Product, { through: CartItem, foreignKey: 'cartId' })
 Product.belongsToMany(Cart, { through: CartItem, foreignKey: 'productId' })
 
-//Product - OrderDetail
+// Product - OrderDetail
 Product.hasMany(OrderDetail, { foreignKey: 'productId' })
 OrderDetail.belongsTo(Product, { foreignKey: 'productId' })
 
-//Category - SubCategory **
+// Category - SubCategory **
 Category.hasMany(Subcategory, { foreignKey: 'categoryId' })
 Subcategory.belongsTo(Category, { foreignKey: 'categoryId' })
 
-//User - Cart
+// User - Cart
 User.hasOne(Cart, { foreignKey: 'userId' })
 Cart.belongsTo(User, { foreignKey: 'userId' })
 
-//order - orderDetail
+// order - orderDetail
 Order.hasMany(OrderDetail, { foreignKey: 'orderId' })
 OrderDetail.belongsTo(Order, { foreignKey: 'orderId' })
 
-//order-address     USERADDRESS??
+// order-address     USERADDRESS??
 Address.hasMany(Order, { foreignKey: 'addressId' })
 Order.belongsTo(Address, { foreignKey: 'addressId' })
 
-//country- address
+// country- address
 Country.hasMany(Address, { foreignKey: 'countryId' })
 Address.belongsTo(Country, { foreignKey: 'countryId' })
 
-//state-address
+// state-address
 State.hasMany(Address, { foreignKey: 'stateId' })
 Address.belongsTo(State, { foreignKey: 'stateId' })
 
@@ -118,5 +118,5 @@ export {
   WishList,
   Status,
   Country,
-  State,
+  State
 }

@@ -1,4 +1,4 @@
-import { hashBcrypt } from '../../config/authToken.js'
+// import { hashBcrypt } from '../../config/authToken.js'
 import { User, Address, Cart, WishList } from '../../models/index.js'
 
 const getAllUser = async (req, res) => {
@@ -19,14 +19,14 @@ const getByIdUser = async (req, res) => {
 
     data === null
       ? res.status(400).send({
-          message: 'User with id ' + id + ' not found',
-          success: false,
-        })
+        message: 'User with id ' + id + ' not found',
+        success: false
+      })
       : res.status(200).send({
-          message: 'User with id ' + id + ' found',
-          success: true,
-          data,
-        })
+        message: 'User with id ' + id + ' found',
+        success: true,
+        data
+      })
   } catch (error) {
     res.status(400).send({ message: error, success: false })
   }
@@ -44,18 +44,22 @@ const createUser = async (req, res) => {
       email,
       password,
       roleId,
-      statusId,
+      statusId
     })
     const cart = await Cart.create({
-      userId: user.id,
+      userId: user.id
     })
     const wishlist = await WishList.create({
-      userId: user.id,
+      userId: user.id
     })
-    //TODO asignar el cartId y el wishlistId al usuario
+    // TODO asignar el cartId y el wishlistId al usuario
     res.send({
-      message: `User created`,
+      message: 'User created',
       success: true,
+      user: {
+        cart,
+        wishlist
+      }
     })
   } catch (error) {
     res.status(400).send({ message: error, success: false })
@@ -75,16 +79,17 @@ const updateUser = async (req, res) => {
         email,
         password,
         roleId,
-        statusId,
+        statusId
       },
       {
-        where: { id },
+        where: { id }
       }
     )
 
     res.send({
-      message: `User updated`,
+      message: 'User updated',
       success: true,
+      user
     })
   } catch (error) {
     res.status(400).send({ message: error, success: false })
@@ -96,8 +101,8 @@ const deleteUser = async (req, res) => {
     const { id } = req.params
     await User.destroy({
       where: {
-        id,
-      },
+        id
+      }
     })
     res.send({ message: `User with ${id} deleted`, success: true })
   } catch (error) {
@@ -114,12 +119,12 @@ const createUserAddress = async (req, res) => {
       city,
       state,
       zipCode,
-      UserId: id,
+      UserId: id
     })
     res.send({
-      message: `Address created`,
+      message: 'Address created',
       success: true,
-      address,
+      address
     })
   } catch (error) {
     res.status(400).send({ message: error, success: false })
@@ -132,5 +137,5 @@ export {
   createUser,
   updateUser,
   deleteUser,
-  createUserAddress,
+  createUserAddress
 }
