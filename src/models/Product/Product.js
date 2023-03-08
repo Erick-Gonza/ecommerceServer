@@ -27,6 +27,9 @@ Product.init(
     imageUrl: {
       type: Dt.STRING,
     },
+    color: {
+      type: Dt.STRING,
+    },
   },
   {
     sequelize: db,
@@ -38,12 +41,14 @@ Product.afterSync(async () => {
     name: 'product 1',
     categoryId: 1,
     price: 100,
+    color: "Yellow"
   })
   await Product.create({
     name: 'product 2',
     description: 'description 2',
     categoryId: 2,
     price: 200,
+    color: "Green"
   })
   await Product.create({
     name: 'product 3',

@@ -3,21 +3,22 @@ import WishListItem from '../../models/WishList/WishListItem.js'
 
 const getWishList = async (req, res) => {
   try {
-    const { id } = req.params
-    const data = await WishList.findByPk(id, { include: [{ all: true }] })
-
-    data === null
-      ? res.status(400).send({
-          message: 'wishlist not found',
-          success: false,
-        })
-      : res.status(200).send({
-          message: 'wishlist',
+    const {userId} = req.params
+    let data = await WishList.findOne({where:{userId}, include:Product})
+    if (data === null){
+      data = await WishList.create({
+        userId,
+      })
+    } 
+    
+    res.status(200).send({
+          message: 'Get all products',
           success: true,
           data,
         })
+  
   } catch (error) {
-    res.status(400).send({ message: error, success: false })
+    res.status(500).send({ message: error, success: false })
   }
 }
 
@@ -57,8 +58,8 @@ const addToWishList = async (req, res) => {
       },
     })
     if (wishlistItem === null) {
-      await CartItem.create({
-        cartId: cart.id,
+      await WishListItem.create({
+        wishlistId: wishlist.id,
         productId,
         quantity: 1,
       })

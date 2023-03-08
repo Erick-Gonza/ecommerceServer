@@ -8,7 +8,7 @@ import {
 const wishListRouter = Router()
 
 // Get a WishList
-wishListRouter.get('/:id', getWishList)
+wishListRouter.get('/:userId', getWishList)
 
 //add to wishlist
 wishListRouter.post('/', addToWishList)
