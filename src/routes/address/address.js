@@ -6,6 +6,7 @@ import {
   updateAddress,
   deleteAddress
 } from '../../controllers/Address/address.js'
+import isAuth from '../../middleware/isAuth.js'
 
 const addressRouter = Router()
 
@@ -13,13 +14,13 @@ const addressRouter = Router()
 addressRouter.get('/', getAllAddress)
 
 // Get a user
-addressRouter.get('/:id', getByIdAddress)
+addressRouter.get('/:id', isAuth, getByIdAddress)
 
 // Create a user
 addressRouter.post('/', createAddress)
 
 // Update a user
-addressRouter.put('/:id', updateAddress)
+addressRouter.put('/:id', isAuth, updateAddress)
 
 // Delete a user
 addressRouter.delete('/:id', deleteAddress)
