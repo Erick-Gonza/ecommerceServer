@@ -8,19 +8,19 @@ Address.init(
     id: {
       type: Dt.INTEGER,
       primaryKey: true,
-      autoIncrement: true,
+      autoIncrement: true
     },
     street: {
-      type: Dt.STRING,
+      type: Dt.STRING
     },
     stateId: {
-      type: Dt.INTEGER,
+      type: Dt.INTEGER
     },
     zipCode: {
-      type: Dt.INTEGER,
+      type: Dt.INTEGER
     },
     countryId: {
-      type: Dt.INTEGER,
+      type: Dt.INTEGER
     },
     userId: {
       type: Dt.INTEGER,
@@ -28,14 +28,14 @@ Address.init(
         model: 'Users',
         key: 'id',
         onDelete: 'cascade',
-        onUpdate: 'cascade',
-      },
-    },
+        onUpdate: 'cascade'
+      }
+    }
   },
   {
     sequelize: db,
     modelName: 'Address',
-    timestamps: false,
+    timestamps: false
   }
 )
 
@@ -45,14 +45,14 @@ Address.afterSync(async () => {
     stateId: 1,
     zipCode: 64100,
     countryId: 1,
-    userId: 1,
+    userId: 1
   })
   await Address.create({
     street: 'street 2',
     stateId: 2,
     zipCode: 64100,
     countryId: 1,
-    userId: 1,
+    userId: 1
   })
 })
 export default Address

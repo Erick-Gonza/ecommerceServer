@@ -9,7 +9,7 @@ const dbPort = process.env.DB_PORT
 const db = new Sequelize(dbName, dbUserName, dbPassword, {
   host: dbHost,
   dialect: 'mysql',
-  port: dbPort,
+  port: dbPort
 })
 
 try {

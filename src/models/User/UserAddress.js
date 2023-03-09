@@ -8,37 +8,37 @@ UserAddress.init(
     id: {
       type: Dt.INTEGER,
       primaryKey: true,
-      autoIncrement: true,
+      autoIncrement: true
     },
     userId: {
       type: Dt.INTEGER,
       references: {
         model: 'Users',
-        key: 'id',
-      },
+        key: 'id'
+      }
     },
     addressId: {
       type: Dt.INTEGER,
       references: {
         model: 'Address',
-        key: 'id',
-      },
-    },
+        key: 'id'
+      }
+    }
   },
   {
     sequelize: db,
-    modelName: 'UserAddress',
+    modelName: 'UserAddress'
   }
 )
 
 UserAddress.afterSync(async () => {
   await UserAddress.create({
     userId: 1,
-    addressId: 1,
+    addressId: 1
   })
   await UserAddress.create({
     userId: 1,
-    addressId: 2,
+    addressId: 2
   })
 })
 

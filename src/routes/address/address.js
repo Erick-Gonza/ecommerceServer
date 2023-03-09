@@ -4,7 +4,7 @@ import {
   getByIdAddress,
   createAddress,
   updateAddress,
-  deleteAddress,
+  deleteAddress
 } from '../../controllers/Address/address.js'
 
 const addressRouter = Router()

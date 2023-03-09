@@ -4,7 +4,7 @@ import {
   getByIdCategory,
   createCategory,
   updateCategory,
-  deleteCategory,
+  deleteCategory
 } from '../../controllers/Category/category.js'
 
 const categoryRouter = Router()

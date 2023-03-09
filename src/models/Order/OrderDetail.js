@@ -8,20 +8,20 @@ OrderDetail.init(
     id: {
       type: Dt.INTEGER,
       primaryKey: true,
-      autoIncrement: true,
+      autoIncrement: true
     },
-    //order fk
-    //idProduct fk
-    //price ??
-    //creationDate
-    //updateDate
+    // order fk
+    // idProduct fk
+    // price ??
+    // creationDate
+    // updateDate
     quantity: {
-      type: Dt.INTEGER,
-    },
+      type: Dt.INTEGER
+    }
   },
   {
     sequelize: db,
-    modelName: 'OrderDetail',
+    modelName: 'OrderDetail'
   }
 )
 

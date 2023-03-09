@@ -1,8 +1,8 @@
 import { Router } from 'express'
 import {
- getCart,
- addToCart,
-deleteFromCart
+  getCart,
+  addToCart,
+  deleteFromCart
 } from '../../controllers/Cart/cart.js'
 
 const cartRouter = Router()
@@ -13,19 +13,19 @@ const cartRouter = Router()
 // Get cart
 cartRouter.get('/:id', getCart)
 
-//add to cart
+// add to cart
 cartRouter.post('/', addToCart)
 
-//delete from cart
+// delete from cart
 cartRouter.put('/', deleteFromCart)
 
 // Create a category
-//cartRouter.post('/', createCart)
+// cartRouter.post('/', createCart)
 
 // Update a category
-//cartRouter.put('/:id', updateCart)
+// cartRouter.put('/:id', updateCart)
 
 // Delete a category
-//cartRouter.delete('/:id', deleteCart)
+// cartRouter.delete('/:id', deleteCart)
 
 export { cartRouter }

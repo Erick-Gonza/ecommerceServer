@@ -5,8 +5,7 @@ import {
   createUser,
   updateUser,
   deleteUser,
-  createUserAddress,
-  loginUser,
+  createUserAddress
 } from '../../controllers/User/user.js'
 
 const userRouter = Router()
@@ -20,16 +19,13 @@ userRouter.get('/:id', getByIdUser)
 // Create a user
 userRouter.post('/', createUser)
 
-// Login with user
-userRouter.post('/signin', loginUser)
-
 // Update a user
 userRouter.put('/:id', updateUser)
 
 // Delete a user
 userRouter.delete('/:id', deleteUser)
 
-//Add a new address to a user
+// Add a new address to a user
 userRouter.post('/:id/address', createUserAddress)
 
 export { userRouter }

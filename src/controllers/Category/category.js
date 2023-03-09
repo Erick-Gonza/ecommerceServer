@@ -5,14 +5,14 @@ const getAllCategory = async (req, res) => {
     const data = await Category.findAll()
     data.length === 0
       ? res.status(400).send({
-          message: 'No categories found',
-          success: false,
-        })
+        message: 'No categories found',
+        success: false
+      })
       : res.status(200).send({
-          message: 'Get all categories',
-          success: true,
-          data,
-        })
+        message: 'Get all categories',
+        success: true,
+        data
+      })
   } catch (error) {
     res.status(400).send({ message: error, success: false })
   }
@@ -24,14 +24,14 @@ const getByIdCategory = async (req, res) => {
     const data = await Category.findByPk(id)
     data === null
       ? res.status(400).send({
-          message: `Category with id ${id} not found`,
-          success: false,
-        })
+        message: `Category with id ${id} not found`,
+        success: false
+      })
       : res.status(200).send({
-          message: `Category with id ${id} found`,
-          success: true,
-          data,
-        })
+        message: `Category with id ${id} found`,
+        success: true,
+        data
+      })
   } catch (error) {
     res.status(400).send({ message: error, success: false })
   }
@@ -42,17 +42,18 @@ const createCategory = async (req, res) => {
     const { name, description } = req.body
     const [category, created] = await Category.findOrCreate({
       where: { name },
-      defaults: { description },
+      defaults: { description }
     })
     created === true
       ? res.send({
-          message: 'Category created',
-          success: true,
-        })
+        message: 'Category created',
+        success: true,
+        category
+      })
       : res.send({
-          message: `Category with name ${name} already exist`,
-          success: false,
-        })
+        message: `Category with name ${name} already exist`,
+        success: false
+      })
   } catch (error) {
     res.status(400).send({ message: error, success: false })
   }
@@ -66,21 +67,21 @@ const updateCategory = async (req, res) => {
     if (data === null) {
       res.status(400).send({
         message: `Category with id ${id} not found`,
-        success: false,
+        success: false
       })
     } else {
       await Category.update(
         {
           name,
-          description,
+          description
         },
         {
-          where: { id },
+          where: { id }
         }
       )
       res.send({
         message: 'Category updated',
-        success: true,
+        success: true
       })
     }
   } catch (error) {
@@ -95,15 +96,15 @@ const deleteCategory = async (req, res) => {
     if (data === null) {
       res.status(400).send({
         message: `Category with id ${id} not found`,
-        success: false,
+        success: false
       })
     } else {
       await Category.destroy({
-        where: { id },
+        where: { id }
       })
       res.send({
         message: `Category with id ${id} deleted`,
-        success: true,
+        success: true
       })
     }
   } catch (error) {
@@ -116,5 +117,5 @@ export {
   getByIdCategory,
   createCategory,
   updateCategory,
-  deleteCategory,
+  deleteCategory
 }

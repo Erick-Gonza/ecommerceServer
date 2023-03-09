@@ -17,14 +17,14 @@ const getByIdOrder = async (req, res) => {
     const data = await Order.findByPk(id)
     data === null
       ? res.status(400).send({
-          message: 'Order with id ' + id + ' not found',
-          success: false,
-        })
+        message: 'Order with id ' + id + ' not found',
+        success: false
+      })
       : res.status(200).send({
-          message: 'Order with id ' + id + ' found',
-          success: true,
-          data,
-        })
+        message: 'Order with id ' + id + ' found',
+        success: true,
+        data
+      })
   } catch (error) {
     res.status(400).send({ message: error, success: false })
   }
@@ -35,12 +35,12 @@ const createOrder = async (req, res) => {
     const { userId, addressId } = req.body
     const data = await Order.create({
       userId,
-      addressId,
+      addressId
     })
     res.send({
-      message: `Order created`,
+      message: 'Order created',
       success: true,
-      data,
+      data
     })
   } catch (error) {
     res.status(400).send({ message: error, success: false })
@@ -54,16 +54,17 @@ const updateOrder = async (req, res) => {
     const data = await Order.update(
       {
         userId,
-        addressId,
+        addressId
       },
       {
-        where: { id },
+        where: { id }
       }
     )
 
     res.send({
-      message: `Order updated`,
+      message: 'Order updated',
       success: true,
+      data
     })
   } catch (error) {
     res.status(400).send({ message: error, success: false })
@@ -75,8 +76,8 @@ const deleteOrder = async (req, res) => {
     const { id } = req.params
     await Order.destroy({
       where: {
-        id,
-      },
+        id
+      }
     })
     res.send({ message: `Order with ${id} deleted`, success: true })
   } catch (error) {

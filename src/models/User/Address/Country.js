@@ -8,31 +8,31 @@ Country.init(
     id: {
       type: Dt.INTEGER,
       primaryKey: true,
-      autoIncrement: true,
+      autoIncrement: true
     },
     name: {
-      type: Dt.STRING,
-    },
+      type: Dt.STRING
+    }
   },
   {
     sequelize: db,
     modelName: 'Country',
-    timestamps: false,
+    timestamps: false
   }
 )
 
 Country.afterSync(async () => {
   await Country.create({
-    name: 'Monterrey',
+    name: 'Monterrey'
   })
   await Country.create({
-    name: 'Guadalupe',
+    name: 'Guadalupe'
   })
   await Country.create({
-    name: 'Reynosa',
+    name: 'Reynosa'
   })
   await Country.create({
-    name: 'Mier',
+    name: 'Mier'
   })
 })
 

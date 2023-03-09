@@ -8,12 +8,12 @@ WishList.init(
     id: {
       type: Dt.INTEGER,
       primaryKey: true,
-      autoIncrement: true,
-    },
+      autoIncrement: true
+    }
   },
   {
     sequelize: db,
-    modelName: 'WishList',
+    modelName: 'WishList'
   }
 )
 

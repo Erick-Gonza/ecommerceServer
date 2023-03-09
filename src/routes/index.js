@@ -9,7 +9,7 @@ import { wishListRouter } from './wishList/wishList.js'
 import { subcategoryRouter } from './subCategory/subCategory.js'
 import { addressRouter } from './address/address.js'
 import { loginRouter } from './login/login.js'
-import isAuth from '../middleware/isAuth.js'
+// import isAuth from '../middleware/isAuth.js'
 
 const router = Router()
 

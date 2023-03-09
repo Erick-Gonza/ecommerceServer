@@ -10,25 +10,27 @@ const loginUser = async (req, res) => {
 
     const user = await User.findOne({ where: login })
 
+    if (!user) {
+      return res.status(404).send({ message: 'User not found', success: false })
+    }
+
     const passwordCorrect =
-      user === null ? false : compareBcrypt(password, user.password)
+      user === null ? false : compareBcrypt(password, user?.password)
 
     if (!(user && passwordCorrect)) {
       return res.status(401).json({
-        error: 'invalid user or password',
+        error: 'invalid user or password'
       })
     }
 
     const userForToken = {
       id: user.id,
-      password: user.password,
+      password: user.password
     }
 
     const token = signToken(userForToken, process.env.SECRET)
 
-    res.cookie('token', token)
-
-    res.status(200).send({ token, user: user.userName })
+    res.cookie('token', token).status(200).send({ token, user: user.userName })
   } catch (error) {
     res.status(400).send({ message: 'error', success: false })
   }
