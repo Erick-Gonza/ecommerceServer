@@ -9,11 +9,13 @@ import { wishListRouter } from './wishList/wishList.js'
 import { subcategoryRouter } from './subCategory/subCategory.js'
 import { addressRouter } from './address/address.js'
 import { loginRouter } from './login/login.js'
+import { validateRouter } from './validate/validate.js'
 
 const router = Router()
 
 router.use('/user', userRouter)
 router.use('/login', loginRouter)
+router.use('/validate', validateRouter)
 router.use('/product', productRouter)
 router.use('/category', categoryRouter)
 router.use('/wishlist', wishListRouter)
