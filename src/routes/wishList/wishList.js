@@ -4,14 +4,15 @@ import {
   addToWishList
   // deleteFromWishList
 } from '../../controllers/WishList/wishList.js'
+import isAuth from '../../middleware/isAuth.js'
 
 const wishListRouter = Router()
 
 // Get a WishList
-wishListRouter.get('/:id', getWishList)
+wishListRouter.get('/:userId', isAuth, getWishList)
 
 // add to wishlist
-wishListRouter.post('/', addToWishList)
+wishListRouter.post('/', isAuth, addToWishList)
 
 // delete from wishlist
 // wishListRouter.delete('/', deleteFromWishList)

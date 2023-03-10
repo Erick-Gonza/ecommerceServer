@@ -10,10 +10,12 @@ const loginUser = async (req, res) => {
 
     const user = await User.findOne({ where: login })
 
-    !user && res.status(404).send({ message: 'User not found', success: false })
+    if (!user) {
+      return res.status(404).send({ message: 'User not found', success: false })
+    }
 
     const passwordCorrect =
-      user === null ? false : compareBcrypt(password, user.password)
+      user === null ? false : compareBcrypt(password, user?.password)
 
     if (!(user && passwordCorrect)) {
       return res.status(401).json({

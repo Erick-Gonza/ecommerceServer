@@ -6,6 +6,7 @@ import {
   getOrder,
   updateOrder
 } from '../../controllers/Order/order.js'
+import isAuth from '../../middleware/isAuth.js'
 
 const orderRouter = Router()
 
@@ -13,13 +14,13 @@ const orderRouter = Router()
 orderRouter.get('/', getOrder)
 
 // Get a category
-orderRouter.get('/:id', getByIdOrder)
+orderRouter.get('/:id', isAuth, getByIdOrder)
 
 // Create a category
 orderRouter.post('/', createOrder)
 
 // Update a category
-orderRouter.put('/:id', updateOrder)
+orderRouter.put('/:id', isAuth, updateOrder)
 
 // Delete a category
 orderRouter.delete('/:id', deleteOrder)

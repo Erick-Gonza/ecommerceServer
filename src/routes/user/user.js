@@ -7,6 +7,7 @@ import {
   deleteUser,
   createUserAddress
 } from '../../controllers/User/user.js'
+import isAuth from '../../middleware/isAuth.js'
 
 const userRouter = Router()
 
@@ -14,7 +15,7 @@ const userRouter = Router()
 userRouter.get('/', getAllUser)
 
 // Get a user
-userRouter.get('/:id', getByIdUser)
+userRouter.get('/:id', isAuth, getByIdUser)
 
 // Create a user
 userRouter.post('/', createUser)
@@ -26,6 +27,6 @@ userRouter.put('/:id', updateUser)
 userRouter.delete('/:id', deleteUser)
 
 // Add a new address to a user
-userRouter.post('/:id/address', createUserAddress)
+userRouter.post('/:id/address', isAuth, createUserAddress)
 
 export { userRouter }

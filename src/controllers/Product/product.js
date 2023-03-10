@@ -1,7 +1,7 @@
 import { Product, Category, Subcategory } from '../../models/index.js'
 const getAllProduct = async (req, res) => {
   try {
-    const data = await Product.findAll()
+    const data = await Product.findAll([{include:{all:true}}])
     data.length === 0
       ? res.status(400).send({
         message: 'No products found',

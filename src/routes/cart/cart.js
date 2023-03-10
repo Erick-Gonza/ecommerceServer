@@ -4,6 +4,7 @@ import {
   addToCart,
   deleteFromCart
 } from '../../controllers/Cart/cart.js'
+import isAuth from '../../middleware/isAuth.js'
 
 const cartRouter = Router()
 
@@ -11,13 +12,13 @@ const cartRouter = Router()
 // cartRouter.get('/', getCart)
 
 // Get cart
-cartRouter.get('/:id', getCart)
+cartRouter.get('/:id', isAuth, getCart)
 
 // add to cart
-cartRouter.post('/', addToCart)
+cartRouter.post('/', isAuth, addToCart)
 
 // delete from cart
-cartRouter.put('/', deleteFromCart)
+cartRouter.put('/', isAuth, deleteFromCart)
 
 // Create a category
 // cartRouter.post('/', createCart)

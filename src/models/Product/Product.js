@@ -26,6 +26,9 @@ Product.init(
     },
     imageUrl: {
       type: Dt.STRING
+    },
+    color: {
+      type: Dt.STRING
     }
   },
   {
@@ -37,13 +40,15 @@ Product.afterSync(async () => {
   await Product.create({
     name: 'product 1',
     categoryId: 1,
-    price: 100
+    price: 100,
+    color: 'Yellow'
   })
   await Product.create({
     name: 'product 2',
     description: 'description 2',
     categoryId: 2,
-    price: 200
+    price: 200,
+    color: 'Green'
   })
   await Product.create({
     name: 'product 3',
