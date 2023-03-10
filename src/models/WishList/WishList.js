@@ -17,4 +17,10 @@ WishList.init(
   }
 )
 
+WishList.afterSync(async () => {
+  await WishList.create({
+    userId: 1
+  })
+})
+
 export default WishList
