@@ -9,7 +9,7 @@ import isAuth from '../../middleware/isAuth.js'
 const wishListRouter = Router()
 
 // Get a WishList
-wishListRouter.get('/:userId', isAuth, getWishList)
+wishListRouter.get('/:userId', getWishList)
 
 // add to wishlist
 wishListRouter.post('/', isAuth, addToWishList)

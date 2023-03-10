@@ -18,4 +18,19 @@ WishListItem.init(
   }
 )
 
+WishListItem.afterSync(async () => {
+  await WishListItem.create({
+    wishlistId: 1,
+    productId: 1
+  })
+  await WishListItem.create({
+    wishlistId: 1,
+    productId: 2
+  })
+  await WishListItem.create({
+    wishlistId: 1,
+    productId: 3
+  })
+})
+
 export default WishListItem

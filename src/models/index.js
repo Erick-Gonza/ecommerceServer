@@ -118,5 +118,6 @@ export {
   WishList,
   Status,
   Country,
-  State
+  State,
+  WishListItem
 }

@@ -1,21 +1,17 @@
 // import CartItem from '../../models/Cart/CartItem.js'
-import { WishList, Product, User } from '../../models/index.js'
-import WishListItem from '../../models/WishList/WishListItem.js'
+import db from '../../config/database.js'
+import { WishList, Product, User, WishListItem } from '../../models/index.js'
 
 const getWishList = async (req, res) => {
   try {
     const { userId } = req.params
-    let data = await WishList.findOne({ where: { userId }, include: Product })
-    if (data === null) {
-      data = await WishList.create({
-        userId
-      })
-    }
+    // const data = await WishList.findOne({ where: { userId } }, { include: [{ all: true }] })
+    const data = await db.query(`SELECT Products.price as ProductPrice, Products.name AS productName, Products.description AS productDescription FROM Users INNER JOIN WishLists ON WishLists.userId = Users.id INNER JOIN WishListItems ON WishLists.id = WishListItems.wishlistId INNER JOIN Products ON WishListItems.productId = Products.id WHERE Users.id = ${userId}`)
 
     res.status(200).send({
       message: 'Get all products',
       success: true,
-      data
+      data: data[0]
     })
   } catch (error) {
     res.status(500).send({ message: error, success: false })
