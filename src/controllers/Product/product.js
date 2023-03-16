@@ -71,7 +71,7 @@ const createProduct = async (req, res) => {
     const { files } = req
     // console.log(files[0])
     // console.log(files[0].originalname)
-    const imageUrl = files[0].originalname
+    const imageUrl = files[0].filename
     const [product, created] = await Product.findOrCreate({
       where: {
         name
