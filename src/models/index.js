@@ -14,6 +14,7 @@ import Country from './User/Address/Country.js'
 import UserAddress from './User/UserAddress.js'
 import CartItem from './Cart/CartItem.js'
 import WishListItem from './WishList/WishListItem.js'
+import City from './User/Address/City.js'
 
 // User - Role
 Role.hasMany(User, { as: 'user', foreignKey: 'roleId' })
@@ -85,6 +86,8 @@ Address.belongsTo(Country, { foreignKey: 'countryId' })
 State.hasMany(Address, { foreignKey: 'stateId' })
 Address.belongsTo(State, { foreignKey: 'stateId' })
 
+City.hasMany(Address, { foreignKey: 'cityId' })
+Address.belongsTo(City, { foreignKey: 'cityId' })
 // User.belongsTo(Cart, {
 //   foreignKey: 'wishListId',
 //   target: 'id',
@@ -119,5 +122,6 @@ export {
   Status,
   Country,
   State,
-  WishListItem
+  WishListItem,
+  City
 }

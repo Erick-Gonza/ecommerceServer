@@ -1,4 +1,5 @@
 import { Address, Country, State } from '../../models/index.js'
+import City from '../../models/User/Address/City.js'
 
 const getAllAddress = async (req, res) => {
   try {
@@ -18,10 +19,11 @@ const getAllAddress = async (req, res) => {
   }
 }
 
+//get address by userid
 const getByIdAddress = async (req, res) => {
   try {
     const { id } = req.params
-    const data = await Address.findByPk(id)
+    const data = await Address.findOne({where:{userId:id}, include: [Country, State, City]})
     data.length === 0
       ? res.status(400).send({
         message: `Address with id ${id} not found`,
@@ -39,13 +41,14 @@ const getByIdAddress = async (req, res) => {
 
 const createAddress = async (req, res) => {
   try {
-    const { street, city, zipCode, countryId, stateId, userId } = req.body
+    const { street, cityId, zipCode, countryId, stateId} = req.body
+    const {userId} = req.params
     const address = await Address.create({
-      street,
-      city,
-      zipCode,
-      countryId,
-      stateId,
+      street:'Change',
+      cityId:1,
+      zipCode:0,
+      countryId:1,
+      stateId:1,
       userId
     })
     res.send({
@@ -61,11 +64,11 @@ const createAddress = async (req, res) => {
 const updateAddress = async (req, res) => {
   try {
     const { id } = req.params
-    const { street, city, zipCode, countryId, stateId, userId } = req.body
+    const { street, cityId, zipCode, countryId, stateId, userId } = req.body
     const address = await Address.update(
       {
         street,
-        city,
+        cityId,
         zipCode,
         countryId,
         stateId,
@@ -100,10 +103,12 @@ const deleteAddress = async (req, res) => {
   }
 }
 
+
+
 export {
   getAllAddress,
   getByIdAddress,
   createAddress,
   updateAddress,
-  deleteAddress
+  deleteAddress,
 }

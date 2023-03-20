@@ -12,7 +12,7 @@ const verifyToken = (token) => {
 }
 
 const compareBcrypt = async (password, hash) => {
-  return await bcrypt.compare(password, hash)
+  return bcrypt.compare(password, hash)
 }
 
 const hashBcrypt = async (password) => {
