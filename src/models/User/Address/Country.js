@@ -23,16 +23,19 @@ Country.init(
 
 Country.afterSync(async () => {
   await Country.create({
-    name: 'Monterrey'
+    name: 'Change'
   })
   await Country.create({
-    name: 'Guadalupe'
+    name: 'Mexico'
   })
   await Country.create({
-    name: 'Reynosa'
+    name: 'USA'
   })
   await Country.create({
-    name: 'Mier'
+    name: 'Brazil'
+  })
+  await Country.create({
+    name: 'Argentina'
   })
 })
 

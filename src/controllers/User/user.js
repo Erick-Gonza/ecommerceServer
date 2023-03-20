@@ -53,13 +53,22 @@ const createUser = async (req, res) => {
     const wishlist = await WishList.create({
       userId: user.id
     })
+    const address = await Address.create({
+      street:'Change',
+      cityId:1,
+      zipCode:0,
+      countryId:1,
+      stateId:1,
+      userId: user.id
+    })
     // TODO asignar el cartId y el wishlistId al usuario
     res.send({
       message: 'User created',
       success: true,
       user: {
         cart,
-        wishlist
+        wishlist,
+        address
       }
     })
   } catch (error) {

@@ -22,6 +22,9 @@ Address.init(
     countryId: {
       type: Dt.INTEGER
     },
+    cityId:{
+      type:Dt.INTEGER
+    },
     userId: {
       type: Dt.INTEGER,
       references: {
@@ -45,6 +48,7 @@ Address.afterSync(async () => {
     stateId: 1,
     zipCode: 64100,
     countryId: 1,
+    cityId:1,
     userId: 1
   })
   await Address.create({
@@ -52,6 +56,7 @@ Address.afterSync(async () => {
     stateId: 2,
     zipCode: 64100,
     countryId: 1,
+    cityId:2,
     userId: 1
   })
 })
