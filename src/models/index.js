@@ -3,7 +3,6 @@ import Order from './Order/Order.js'
 import OrderDetail from './Order/OrderDetail.js'
 import Category from './Product/Category.js'
 import Product from './Product/Product.js'
-import Subcategory from './Product/Subcategory.js'
 import Address from './User/Address/Address.js'
 import Role from './User/Role.js'
 import Status from './User/Status.js'
@@ -46,10 +45,6 @@ Product.belongsToMany(WishList, {
 User.hasMany(Order, { foreignKey: 'userId' })
 Order.belongsTo(User, { foreignKey: 'userId' })
 
-// //Product - subcategory
-Subcategory.hasMany(Product, { foreignKey: 'subcategoryId' })
-Product.belongsTo(Subcategory, { foreignKey: 'subcategoryId' })
-
 // //Product - Category
 Category.hasMany(Product, { foreignKey: 'categoryId' })
 Product.belongsTo(Category, { foreignKey: 'categoryId' })
@@ -61,10 +56,6 @@ Product.belongsToMany(Cart, { through: CartItem, foreignKey: 'productId' })
 // Product - OrderDetail
 Product.hasMany(OrderDetail, { foreignKey: 'productId' })
 OrderDetail.belongsTo(Product, { foreignKey: 'productId' })
-
-// Category - SubCategory **
-Category.hasMany(Subcategory, { foreignKey: 'categoryId' })
-Subcategory.belongsTo(Category, { foreignKey: 'categoryId' })
 
 // User - Cart
 User.hasOne(Cart, { foreignKey: 'userId' })
@@ -88,31 +79,11 @@ State.belongsTo(Country, { foreignKey: 'countryId' })
 
 State.hasMany(City, { foreignKey: 'stateId' })
 City.belongsTo(State, { foreignKey: 'stateId' })
-// User.belongsTo(Cart, {
-//   foreignKey: 'wishListId',
-//   target: 'id',
-// })
-
-// Cart.hasOne(User, {
-//   foreignKey: 'cartId',
-//   sourceKey: 'id',
-// })
-
-// Category.hasMany(Subcategory, {
-//   foreignKey: 'categoryId',
-//   sourceKey: 'id',
-// })
-
-// Subcategory.belongsTo(Category, {
-//   foreignKey: 'categoryId',
-//   target: 'id',
-// })
 
 export {
   Product,
   User,
   Category,
-  Subcategory,
   Order,
   OrderDetail,
   Address,

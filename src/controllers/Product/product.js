@@ -1,4 +1,4 @@
-import { Product, Category, Subcategory } from '../../models/index.js'
+import { Product, Category } from '../../models/index.js'
 const getAllProduct = async (req, res) => {
   try {
     const data = await Product.findAll({ include: [{ all: true }] })
@@ -22,8 +22,7 @@ const getByIdProduct = async (req, res) => {
     const { id } = req.params
     const data = await Product.findByPk(id, {
       include: [
-        { model: Category, attributes: ['name'] },
-        { model: Subcategory, attributes: ['name'] }
+        { model: Category, attributes: ['name'] }
       ]
     })
     data === null
@@ -66,11 +65,9 @@ const getAllProductByCategoryId = async (req, res) => {
 
 const createProduct = async (req, res) => {
   try {
-    const { name, description, price, stock, categoryId, subcategoryId } =
+    const { name, description, price, stock, categoryId } =
       req.body
     const { files } = req
-    // console.log(files[0])
-    // console.log(files[0].originalname)
     const imageUrl = files[0].filename
     const [product, created] = await Product.findOrCreate({
       where: {
@@ -82,7 +79,6 @@ const createProduct = async (req, res) => {
         price,
         stock,
         categoryId,
-        subcategoryId,
         imageUrl
       }
     })
@@ -104,7 +100,7 @@ const createProduct = async (req, res) => {
 const updateProduct = async (req, res) => {
   try {
     const { id } = req.params
-    const { name, description, price, stock, imageUrl, SubcategoryId } =
+    const { name, description, price, stock, imageUrl } =
       req.body
 
     const data = await Product.findByPk(id)
@@ -119,10 +115,8 @@ const updateProduct = async (req, res) => {
           name,
           description,
           price,
-          // discount,
           stock,
-          imageUrl,
-          SubcategoryId
+          imageUrl
         },
         {
           where: { id }

@@ -6,7 +6,6 @@ import { cartRouter } from './cart/cart.js'
 import { orderRouter } from './Order/order.js'
 import { orderDetailRouter } from './Order/orderDetail.js'
 import { wishListRouter } from './wishList/wishList.js'
-import { subcategoryRouter } from './subCategory/subCategory.js'
 import { addressRouter } from './address/address.js'
 import { loginRouter } from './login/login.js'
 import { validateRouter } from './validate/validate.js'
@@ -22,7 +21,6 @@ router.use('/validate', validateRouter)
 router.use('/product', productRouter)
 router.use('/category', categoryRouter)
 router.use('/wishlist', wishListRouter)
-router.use('/Subcategory', subcategoryRouter)
 router.use('/cart', cartRouter)
 router.use('/order', orderRouter)
 router.use('/orderDetail', orderDetailRouter)

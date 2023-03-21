@@ -9,9 +9,6 @@ Category.init(
       type: Dt.STRING,
       allowNull: false,
       unique: true
-    },
-    description: {
-      type: Dt.STRING
     }
     // idSubCategory: {
     //     type: Dt.STRING,
@@ -30,17 +27,14 @@ Category.init(
 Category.afterSync(async () => {
   await Category.create({
     name: 'Category 1',
-    description: 'description 1',
     subcategoryId: 1
   })
   await Category.create({
     name: 'Category 2',
-    description: 'description 2',
     subcategoryId: 2
   })
   await Category.create({
     name: 'Category 3',
-    description: 'description 3',
     subcategoryId: 3
   })
 })
