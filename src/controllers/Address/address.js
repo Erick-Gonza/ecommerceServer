@@ -19,36 +19,48 @@ const getAllAddress = async (req, res) => {
   }
 }
 
-//get address by userid
+// get address by userid
 const getByIdAddress = async (req, res) => {
-  try {
-    const { id } = req.params
-    const data = await Address.findOne({where:{userId:id}, include: [Country, State, City]})
-    data.length === 0
-      ? res.status(400).send({
-        message: `Address with id ${id} not found`,
-        success: false
-      })
-      : res.status(200).send({
-        message: `Address with id ${id} found`,
-        success: true,
-        data
-      })
-  } catch (error) {
-    res.status(400).send({ message: error, success: false })
-  }
+  const { id } = req.params
+  const data = await Address.findOne({ where: { userId: id }, include: { all: true } })
+  data.length === 0
+    ? res.status(400).send({
+      message: `Address with id ${id} not found`,
+      success: false
+    })
+    : res.status(200).send({
+      message: `Address with id ${id} found`,
+      success: true,
+      data
+    })
+  // try {
+  //   const { id } = req.params
+  //   const data = await Address.findOne({ where: { userId: id }, include: [Country, State, City] })
+  //   data.length === 0
+  //     ? res.status(400).send({
+  //       message: `Address with id ${id} not found`,
+  //       success: false
+  //     })
+  //     : res.status(200).send({
+  //       message: `Address with id ${id} found`,
+  //       success: true,
+  //       data
+  //     })
+  // } catch (error) {
+  //   res.status(400).send({ message: error, success: false })
+  // }
 }
 
 const createAddress = async (req, res) => {
   try {
-    const { street, cityId, zipCode, countryId, stateId} = req.body
-    const {userId} = req.params
+    const { street, cityId, zipCode, countryId, stateId } = req.body
+    const { userId } = req.params
     const address = await Address.create({
-      street:'Change',
-      cityId:1,
-      zipCode:0,
-      countryId:1,
-      stateId:1,
+      street: 'Change',
+      cityId: 1,
+      zipCode: 0,
+      countryId: 1,
+      stateId: 1,
       userId
     })
     res.send({
@@ -103,12 +115,10 @@ const deleteAddress = async (req, res) => {
   }
 }
 
-
-
 export {
   getAllAddress,
   getByIdAddress,
   createAddress,
   updateAddress,
-  deleteAddress,
+  deleteAddress
 }

@@ -4,7 +4,7 @@ import {
   getByIdAddress,
   createAddress,
   updateAddress,
-  deleteAddress,
+  deleteAddress
 } from '../../controllers/Address/address.js'
 import isAuth from '../../middleware/isAuth.js'
 
@@ -14,13 +14,13 @@ const addressRouter = Router()
 addressRouter.get('/', getAllAddress)
 
 // Get address by userId
-addressRouter.get('/:id', isAuth, getByIdAddress)
+addressRouter.get('/:id', getByIdAddress)
 
 // Create a user
 addressRouter.post('/', createAddress)
 
 // Update a user
-addressRouter.put('/:id', isAuth, updateAddress)
+addressRouter.put('/:id', updateAddress)
 
 // Delete a user
 addressRouter.delete('/:id', deleteAddress)
