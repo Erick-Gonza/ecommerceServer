@@ -26,13 +26,36 @@ State.afterSync(async () => {
     name: 'Change'
   })
   await State.create({
-    name: 'Nuevo Leon'
+    name: 'Nuevo Leon',
+    countryId: 2
   })
   await State.create({
-    name: 'CDMX'
+    name: 'CDMX',
+    countryId: 2 
   })
   await State.create({
-    name: 'Tamaulipas'
+    name: 'Tamaulipas',
+    countryId: 2
+  })
+  await State.create({
+    name: 'California',
+    countryId: 3
+  })
+  await State.create({
+    name: 'Arizona',
+    countryId: 3
+  })
+  await State.create({
+    name: 'Texas',
+    countryId: 3
+  })
+  await State.create({
+    name: 'Sao Paulo',
+    countryId: 4
+  })
+  await State.create({
+    name: 'Argentina',
+    countryId: 5
   })
 })
 
