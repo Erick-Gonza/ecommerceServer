@@ -83,11 +83,11 @@ Country.hasMany(Address, { foreignKey: 'countryId' })
 Address.belongsTo(Country, { foreignKey: 'countryId' })
 
 // state-address
-State.hasMany(Address, { foreignKey: 'stateId' })
-Address.belongsTo(State, { foreignKey: 'stateId' })
+Country.hasMany(State, { foreignKey: 'countryId' })
+State.belongsTo(Country, { foreignKey: 'countryId' })
 
-City.hasMany(Address, { foreignKey: 'cityId' })
-Address.belongsTo(City, { foreignKey: 'cityId' })
+State.hasMany(City, { foreignKey: 'stateId' })
+City.belongsTo(State, { foreignKey: 'stateId' })
 // User.belongsTo(Cart, {
 //   foreignKey: 'wishListId',
 //   target: 'id',
