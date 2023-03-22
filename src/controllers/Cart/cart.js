@@ -5,17 +5,6 @@ const getCart = async (req, res) => {
   try {
     const { id } = req.params
     const data = await Cart.findByPk(id, { include: [{ all: true }] })
-
-    // !data && res.status(400).send({
-    //   message: 'cart not found',
-    //   success: false,
-    // })
-
-    // res.status(200).send({
-    //   message: 'cart',
-    //   success: true,
-    //   data,
-    // })
     data === null
       ? res.status(400).send({
         message: 'cart not found',
@@ -35,13 +24,8 @@ const addToCart = async (req, res) => {
   try {
     const { productId, userId } = req.body
     // que producto exista
-    // TODO, refactorizar validaciones
     // !product && new Error("Product doesn't exist")
     const product = await Product.findByPk(productId)
-    // !product && !user && res.status(400).send({
-    //   message: 'Cart with id ' + productId + ' not found',
-    //   success: false,
-    // })
 
     if (product === null) {
       res.status(400).send({
@@ -95,30 +79,10 @@ const addToCart = async (req, res) => {
   }
 }
 
-const deleteFromCart = async (req, res) => {
+const updateCartItem = async (req, res) => {
   try {
-    const { productId, userId } = req.body
-    // que producto exista
-    const product = await Product.findByPk(productId)
-    if (product === null) {
-      res.status(400).send({
-        message: 'Cart with id ' + productId + ' not found',
-        success: false
-      })
-      return
-    }
-    // que usuario exista
-    const user = await User.findByPk(userId)
-    if (user === null) {
-      res.status(400).send({
-        message: ' with id ' + userId + ' not found',
-        success: false
-      })
-      return
-    }
-    // que usuario tenga un carrito
+    const { productId, userId, quantity } = req.body
     const cart = await Cart.findOne({ where: { userId } })
-
     const cartItem = await CartItem.findOne({
       where: {
         cartId: cart.id,
@@ -126,12 +90,20 @@ const deleteFromCart = async (req, res) => {
       }
     })
 
-    await cartItem.update({
-      quantity: cartItem.quantity - 1
-    })
+    if (cartItem === null) {
+      await CartItem.create({
+        cartId: cart.id,
+        productId,
+        quantity
+      })
+    } else {
+      await cartItem.update({
+        quantity
+      })
+    }
 
     res.status(201).send({
-      message: 'one item removed from cart',
+      message: 'cart item updated',
       success: true
     })
   } catch (error) {
@@ -139,4 +111,4 @@ const deleteFromCart = async (req, res) => {
   }
 }
 
-export { addToCart, getCart, deleteFromCart }
+export { addToCart, getCart, updateCartItem }
