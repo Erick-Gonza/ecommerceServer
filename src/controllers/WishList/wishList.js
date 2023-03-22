@@ -6,7 +6,7 @@ const getWishList = async (req, res) => {
   try {
     const { userId } = req.params
     // const data = await WishList.findOne({ where: { userId } }, { include: [{ all: true }] })
-    const data = await db.query(`SELECT Products.price as price, Products.name AS name, Products.description AS description FROM Users INNER JOIN WishLists ON WishLists.userId = Users.id INNER JOIN WishListItems ON WishLists.id = WishListItems.wishlistId INNER JOIN Products ON WishListItems.productId = Products.id WHERE Users.id = ${userId}`)
+    const data = await db.query(`SELECT Products.price as price,Products.id AS id, Products.name AS name, Products.description AS description, Products.imageUrl as imageUrl FROM Users INNER JOIN WishLists ON WishLists.userId = Users.id INNER JOIN WishListItems ON WishLists.id = WishListItems.wishlistId INNER JOIN Products ON WishListItems.productId = Products.id WHERE Users.id = ${userId}`)
 
     res.status(200).send({
       message: 'Get all products',

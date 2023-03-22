@@ -21,4 +21,13 @@ Status.init(
   }
 )
 
+Status.afterSync(async () => {
+  await Status.create({
+    name: 'active'
+  })
+  await Status.create({
+    name: 'inactive'
+  })
+})
+
 export default Status

@@ -21,4 +21,34 @@ City.init(
   }
 )
 
+City.afterSync(async () => {
+  await City.create({
+    name: 'Change'
+  })
+  await City.create({
+    name: 'Monterrey',
+    stateId: 2
+  })
+  await City.create({
+    name: 'Guadalupe',
+    stateId: 2
+  })
+  await City.create({
+    name: 'San Nicolas',
+    stateId: 2
+  })
+  await City.create({
+    name: 'Los Angeles',
+    stateId: 5
+  })
+  await City.create({
+    name: 'Sao Paulo',
+    stateId: 8
+  })
+  await City.create({
+    name: 'La Plata',
+    stateId: 9
+  })
+})
+
 export default City

@@ -24,4 +24,19 @@ Category.init(
   }
 )
 
+Category.afterSync(async () => {
+  await Category.create({
+    name: 'Category 1',
+    subcategoryId: 1
+  })
+  await Category.create({
+    name: 'Category 2',
+    subcategoryId: 2
+  })
+  await Category.create({
+    name: 'Category 3',
+    subcategoryId: 3
+  })
+})
+
 export default Category

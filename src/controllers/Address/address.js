@@ -1,5 +1,4 @@
-import { Address, Country, State } from '../../models/index.js'
-import City from '../../models/User/Address/City.js'
+import { Address, Country, State, City } from '../../models/index.js'
 
 const getAllAddress = async (req, res) => {
   try {
@@ -21,34 +20,27 @@ const getAllAddress = async (req, res) => {
 
 // get address by userid
 const getByIdAddress = async (req, res) => {
-  const { id } = req.params
-  const data = await Address.findOne({ where: { userId: id }, include: { all: true } })
-  data.length === 0
-    ? res.status(400).send({
-      message: `Address with id ${id} not found`,
-      success: false
+  try {
+    const { id } = req.params
+    const data = await Address.findOne({
+      where: { userId: id },
+      include: [
+        { model: Country, include: [{ model: State, attributes: ['name', 'id'], include: [{ model: City, attributes: ['name', 'id'] }] }] }
+      ]
     })
-    : res.status(200).send({
-      message: `Address with id ${id} found`,
-      success: true,
-      data
-    })
-  // try {
-  //   const { id } = req.params
-  //   const data = await Address.findOne({ where: { userId: id }, include: [Country, State, City] })
-  //   data.length === 0
-  //     ? res.status(400).send({
-  //       message: `Address with id ${id} not found`,
-  //       success: false
-  //     })
-  //     : res.status(200).send({
-  //       message: `Address with id ${id} found`,
-  //       success: true,
-  //       data
-  //     })
-  // } catch (error) {
-  //   res.status(400).send({ message: error, success: false })
-  // }
+    data.length === 0
+      ? res.status(400).send({
+        message: `Address with id ${id} not found`,
+        success: false
+      })
+      : res.status(200).send({
+        message: `Address with id ${id} found`,
+        success: true,
+        data
+      })
+  } catch (error) {
+    res.status(400).send({ message: error, success: false })
+  }
 }
 
 const createAddress = async (req, res) => {

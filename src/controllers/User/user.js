@@ -108,18 +108,26 @@ const updateUser = async (req, res) => {
 }
 
 const deleteUser = async (req, res) => {
-  try {
-    const { id } = req.params
-    await User.destroy({
-      where: {
-        id
-      }
-    })
-    // await deleteMail()
-    res.send({ message: `User with ${id} deleted`, success: true })
-  } catch (error) {
-    res.status(400).send({ message: error, success: false })
-  }
+  const { id } = req.params
+  await User.destroy({
+    where: {
+      id
+    }
+  })
+  // await deleteMail()
+  res.send({ message: `User with ${id} deleted`, success: true })
+  // try {
+  //   const { id } = req.params
+  //   await User.destroy({
+  //     where: {
+  //       id
+  //     }
+  //   })
+  //   // await deleteMail()
+  //   res.send({ message: `User with ${id} deleted`, success: true })
+  // } catch (error) {
+  //   res.status(400).send({ message: error, success: false })
+  // }
 }
 
 const createUserAddress = async (req, res) => {
