@@ -31,15 +31,4 @@ UserAddress.init(
   }
 )
 
-UserAddress.afterSync(async () => {
-  await UserAddress.create({
-    userId: 1,
-    addressId: 1
-  })
-  await UserAddress.create({
-    userId: 1,
-    addressId: 2
-  })
-})
-
 export default UserAddress

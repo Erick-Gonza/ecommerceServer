@@ -21,22 +21,4 @@ Country.init(
   }
 )
 
-Country.afterSync(async () => {
-  await Country.create({
-    name: 'Change'
-  })
-  await Country.create({
-    name: 'Mexico'
-  })
-  await Country.create({
-    name: 'USA'
-  })
-  await Country.create({
-    name: 'Brazil'
-  })
-  await Country.create({
-    name: 'Argentina'
-  })
-})
-
 export default Country

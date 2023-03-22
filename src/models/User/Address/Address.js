@@ -22,8 +22,8 @@ Address.init(
     countryId: {
       type: Dt.INTEGER
     },
-    cityId:{
-      type:Dt.INTEGER
+    cityId: {
+      type: Dt.INTEGER
     },
     userId: {
       type: Dt.INTEGER,
@@ -42,22 +42,4 @@ Address.init(
   }
 )
 
-Address.afterSync(async () => {
-  await Address.create({
-    street: 'street 1',
-    stateId: 1,
-    zipCode: 64100,
-    countryId: 1,
-    cityId:1,
-    userId: 1
-  })
-  await Address.create({
-    street: 'street 2',
-    stateId: 2,
-    zipCode: 64100,
-    countryId: 1,
-    cityId:2,
-    userId: 1
-  })
-})
 export default Address

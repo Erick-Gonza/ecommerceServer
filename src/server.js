@@ -19,7 +19,7 @@ app.use(morgan('tiny'))
 // Main route
 app.use('/api/v1', router)
 
-await db.sync({ force: true }).then(() => {
+await db.sync().then(() => {
   app.listen(port, () => {
     console.log(`Server is running on port ${port}`)
   })
