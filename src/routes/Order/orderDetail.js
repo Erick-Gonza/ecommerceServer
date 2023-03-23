@@ -1,27 +1,15 @@
 import { Router } from 'express'
 import {
-  getOrderDetail,
-  getByIdOrderDetail,
-  createOrderDetail,
-  updateOrderDetail,
-  deleteOrderDetail
+  getOrderDetailByUserId,
+  createOrderDetail
 } from '../../controllers/OrderDetail/orderDetail.js'
 
 const orderDetailRouter = Router()
 
-// Get all categories
-orderDetailRouter.get('/', getOrderDetail)
+// Get a ordrDetail by id
+orderDetailRouter.get('/:id', getOrderDetailByUserId)
 
-// Get a category
-orderDetailRouter.get('/:id', getByIdOrderDetail)
-
-// Create a category
+// Create a new orderDetail
 orderDetailRouter.post('/', createOrderDetail)
-
-// Update a category
-orderDetailRouter.put('/:id', updateOrderDetail)
-
-// Delete a category
-orderDetailRouter.delete('/:id', deleteOrderDetail)
 
 export { orderDetailRouter }

@@ -68,7 +68,9 @@ const createProduct = async (req, res) => {
     const { name, description, price, stock, categoryId } =
       req.body
     const { files } = req
+    // handle base64 image
     const imageUrl = files[0].filename
+    // const base64Img
     const [product, created] = await Product.findOrCreate({
       where: {
         name
@@ -79,6 +81,7 @@ const createProduct = async (req, res) => {
         price,
         stock,
         categoryId,
+        // imageUrl: base64Img
         imageUrl
       }
     })
