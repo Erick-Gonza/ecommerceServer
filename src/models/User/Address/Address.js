@@ -27,11 +27,12 @@ Address.init(
     },
     userId: {
       type: Dt.INTEGER,
+      onDelete: 'CASCADE',
+      
       references: {
         model: 'Users',
         key: 'id',
-        onDelete: 'SET NULL',
-        onUpdate: 'CASCADE'
+        
       }
     }
   },

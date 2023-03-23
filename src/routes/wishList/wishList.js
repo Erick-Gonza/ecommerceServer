@@ -1,7 +1,8 @@
 import { Router } from 'express'
 import {
   getWishList,
-  addToWishList
+  addToWishList,
+  deleteFromWishlist
   // deleteFromWishList
 } from '../../controllers/WishList/wishList.js'
 import isAuth from '../../middleware/isAuth.js'
@@ -14,8 +15,7 @@ wishListRouter.get('/:userId', getWishList)
 // add to wishlist
 wishListRouter.post('/', isAuth, addToWishList)
 
-// delete from wishlist
-// wishListRouter.delete('/', deleteFromWishList)
+wishListRouter.delete('/:productId', deleteFromWishlist)
 
 // // Create a WishList
 // wishListRouter.post('/', createWishList)
