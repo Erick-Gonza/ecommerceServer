@@ -24,9 +24,9 @@ const getByIdAddress = async (req, res) => {
     const { id } = req.params
     const data = await Address.findOne({
       where: { userId: id },
-      include: [
-        { model: Country, include: [{ model: State, attributes: ['name', 'id'], include: [{ model: City, attributes: ['name', 'id'] }] }] }
-      ]
+      // include: [
+      //   { Country, include: [{ State, include: [{  City }] }] }
+      // ]
     })
     data.length === 0
       ? res.status(400).send({
@@ -83,7 +83,7 @@ const updateAddress = async (req, res) => {
       }
     )
     res.send({
-      message: 'Address created',
+      message: 'Address updated',
       success: true,
       address
     })

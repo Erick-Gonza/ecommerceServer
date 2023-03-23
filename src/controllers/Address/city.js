@@ -21,6 +21,27 @@ const getAllCity = async (req,res)=>{
     }
 }
 
+const getCityById = async (req,res)=>{
+  try{
+    const {cityId} = req.params
+    const data = await City.findByPk(cityId)
+    data.length === 0
+      ? res.status(400).send({
+        message: 'No city found',
+        success: false
+      })
+      : res.status(200).send({
+        message: ' City found',
+        success: true,
+        data
+      })
+    }
+    catch(error){
+     res.status(400).send({ message: error, success: false })   
+    }
+}
+
 export {
-    getAllCity
+    getAllCity,
+    getCityById
 }

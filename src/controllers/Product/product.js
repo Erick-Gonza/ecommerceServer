@@ -65,7 +65,7 @@ const getAllProductByCategoryId = async (req, res) => {
 
 const createProduct = async (req, res) => {
   try {
-    const { name, description, price, stock, categoryId } =
+    const { name, description, price, stock, categoryId, color } =
       req.body
     const { files } = req
     // handle base64 image
@@ -81,8 +81,8 @@ const createProduct = async (req, res) => {
         price,
         stock,
         categoryId,
-        // imageUrl: base64Img
-        imageUrl
+        imageUrl,
+        color
       }
     })
     created === true
@@ -103,7 +103,7 @@ const createProduct = async (req, res) => {
 const updateProduct = async (req, res) => {
   try {
     const { id } = req.params
-    const { name, description, price, stock, imageUrl } =
+    const { name, description, price, stock, imageUrl, color, categoryId } =
       req.body
 
     const data = await Product.findByPk(id)
@@ -119,7 +119,9 @@ const updateProduct = async (req, res) => {
           description,
           price,
           stock,
-          imageUrl
+          imageUrl,
+          color,
+          categoryId
         },
         {
           where: { id }

@@ -24,8 +24,8 @@ Status.hasMany(User, { foreignKey: 'statusId' })
 User.belongsTo(Status, { foreignKey: 'statusId' })
 
 // // User - Address
-User.belongsToMany(Address, { through: UserAddress, foreignKey: 'userId' }, { onDelete: 'SET NULL', onUpdate: 'CASCADE' })
-Address.belongsToMany(User, { through: UserAddress, foreignKey: 'addressId' }, { onDelete: 'SET NULL', onUpdate: 'CASCADE' })
+User.belongsToMany(Address, { through: UserAddress, foreignKey: 'userId' }, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
+Address.belongsToMany(User, { through: UserAddress, foreignKey: 'addressId' }, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
 
 // // User - WishList
 User.hasOne(WishList, { foreignKey: 'userId' })
