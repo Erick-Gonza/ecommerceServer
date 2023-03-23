@@ -1,4 +1,4 @@
-import { Order, OrderDetail } from '../../models/index.js'
+import { OrderDetail } from '../../models/index.js'
 
 const getOrderDetailByUserId = async (req, res) => {
   try {

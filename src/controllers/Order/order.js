@@ -2,8 +2,8 @@ import { Address, Order } from '../../models/index.js'
 
 const getOrdersByUserId = async (req, res) => {
   try {
-    const { id } = req.body
-    const data = await Order.findAll({ where: { userId: id } })
+    const { id } = req.params
+    const data = await Order.findAll({ where: { userId: id }, include: [{ all: true }] })
     data === null
       ? res.status(400).send({
         message: 'Order with id ' + id + ' not found',
