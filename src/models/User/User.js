@@ -33,7 +33,6 @@ User.init(
     modelName: 'User'
   }
 )
-// TODO: Add password encryption, and add a beforeCreate and beforeUpdate hook
 User.beforeCreate(async (user) => {
   // create a hash of the password
   const hash = await hashBcrypt(user.password, 10)

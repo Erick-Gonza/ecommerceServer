@@ -9,7 +9,7 @@ Category.init(
       type: Dt.STRING,
       allowNull: false,
       unique: true
-    },
+    }
   },
   {
     sequelize: db,
@@ -23,19 +23,19 @@ Category.afterSync(async () => {
     imageUrl: ''
   })
   await Category.create({
-    name: 'Dresses',
+    name: 'Dresses'
   })
   await Category.create({
-    name: 'Bottoms',
+    name: 'Bottoms'
   })
   await Category.create({
-    name: 'Outwear',
+    name: 'Outwear'
   })
   await Category.create({
-    name: 'Shoes',
+    name: 'Shoes'
   })
   await Category.create({
-    name: 'Accesories',
+    name: 'Accesories'
   })
 })
 

@@ -10,10 +10,6 @@ Order.init(
       primaryKey: true,
       autoIncrement: true
     }
-    // idUser fk
-    // CreationDate
-    // updateDate
-    // address fk
   },
   {
     sequelize: db,

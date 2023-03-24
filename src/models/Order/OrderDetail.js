@@ -10,11 +10,6 @@ OrderDetail.init(
       primaryKey: true,
       autoIncrement: true
     },
-    // order fk
-    // idProduct fk
-    // price ??
-    // creationDate
-    // updateDate
     quantity: {
       type: Dt.INTEGER
     }

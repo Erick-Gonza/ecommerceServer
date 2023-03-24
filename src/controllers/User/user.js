@@ -1,6 +1,6 @@
 // import { hashBcrypt } from '../../config/authToken.js'
 import { User, Address, Cart, WishList } from '../../models/index.js'
-import { registerMail, deleteMail } from '../../utils/mails/registerMail.js'
+import { registerMail } from '../../utils/mails/registerMail.js'
 
 const getAllUser = async (req, res) => {
   try {

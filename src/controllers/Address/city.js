@@ -1,10 +1,9 @@
-import { where } from "sequelize"
-import { City} from "../../models/index.js"
+import { City } from '../../models/index.js'
 
-const getAllCity = async (req,res)=>{
-    try{
-    const {stateId} = req.params
-    const cities = await City.findAll({where: {stateId}})
+const getAllCity = async (req, res) => {
+  try {
+    const { stateId } = req.params
+    const cities = await City.findAll({ where: { stateId } })
     cities.length === 0
       ? res.status(400).send({
         message: 'No cities found',
@@ -15,15 +14,14 @@ const getAllCity = async (req,res)=>{
         success: true,
         cities
       })
-    }
-    catch(error){
-     res.status(400).send({ message: error, success: false })   
-    }
+  } catch (error) {
+    res.status(400).send({ message: error, success: false })
+  }
 }
 
-const getCityById = async (req,res)=>{
-  try{
-    const {cityId} = req.params
+const getCityById = async (req, res) => {
+  try {
+    const { cityId } = req.params
     const data = await City.findByPk(cityId)
     data.length === 0
       ? res.status(400).send({
@@ -35,13 +33,12 @@ const getCityById = async (req,res)=>{
         success: true,
         data
       })
-    }
-    catch(error){
-     res.status(400).send({ message: error, success: false })   
-    }
+  } catch (error) {
+    res.status(400).send({ message: error, success: false })
+  }
 }
 
 export {
-    getAllCity,
-    getCityById
+  getAllCity,
+  getCityById
 }

@@ -30,7 +30,7 @@ Address.init(
       onDelete: 'CASCADE',
       references: {
         model: 'Users',
-        key: 'id',
+        key: 'id'
       }
     }
   },

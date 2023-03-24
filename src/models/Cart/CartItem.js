@@ -11,17 +11,10 @@ CartItem.init(
       autoIncrement: true,
       allowNull: false
     },
-    // product id fk
-    // user id fk
     quantity: {
       type: Dt.INTEGER,
       allowNull: false
     }
-    // total: {
-    //   type: Dt.DECIMAL,
-    // },
-    // creationDate
-    // updateDate
   },
   {
     sequelize: db,

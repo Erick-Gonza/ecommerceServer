@@ -23,10 +23,7 @@ const getByIdAddress = async (req, res) => {
   try {
     const { id } = req.params
     const data = await Address.findOne({
-      where: { userId: id },
-      // include: [
-      //   { Country, include: [{ State, include: [{  City }] }] }
-      // ]
+      where: { userId: id }
     })
     data.length === 0
       ? res.status(400).send({

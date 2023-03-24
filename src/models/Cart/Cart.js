@@ -11,17 +11,6 @@ Cart.init(
       autoIncrement: true,
       allowNull: false
     },
-    // product id fk
-    // user id fk
-    // quantity: {
-    //   type: Dt.INTEGER,
-    // },
-    // total: {
-    //   type: Dt.DECIMAL,
-    // },
-    // creationDate
-    // updateDate
-
     userId: {
       type: Dt.INTEGER,
       references: {
