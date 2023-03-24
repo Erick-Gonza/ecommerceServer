@@ -40,16 +40,4 @@ User.beforeCreate(async (user) => {
   user.password = hash
 })
 
-User.afterSync(async () => {
-  await User.create({
-    firstName: 'Admin',
-    lastName: 'Admin',
-    userName: 'Admin',
-    email: 'Admin@test.com',
-    password: 'admin',
-    roleId: 1,
-    statusId: 1
-  })
-})
-
 export default User

@@ -27,10 +27,4 @@ Cart.init(
   }
 )
 
-Cart.afterSync(async () => {
-  await Cart.create({
-    userId: 1
-  })
-})
-
 export default Cart

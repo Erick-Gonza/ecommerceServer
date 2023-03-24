@@ -17,26 +17,4 @@ Category.init(
   }
 )
 
-Category.afterSync(async () => {
-  await Category.create({
-    name: 'Tops',
-    imageUrl: ''
-  })
-  await Category.create({
-    name: 'Dresses'
-  })
-  await Category.create({
-    name: 'Bottoms'
-  })
-  await Category.create({
-    name: 'Outwear'
-  })
-  await Category.create({
-    name: 'Shoes'
-  })
-  await Category.create({
-    name: 'Accesories'
-  })
-})
-
 export default Category
