@@ -1,17 +1,11 @@
+import db from '../../config/database.js'
 import { OrderDetail } from '../../models/index.js'
 
 const getOrderDetailByUserId = async (req, res) => {
   try {
     const { id } = req.params
-    let data = await OrderDetail.findAll({
-      where: { orderId: id }
-    })
-    if (data === []) {
-      data = await OrderDetail.findOne({
-        where: { orderId: id }
-      })
-      return data
-    }
+    const [results] = await db.query(`SELECT OrderDetails.orderId as OrderId, OrderDetails.productId as ProductId, OrderDetails.quantity as ProductQuantity, Products.name AS ProductName, Products.imageUrl as ProductImage, Products.price as ProductPrice FROM OrderDetails INNER JOIN Orders ON Orders.id = OrderDetails.orderId INNER JOIN Products ON Products.id = OrderDetails.productId WHERE Orders.id = ${id}`)
+    const data = results
     data === null
       ? res.status(400).send({
         message: 'OrderDetail with id ' + id + ' not found',
