@@ -7,7 +7,6 @@ const getWishList = async (req, res) => {
     const { userId } = req.params
     // const data = await WishList.findOne({ where: { userId } }, { include: [{ all: true }] })
     const data = await db.query(`SELECT Products.price as price,Products.id AS id, Products.name AS name, Products.description AS description, Products.imageUrl as imageUrl FROM Users INNER JOIN WishLists ON WishLists.userId = Users.id INNER JOIN WishListItems ON WishLists.id = WishListItems.wishlistId INNER JOIN Products ON WishListItems.productId = Products.id WHERE Users.id = ${userId}`)
-
     res.status(200).send({
       message: 'Get all products',
       success: true,
@@ -78,6 +77,7 @@ const deleteFromWishlist = async (req, res) => {
   try {
     const { productId, userId } = req.body
     const product = await Product.findByPk(productId)
+    
     // que producto exista
     if (product === null) {
       res.status(400).send({
@@ -91,7 +91,7 @@ const deleteFromWishlist = async (req, res) => {
     const user = await User.findByPk(userId)
     if (user === null) {
       res.status(400).send({
-        message: ' with id ' + userId + ' not found',
+        message: 'User with id ' + userId + ' not found',
         success: false
       })
       return
@@ -110,12 +110,19 @@ const deleteFromWishlist = async (req, res) => {
         productId
       }
     })
-    wishlistItem === null
-      ? res.status(400).send({
+      if(wishlistItem === null) {
+        res.status(400).send({
         message: 'product not found in wishlist',
         success: false
-      })
-      : wishlistItem.destroy({ where: { id: wishlistItem.id } })
+      })}else{
+        await wishlistItem.destroy({ where: { id: wishlistItem.id } }).then(
+          res.status(200).send({
+            message:'product deleted',
+            success: true
+          })
+        )
+      }
+      
   } catch (error) {
     res.status(400).send({ message: error, success: false })
   }

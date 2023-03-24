@@ -15,7 +15,7 @@ const productRouter = Router()
 productRouter.use('/public', express.static(`${filePath}../../../uploads`))
 
 // Get all products
-productRouter.get('/', getAllProduct)
+productRouter.get('/all/:userId', getAllProduct)
 
 // Get a product
 productRouter.get('/:id', getByIdProduct)
@@ -30,6 +30,6 @@ productRouter.post('/', multerUpload.array('file'), createProduct)
 productRouter.put('/:id', updateProduct)
 
 // Delete a product
-productRouter.delete('/:id', deleteProduct)
+productRouter.delete('/:id/', deleteProduct)
 
 export { productRouter }
