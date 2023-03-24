@@ -1,21 +1,43 @@
 import { Product, Category } from '../../models/index.js'
+import db from '../../config/database.js'
 import path from 'path'
 import fs from 'fs'
 import { fileURLToPath } from 'url'
 
 const getAllProduct = async (req, res) => {
   try {
-    const data = await Product.findAll({ include: [{ all: true }] })
-    data.length === 0
-      ? res.status(400).send({
-        message: 'No products found',
-        success: false
-      })
-      : res.status(200).send({
-        message: 'Get all products',
-        success: true,
-        data
-      })
+    const { userId } = req.params
+    if (userId === undefined || userId === null) {
+      const results = await Product.findAll({ include: [{ all: true }] })
+      results.length === 0
+        ? res.status(400).send({
+          message: 'No products found',
+          success: false
+        })
+        : res.status(200).send({
+          message: 'Get all products ',
+          success: true,
+          results
+        })
+    } else {
+      const [results] = await db.query(`SELECT Products.price as price,Products.id AS id, Products.name , Products.description , Products.imageUrl as imageUrl, Products.categoryId as CategoryId, UserWishListItem.productId IS NOT NULL AS isFavorite
+      FROM Products
+      LEFT JOIN (SELECT WishListItems.id as WishListItemId, WishListItems.productId
+      FROM WishLists
+      RIGHT JOIN WishListItems ON WishLists.id = WishListItems.wishlistId
+      WHERE WishLists.userId = ${userId}) as UserWishListItem ON Products.id = UserWishListItem.productId`
+      )
+      results.length === 0
+        ? res.status(400).send({
+          message: 'No products found',
+          success: false
+        })
+        : res.status(200).send({
+          message: 'Get all products',
+          success: true,
+          results
+        })
+    }
   } catch (error) {
     res.status(400).send({ message: error, success: false })
   }

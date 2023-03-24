@@ -24,6 +24,6 @@ wishListRouter.delete('/:productId', deleteFromWishlist)
 // wishListRouter.put('/:id', updateWishList)
 
 // // Delete a WishList
-// wishListRouter.delete('/:id', deleteWishList)
+wishListRouter.delete('/', deleteFromWishlist)
 
 export { wishListRouter }
