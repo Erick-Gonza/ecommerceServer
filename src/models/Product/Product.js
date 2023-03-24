@@ -25,7 +25,7 @@ Product.init(
       type: Dt.INTEGER
     },
     imageUrl: {
-      type: Dt.TEXT
+      type: Dt.TEXT('long')
     },
     color: {
       type: Dt.STRING

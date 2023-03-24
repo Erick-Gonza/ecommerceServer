@@ -1,4 +1,8 @@
 import { Product, Category } from '../../models/index.js'
+import path from 'path'
+import fs from 'fs'
+import { fileURLToPath } from 'url'
+
 const getAllProduct = async (req, res) => {
   try {
     const data = await Product.findAll({ include: [{ all: true }] })
@@ -66,11 +70,14 @@ const getAllProductByCategoryId = async (req, res) => {
 const createProduct = async (req, res) => {
   try {
     const { name, description, price, stock, categoryId, color } =
-      req.body
+    req.body
     const { files } = req
     // handle base64 image
-    const imageUrl = files[0].filename
-    // const base64Img
+    const __filename = fileURLToPath(import.meta.url)
+    const __dirname = path.dirname(__filename)
+    const imageUrl = path.resolve(__dirname, `../../../uploads/${files[0].filename}`)
+    const imageBase64 = fs.readFileSync(imageUrl, 'base64')
+    const encodedImage = `data:image/png;base64,${imageBase64}`
     const [product, created] = await Product.findOrCreate({
       where: {
         name
@@ -81,7 +88,7 @@ const createProduct = async (req, res) => {
         price,
         stock,
         categoryId,
-        imageUrl,
+        imageUrl: encodedImage,
         color
       }
     })
@@ -93,7 +100,8 @@ const createProduct = async (req, res) => {
       })
       : res.send({
         message: 'Product already exists',
-        success: false
+        success: false,
+        encodedImage
       })
   } catch (error) {
     res.status(400).send({ message: error, success: false })
