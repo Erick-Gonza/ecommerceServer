@@ -3,7 +3,15 @@ import { OrderDetail } from '../../models/index.js'
 const getOrderDetailByUserId = async (req, res) => {
   try {
     const { id } = req.params
-    const data = await OrderDetail.findByPk(id)
+    let data = await OrderDetail.findAll({
+      where: { orderId: id }
+    })
+    if (data === []) {
+      data = await OrderDetail.findOne({
+        where: { orderId: id }
+      })
+      return data
+    }
     data === null
       ? res.status(400).send({
         message: 'OrderDetail with id ' + id + ' not found',
